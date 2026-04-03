@@ -3,7 +3,7 @@
     --surface: #111111;
     --text: #eeeeee;
     --border: #333333;
-    --textbox: #1e293b; /* 👈 your requested color */
+    --textbox: #1e293b;
 }
 
 * {
@@ -12,17 +12,6 @@
     box-sizing: border-box;
 }
 
-/* 👇 HIDE DEFAULT CURSOR */
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-    cursor: none;
-}
-
-/* ================= LOADING SCREEN ================= */
 #loadingScreen {
     position: fixed;
     inset: 0;
@@ -57,7 +46,6 @@ body {
     transition: opacity 0.5s ease;
 }
 
-/* ================= PARTICLES ================= */
 #particles {
     position: fixed;
     inset: 0;
@@ -66,7 +54,6 @@ body {
     opacity: 0.6;
 }
 
-/* ================= HEADER ================= */
 header {
     position: sticky;
     top: 0;
