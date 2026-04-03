@@ -8,9 +8,40 @@
 </head>
 <body>
 
-    <div id="loadingScreen">
-        <div class="loader"></div>
-        <p id="loadingText">Loading games... (0/0)</p>
+    <!-- SETTINGS BUTTON -->
+    <button id="openSettings" class="settings-fab">⚙</button>
+
+    <!-- SETTINGS MODAL -->
+    <div id="settingsModal" class="settings-modal">
+        <div class="settings-box">
+            <h2>Settings</h2>
+
+            <label>Theme</label>
+            <select id="themeSelect">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+            </select>
+
+            <label>Custom Background</label>
+            <input type="color" id="bgColor">
+
+            <label>Custom Surface</label>
+            <input type="color" id="surfaceColor">
+
+            <label>Particles</label>
+            <button id="toggleParticles">Toggle Particles</button>
+
+            <label>Site Title</label>
+            <input type="text" id="titleInput" placeholder="Enter title">
+
+            <label>Favicon URL</label>
+            <input type="text" id="faviconInput" placeholder="https://.../icon.png">
+
+            <label>About:Blank Mode</label>
+            <button id="openAboutBlank">Open in About:Blank</button>
+
+            <button id="closeSettings">Close</button>
+        </div>
     </div>
 
     <canvas id="particles"></canvas>
@@ -21,7 +52,7 @@
             <div class="search-container">
                 <input type="text" id="searchBar" placeholder="Search games..." oninput="filterGames()">
             </div>
-            <button id="settingsBtn">Settings</button>
+            <button id="settingsBtn" onclick="document.getElementById('openSettings').click()">Settings</button>
         </div>
     </header>
 
@@ -29,7 +60,6 @@
         <h1 class="title">Games</h1>
 
         <div id="featuredZones" class="zone-container"></div>
-
         <div id="allZones" class="zone-container"></div>
     </main>
 
