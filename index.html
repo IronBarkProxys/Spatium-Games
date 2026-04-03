@@ -6,23 +6,22 @@
     <title>Spatium</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+
+    <!-- ✅ LOADING SCREEN -->
+    <div id="loadingScreen">
+        <div class="loader"></div>
+        <p id="loadingText">Loading games... (0/0)</p>
+    </div>
+
     <canvas id="particles"></canvas>
 
     <header>
         <div class="header-content">
             <div class="logo">Spatium</div>
-
             <div class="search-container">
-                <input
-                    type="text"
-                    id="searchBar"
-                    placeholder="Search games..."
-                    oninput="filterGames()"
-                >
+                <input type="text" id="searchBar" placeholder="Search games..." oninput="filterGames()">
             </div>
-
             <button id="settingsBtn">Settings</button>
         </div>
     </header>
@@ -31,22 +30,21 @@
         <h1 class="title">Games</h1>
 
         <div id="featuredZones" class="zone-container"></div>
+
         <div id="allZones" class="zone-container"></div>
     </main>
 
     <div id="zoneViewer">
         <div class="zone-header">
             <h2 id="zoneName">Game Title</h2>
-
             <div class="zone-controls">
                 <button onclick="fullscreenZone()">Fullscreen</button>
                 <button onclick="closeZone()">Close</button>
             </div>
         </div>
-
         <iframe id="zoneFrame" allowfullscreen></iframe>
     </div>
-
+    
     <div id="onlineCounter">Online: 23</div>
 
     <script src="script.js"></script>
