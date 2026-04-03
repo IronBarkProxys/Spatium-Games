@@ -40,6 +40,64 @@ cherri/
 
 
 Each game goes in its own folder inside `games/`. The main file inside every game folder must be named `index.html`.
+🎯 How to Play
+
+Open index.html or visit your GitHub Pages link
+Browse or search for a game
+Click any game card → it opens in the built-in player
+Use Fullscreen, New Tab, or Close buttons
+
+
+🌐 Live Demo
+(Once deployed, add your GitHub Pages link here)
+Example: https://yourusername.github.io/cherri/
+
+⚠️ Legal & Disclaimer
+
+This project is not affiliated with any game developers.
+All games are sourced from public links and the "Ultimate Game Stash" document.
+We respect copyright. If a game owner wants their content removed, please contact us.
+This site is made purely for educational and entertainment purposes.
+
+No assets are hosted illegally — we only provide a frontend player.
+
+🛠 Tech Stack
+
+Pure HTML + CSS + JavaScript
+iframe-based game player (supports multi-file games)
+GitHub Pages hosting (free & fast)
+Responsive & mobile-friendly
+
+
+📈 Future Plans
+
+None rn js trying to get the site on its feet
+but im also working on a proxy search
+unblocked movies
+a music player
+and much more so join the Discord to stay updated :)
+
+🤝 Contributing
+Want to help?
+
+Fork the repo
+Add new games to /games/ and update games.json
+Submit a Pull Request
+
+All contributions are welcome — especially new games and thumbnail improvements!
+
+⭐ Credits & Thanks
+
+Ik I already told you about the Ultimate Game Stash, but it is so good I have to bring it up again.
+Ultimate Game Stash — The massive Google Doc that powers most of the collection:
+https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q
+Inspired by gn-math and other unblocked game sites
+Built with love using Figtree font and custom particles
+
+
+📬 Contact / Support
+
+Discord: https://discord.gg/6fJ8GrsjMz
 
 ## Adding New Games
 
@@ -58,6 +116,7 @@ Want to add a game?
   "thumbnail": "thumbnails/slope.png",
   "category": "arcade"
 }
+
 
 
 
