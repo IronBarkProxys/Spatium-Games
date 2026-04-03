@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spatium</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="particles"></canvas>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">CHERRI</div>
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Search games..." oninput="filterGames()">
+            </div>
+            <button id="settingsBtn">Settings</button>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="title">Game Vault</h1>
+
+        <div id="featuredZones" class="zone-container"></div>
+
+        <div id="allZones" class="zone-container"></div>
+    </main>
+
+    <div id="zoneViewer">
+        <div class="zone-header">
+            <h2 id="zoneName">Game Title</h2>
+            <div class="zone-controls">
+                <button onclick="fullscreenZone()">Fullscreen</button>
+                <button onclick="closeZone()">Close</button>
+            </div>
+        </div>
+        <iframe id="zoneFrame" allowfullscreen></iframe>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
