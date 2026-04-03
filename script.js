@@ -93,6 +93,7 @@ function displayGames(games) {
 
 function filterGames() {
     const query = document.getElementById('searchBar').value.toLowerCase().trim();
+
     if (!query) {
         displayGames(allGames);
         return;
@@ -105,14 +106,19 @@ function filterGames() {
     displayGames(filtered);
 }
 
-// ====================== GAME OPENING (FIXED) ======================
+// ====================== GAME OPENING (FINAL FIX) ======================
 function openGame(game) {
     document.getElementById('zoneName').textContent = game.name;
-    
+
     const frame = document.getElementById('zoneFrame');
 
-    // 🔥 FIXED PATH (uses folder instead of non-existent "file")
-    frame.src = `games/${game.folder}/index.html`;
+    // 🔥 BULLETPROOF PATH FIX FOR GITHUB PAGES
+    const base = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
+
+    frame.src = `${base}/games/${game.folder}/index.html`;
+
+    // Optional debug (you can remove later)
+    console.log("Loading:", frame.src);
 
     document.getElementById('zoneViewer').style.display = 'flex';
 }
@@ -120,12 +126,14 @@ function openGame(game) {
 function closeZone() {
     const viewer = document.getElementById('zoneViewer');
     const frame = document.getElementById('zoneFrame');
+
     viewer.style.display = 'none';
     frame.src = 'about:blank';
 }
 
 function fullscreenZone() {
     const frame = document.getElementById('zoneFrame');
+
     if (frame.requestFullscreen) frame.requestFullscreen();
     else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
 }
@@ -146,7 +154,5 @@ window.onload = () => {
         }
     });
 
-    window.addEventListener('resize', () => {
-        resizeCanvas();
-    });
+    window.addEventListener('resize', resizeCanvas);
 };
