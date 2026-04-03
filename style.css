@@ -3,7 +3,7 @@
     --surface: #111111;
     --text: #eeeeee;
     --border: #333333;
-    --textbox: #1e293b; /* 👈 your requested color */
+    --textbox: #1e293b;
 }
 
 * {
@@ -20,7 +20,40 @@ body {
     overflow-x: hidden;
 }
 
-/* ================= PARTICLES ================= */
+#loadingScreen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    color: white;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top: 5px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#loadingScreen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
 #particles {
     position: fixed;
     inset: 0;
@@ -29,7 +62,6 @@ body {
     opacity: 0.6;
 }
 
-/* ================= HEADER ================= */
 header {
     position: sticky;
     top: 0;
@@ -70,7 +102,6 @@ header {
     outline: none;
 }
 
-/* ================= TITLE ================= */
 .title {
     text-align: center;
     font-size: 3rem;
@@ -78,17 +109,15 @@ header {
     font-weight: 700;
 }
 
-/* ================= GRID ================= */
 .zone-container {
     width: 100%;
     padding: 0 40px 4rem;
 
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6 per row */
+    grid-template-columns: repeat(6, 1fr);
     gap: 30px;
 }
 
-/* ================= GAME CARD ================= */
 .zone-item {
     width: 100%;
     aspect-ratio: 1 / 1.5;
@@ -111,7 +140,6 @@ header {
     border-color: white;
 }
 
-/* IMAGE */
 .zone-item img {
     width: 100%;
     height: 65%;
@@ -119,12 +147,11 @@ header {
     display: block;
 }
 
-/* TEXT BOX */
 .zone-item button {
     width: 100%;
     height: 35%;
 
-    background: var(--textbox); /* 👈 #1e293b */
+    background: var(--textbox);
     border: none;
     color: white;
 
@@ -140,7 +167,6 @@ header {
     padding: 10px;
 }
 
-/* ================= GAME VIEWER ================= */
 #zoneViewer {
     position: fixed;
     inset: 0;
@@ -173,7 +199,6 @@ header {
     border: none;
 }
 
-/* ================= ONLINE COUNTER ================= */
 #onlineCounter {
     position: fixed;
     bottom: 15px;
@@ -190,7 +215,6 @@ header {
     z-index: 9999;
 }
 
-/* ================= RESPONSIVE ================= */
 @media (max-width: 1200px) {
     .zone-container {
         grid-template-columns: repeat(4, 1fr);
