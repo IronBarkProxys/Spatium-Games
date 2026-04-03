@@ -23,7 +23,6 @@ class Particle {
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-
         if (this.x > canvas.width + 100 || this.y > canvas.height + 100) {
             this.reset();
         }
@@ -96,19 +95,19 @@ function filterGames() {
         displayGames(allGames);
         return;
     }
-    const filtered = allGames.filter(game =>
+    const filtered = allGames.filter(game => 
         game.name.toLowerCase().includes(query)
     );
     displayGames(filtered);
 }
 
-// UPDATED openGame function - loads single .html files directly
+// FIXED openGame - loads the .html file directly from games/ folder
 function openGame(game) {
     document.getElementById('zoneName').textContent = game.name;
     
     const frame = document.getElementById('zoneFrame');
     
-    // Changed from folder/index.html to direct file
+    // This matches your current json with "file"
     frame.src = `games/${game.file}`;
     
     document.getElementById('zoneViewer').style.display = 'flex';
