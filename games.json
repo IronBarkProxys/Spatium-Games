@@ -126,6 +126,16 @@
       "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/710.png"
     },
     {
+      "name": "Hollow Knight",
+      "folder": "Hollow-Knight-Demake",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/468.png"
+    },
+    {
+      "name": "Hollow Knight Silksong",
+      "folder": "Hollow-Knight-Silksong",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/771.png"
+    },
+    {
       "name": "Madalin Stunt Cars 2",
       "folder": "Madalin-Stunt-Cars-2",
       "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/278.png"
