@@ -79,11 +79,13 @@ function displayGames(games) {
     games.forEach(game => {
         const div = document.createElement('div');
         div.className = 'zone-item';
+
         div.innerHTML = `
             <img src="${game.thumbnail}" alt="${game.name}"
-                 onerror="this.src='https://via.placeholder.com/300x170/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
+                 onerror="this.src='https://dummyimage.com/300x170/1a1a1a/ffffff&text=${encodeURIComponent(game.name)}'">
             <button>${game.name}</button>
         `;
+
         div.onclick = () => openGame(game);
         container.appendChild(div);
     });
@@ -95,21 +97,23 @@ function filterGames() {
         displayGames(allGames);
         return;
     }
+
     const filtered = allGames.filter(game => 
         game.name.toLowerCase().includes(query)
     );
+
     displayGames(filtered);
 }
 
-// FIXED openGame - loads the .html file directly from games/ folder
+// ====================== GAME OPENING (FIXED) ======================
 function openGame(game) {
     document.getElementById('zoneName').textContent = game.name;
     
     const frame = document.getElementById('zoneFrame');
-    
-    // This matches your current json with "file"
-    frame.src = `games/${game.file}`;
-    
+
+    // 🔥 FIXED PATH (uses folder instead of non-existent "file")
+    frame.src = `games/${game.folder}/index.html`;
+
     document.getElementById('zoneViewer').style.display = 'flex';
 }
 
