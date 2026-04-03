@@ -5,7 +5,6 @@
     --text-muted: #aaaaaa;
     --accent: #ffffff;
     --border: #333333;
-    --radius: 16px;
 }
 
 * {
@@ -25,15 +24,13 @@ body {
 /* Particles */
 #particles {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: 1;
     pointer-events: none;
     opacity: 0.6;
 }
 
+/* Header */
 header {
     position: sticky;
     top: 0;
@@ -45,7 +42,7 @@ header {
 }
 
 .header-content {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
@@ -57,7 +54,6 @@ header {
 .logo {
     font-size: 2rem;
     font-weight: 800;
-    letter-spacing: -2px;
     color: white;
 }
 
@@ -71,82 +67,80 @@ header {
     padding: 14px 20px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 10px;
     color: white;
-    font-size: 1rem;
     outline: none;
 }
 
-#searchBar:focus {
-    border-color: white;
-    box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
-}
-
+/* Title */
 .title {
     text-align: center;
     font-size: 3rem;
-    margin: 3rem 0 2rem;
+    margin: 2.5rem 0;
     font-weight: 700;
-    letter-spacing: -2px;
 }
 
-/* LONGER GAME CARDS */
+/* ================= GRID: 6 PER ROW ================= */
 .zone-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem 4rem;
+    padding: 0 1rem 4rem;
+
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(6, 127px);
+    gap: 20px;
+    justify-content: center;
 }
 
+/* ================= GAME CARD ================= */
 .zone-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.4s ease;
+    width: 127px;
     display: flex;
     flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .zone-item:hover {
-    transform: translateY(-12px);
+    transform: translateY(-6px);
     border-color: white;
-    box-shadow: 0 20px 40px rgba(255,255,255,0.1);
 }
 
+/* IMAGE (127x127) */
 .zone-item img {
-    width: 100%;
-    aspect-ratio: 16/10;     /* Changed from 16/9 to make it longer/taller */
+    width: 127px;
+    height: 127px;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    display: block;
 }
 
-.zone-item:hover img {
-    transform: scale(1.05);
-}
-
+/* TEXT BOX (127 x 127.92) */
 .zone-item button {
-    width: 100%;
-    padding: 24px 16px;      /* Increased vertical padding */
+    width: 127px;
+    height: 127.92px;
+
     background: transparent;
     border: none;
     color: white;
+
+    font-size: 0.9rem;
     font-weight: 600;
-    font-size: 1.15rem;      /* Slightly bigger text */
     text-align: center;
-    cursor: pointer;
-    flex-grow: 1;            /* Pushes button to bottom and makes card taller */
-    min-height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px;
 }
 
-/* Game Viewer */
+/* ================= GAME VIEWER ================= */
 #zoneViewer {
     position: fixed;
     inset: 0;
-    background: #000;
+    background: black;
     z-index: 2000;
     display: none;
     flex-direction: column;
@@ -157,7 +151,6 @@ header {
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid #333;
 }
 
@@ -165,28 +158,32 @@ header {
     background: #222;
     color: white;
     border: 1px solid #444;
-    padding: 10px 18px;
+    padding: 10px 16px;
     margin-left: 10px;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
 }
 
 #zoneFrame {
     flex: 1;
     border: none;
-    background: #000;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1200px) {
     .zone-container {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 1.5rem;
-        padding: 0 1rem 3rem;
+        grid-template-columns: repeat(4, 127px);
     }
-    
-    .zone-item button {
-        font-size: 1rem;
-        padding: 20px 12px;
+}
+
+@media (max-width: 800px) {
+    .zone-container {
+        grid-template-columns: repeat(3, 127px);
+    }
+}
+
+@media (max-width: 500px) {
+    .zone-container {
+        grid-template-columns: repeat(2, 127px);
     }
 }
