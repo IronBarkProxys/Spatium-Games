@@ -3,7 +3,6 @@
     --surface: #111111;
     --text: #eeeeee;
     --text-muted: #aaaaaa;
-    --accent: #ffffff;
     --border: #333333;
 }
 
@@ -21,7 +20,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Particles */
+/* ================= PARTICLES ================= */
 #particles {
     position: fixed;
     inset: 0;
@@ -30,7 +29,7 @@ body {
     opacity: 0.6;
 }
 
-/* Header */
+/* ================= HEADER ================= */
 header {
     position: sticky;
     top: 0;
@@ -54,7 +53,6 @@ header {
 .logo {
     font-size: 2rem;
     font-weight: 800;
-    color: white;
 }
 
 .search-container {
@@ -72,7 +70,7 @@ header {
     outline: none;
 }
 
-/* Title */
+/* ================= TITLE ================= */
 .title {
     text-align: center;
     font-size: 3rem;
@@ -80,16 +78,17 @@ header {
     font-weight: 700;
 }
 
-/* ================= GRID: 6 PER ROW ================= */
+/* ================= GRID (FULL WIDTH SPREAD) ================= */
 .zone-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 1rem 4rem;
+    width: 100%;
+    padding: 0 40px 4rem;
 
     display: grid;
-    grid-template-columns: repeat(6, 127px);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, 127px);
+    gap: 40px;
+
     justify-content: center;
+    align-content: start;
 }
 
 /* ================= GAME CARD ================= */
@@ -172,18 +171,20 @@ header {
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1200px) {
     .zone-container {
-        grid-template-columns: repeat(4, 127px);
+        grid-template-columns: repeat(auto-fit, 127px);
+        gap: 30px;
     }
 }
 
 @media (max-width: 800px) {
     .zone-container {
-        grid-template-columns: repeat(3, 127px);
+        gap: 25px;
     }
 }
 
 @media (max-width: 500px) {
     .zone-container {
-        grid-template-columns: repeat(2, 127px);
+        gap: 20px;
+        padding: 0 20px 4rem;
     }
 }
