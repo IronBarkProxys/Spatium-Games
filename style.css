@@ -90,14 +90,14 @@ header {
     letter-spacing: -2px;
 }
 
-/* BIGGER GAME CARDS */
+/* LONGER GAME CARDS */
 .zone-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem 4rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));   /* Bigger cards */
-    gap: 2rem;   /* More spacing */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
 }
 
 .zone-item {
@@ -107,7 +107,8 @@ header {
     overflow: hidden;
     cursor: pointer;
     transition: all 0.4s ease;
-    height: 100%; /* Makes all cards same height */
+    display: flex;
+    flex-direction: column;
 }
 
 .zone-item:hover {
@@ -118,7 +119,7 @@ header {
 
 .zone-item img {
     width: 100%;
-    aspect-ratio: 16/9;
+    aspect-ratio: 16/10;     /* Changed from 16/9 to make it longer/taller */
     object-fit: cover;
     transition: transform 0.4s ease;
 }
@@ -129,15 +130,16 @@ header {
 
 .zone-item button {
     width: 100%;
-    padding: 20px 16px;     /* More padding */
+    padding: 24px 16px;      /* Increased vertical padding */
     background: transparent;
     border: none;
     color: white;
     font-weight: 600;
-    font-size: 1.1rem;      /* Bigger text */
+    font-size: 1.15rem;      /* Slightly bigger text */
     text-align: center;
     cursor: pointer;
-    min-height: 80px;
+    flex-grow: 1;            /* Pushes button to bottom and makes card taller */
+    min-height: 90px;
 }
 
 /* Game Viewer */
@@ -175,7 +177,7 @@ header {
     background: #000;
 }
 
-/* Responsive - make cards a bit smaller on mobile */
+/* Responsive */
 @media (max-width: 768px) {
     .zone-container {
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -185,6 +187,6 @@ header {
     
     .zone-item button {
         font-size: 1rem;
-        padding: 16px 12px;
+        padding: 20px 12px;
     }
 }
