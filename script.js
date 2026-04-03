@@ -99,7 +99,7 @@ function filterGames() {
         return;
     }
 
-    const filtered = allGames.filter(game => 
+    const filtered = allGames.filter(game =>
         game.name.toLowerCase().includes(query)
     );
 
@@ -112,15 +112,12 @@ function openGame(game) {
 
     const frame = document.getElementById('zoneFrame');
 
-    // 🔥 BULLETPROOF PATH FIX FOR GITHUB PAGES
-    const base = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
-
-    frame.src = `${base}/games/${game.folder}/index.html`;
-
-    // Optional debug (you can remove later)
-    console.log("Loading:", frame.src);
+    // 🔥 Absolute path using repo name (GitHub Pages safe)
+    frame.src = `/Spatium-Games/games/${game.folder}/index.html`;
 
     document.getElementById('zoneViewer').style.display = 'flex';
+
+    console.log("Opening game:", frame.src);
 }
 
 function closeZone() {
