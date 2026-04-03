@@ -78,27 +78,28 @@ header {
     font-weight: 700;
 }
 
-/* ================= GRID (FULL WIDTH SPREAD) ================= */
+/* ================= GRID (6 PER ROW) ================= */
 .zone-container {
     width: 100%;
     padding: 0 40px 4rem;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, 127px);
-    gap: 40px;
-
-    justify-content: center;
-    align-content: start;
+    grid-template-columns: repeat(6, 1fr); /* EXACTLY 6 PER ROW */
+    gap: 30px;
 }
 
 /* ================= GAME CARD ================= */
 .zone-item {
-    width: 127px;
+    width: 100%;
+    aspect-ratio: 1 / 1.5; /* wider + taller card */
+
     display: flex;
     flex-direction: column;
+
     background: var(--surface);
     border: 1px solid var(--border);
     cursor: pointer;
+
     transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
@@ -107,24 +108,24 @@ header {
     border-color: white;
 }
 
-/* IMAGE (127x127) */
+/* IMAGE (top portion) */
 .zone-item img {
-    width: 127px;
-    height: 127px;
+    width: 100%;
+    height: 65%;
     object-fit: cover;
     display: block;
 }
 
-/* TEXT BOX (127 x 127.92) */
+/* TEXT BOX (bottom portion) */
 .zone-item button {
-    width: 127px;
-    height: 127.92px;
+    width: 100%;
+    height: 35%;
 
     background: transparent;
     border: none;
     color: white;
 
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 600;
     text-align: center;
 
@@ -132,7 +133,7 @@ header {
     align-items: center;
     justify-content: center;
 
-    padding: 5px;
+    padding: 10px;
 }
 
 /* ================= GAME VIEWER ================= */
@@ -169,22 +170,25 @@ header {
 }
 
 /* ================= RESPONSIVE ================= */
+
+/* Tablets */
 @media (max-width: 1200px) {
     .zone-container {
-        grid-template-columns: repeat(auto-fit, 127px);
-        gap: 30px;
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
+/* Small tablets / large phones */
 @media (max-width: 800px) {
     .zone-container {
-        gap: 25px;
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
+/* Phones */
 @media (max-width: 500px) {
     .zone-container {
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
         padding: 0 20px 4rem;
     }
 }
