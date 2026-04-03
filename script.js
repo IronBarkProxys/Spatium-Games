@@ -1,4 +1,4 @@
-// ====================== PARTICLES ======================
+ // ====================== PARTICLES ======================
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 
@@ -61,6 +61,10 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
+// ====================== LOADING SCREEN ======================
+const loadingScreen = document.getElementById("loadingScreen");
+const loadingText = document.getElementById("loadingText");
+
 // ====================== GAME LOADING ======================
 let allGames = [];
 
@@ -68,8 +72,15 @@ async function loadGames() {
     try {
         const res = await fetch('games.json?t=' + Date.now());
         const data = await res.json();
+
         allGames = data.games || [];
-        displayGames(allGames);
+
+        // ✅ Progress simulation (based on total games)
+        const total = allGames.length;
+        let loaded = 0;
+
+        displayGamesWithProgress(allGames, total, loaded);
+
     } catch (err) {
         console.error("Failed to load games.json:", err);
 
@@ -78,14 +89,25 @@ async function loadGames() {
                 Failed to load games.
             </p>
         `;
+
+        // hide loader anyway
+        hideLoader();
     }
 }
 
-function displayGames(games) {
+// ✅ Display with loading counter updates
+function displayGamesWithProgress(games, total, loaded) {
     const container = document.getElementById('allZones');
     container.innerHTML = '';
 
-    games.forEach(game => {
+    function loadNext(index) {
+        if (index >= games.length) {
+            hideLoader();
+            return;
+        }
+
+        const game = games[index];
+
         const div = document.createElement('div');
         div.className = 'zone-item';
 
@@ -98,7 +120,24 @@ function displayGames(games) {
 
         div.addEventListener('click', () => openGame(game));
         container.appendChild(div);
-    });
+
+        loaded++;
+        loadingText.textContent = `Loading games... (${loaded}/${total})`;
+
+        // small delay makes progress visible
+        setTimeout(() => loadNext(index + 1), 2);
+    }
+
+    loadNext(0);
+}
+
+// ✅ Hide loader
+function hideLoader() {
+    loadingScreen.classList.add("fade-out");
+
+    setTimeout(() => {
+        loadingScreen.style.display = "none";
+    }, 500);
 }
 
 // ====================== SEARCH ======================
@@ -125,7 +164,6 @@ function openGame(game) {
 
     title.textContent = game.name;
 
-    // ✅ Correct GitHub Pages path
     frame.src = `/Spatium-Games/games/${game.folder}/index.html`;
 
     viewer.style.display = 'flex';
