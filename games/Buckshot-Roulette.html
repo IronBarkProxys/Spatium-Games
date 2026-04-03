@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buckshot Roulette</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #121212;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- The actual game will load here from the external port -->
+    <script>
+        // Load the real Buckshot Roulette game directly
+        fetch("https://cdn.jsdelivr.net/gh/genizy/web-port@main/buckshot-roulette/index.html")
+            .then(response => response.text())
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(err => {
+                document.body.innerHTML = `
+                    <div style="color:white; text-align:center; margin-top:20%; font-size:24px;">
+                        Failed to load Buckshot Roulette.<br><br>
+                        <small>${err.message}</small>
+                    </div>
+                `;
+            });
+    </script>
+
+</body>
+</html>
