@@ -1,3 +1,4 @@
+ // ====================== PARTICLES ======================
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 
@@ -83,11 +84,11 @@ async function loadGames() {
     } catch (err) {
         console.error("Failed to load games.json:", err);
 
-        document.getElementById('allZones').innerHTML = 
+        document.getElementById('allZones').innerHTML = `
             <p style="text-align:center; color:#888; grid-column:1/-1;">
                 Failed to load games.
             </p>
-        ;
+        `;
 
         // hide loader anyway
         hideLoader();
@@ -110,18 +111,18 @@ function displayGamesWithProgress(games, total, loaded) {
         const div = document.createElement('div');
         div.className = 'zone-item';
 
-        div.innerHTML = 
+        div.innerHTML = `
             <img src="${game.thumbnail}" 
                  alt="${game.name}"
                  onerror="this.src='https://dummyimage.com/300x170/111/fff&text=${encodeURIComponent(game.name)}'">
             <button>${game.name}</button>
-        ;
+        `;
 
         div.addEventListener('click', () => openGame(game));
         container.appendChild(div);
 
         loaded++;
-        loadingText.textContent = Loading games... (${loaded}/${total});
+        loadingText.textContent = `Loading games... (${loaded}/${total})`;
 
         // small delay makes progress visible
         setTimeout(() => loadNext(index + 1), 2);
@@ -163,7 +164,7 @@ function openGame(game) {
 
     title.textContent = game.name;
 
-    frame.src = /Spatium-Games/games/${game.folder}/index.html;
+    frame.src = `/Spatium-Games/games/${game.folder}/index.html`;
 
     viewer.style.display = 'flex';
 
