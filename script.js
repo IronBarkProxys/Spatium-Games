@@ -1,4 +1,4 @@
- // ====================== PARTICLES ======================
+// ====================== PARTICLES ======================
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 
@@ -65,6 +65,71 @@ function animateParticles() {
 const loadingScreen = document.getElementById("loadingScreen");
 const loadingText = document.getElementById("loadingText");
 
+// ====================== SETTINGS ======================
+const settingsBtn = document.getElementById("settingsBtn");
+const settingsModal = document.getElementById("settingsModal");
+
+settingsBtn.addEventListener("click", () => {
+    settingsModal.style.display = "flex";
+});
+
+function closeSettings() {
+    settingsModal.style.display = "none";
+}
+
+function applySettings() {
+    const color = document.getElementById("themeColor").value;
+    const particlesEnabled = document.getElementById("toggleParticles").checked;
+    const title = document.getElementById("siteTitle").value;
+    const favicon = document.getElementById("faviconInput").value;
+
+    // Theme color
+    document.documentElement.style.setProperty('--textbox', color);
+
+    // Toggle particles
+    canvas.style.display = particlesEnabled ? "block" : "none";
+
+    // Title
+    if (title) {
+        document.title = title;
+        document.querySelector(".logo").textContent = title;
+    }
+
+    // Favicon
+    if (favicon) {
+        let link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+            link = document.createElement('link');
+            link.rel = 'icon';
+            document.head.appendChild(link);
+        }
+        link.href = favicon;
+    }
+
+    closeSettings();
+}
+
+// ====================== ABOUT:BLANK ======================
+function openAboutBlank() {
+    const newTab = window.open("about:blank", "_blank");
+
+    const doc = newTab.document;
+
+    doc.open();
+    doc.write(`
+        <html>
+        <head>
+            <title>${document.title}</title>
+        </head>
+        <body style="margin:0; overflow:hidden;">
+            <iframe src="${window.location.href}" 
+                style="border:none; width:100vw; height:100vh;"></iframe>
+        </body>
+        </html>
+    `);
+    doc.close();
+}
+
 // ====================== GAME LOADING ======================
 let allGames = [];
 
@@ -75,7 +140,6 @@ async function loadGames() {
 
         allGames = data.games || [];
 
-        // ✅ Progress simulation (based on total games)
         const total = allGames.length;
         let loaded = 0;
 
@@ -90,12 +154,10 @@ async function loadGames() {
             </p>
         `;
 
-        // hide loader anyway
         hideLoader();
     }
 }
 
-// ✅ Display with loading counter updates
 function displayGamesWithProgress(games, total, loaded) {
     const container = document.getElementById('allZones');
     container.innerHTML = '';
@@ -124,14 +186,12 @@ function displayGamesWithProgress(games, total, loaded) {
         loaded++;
         loadingText.textContent = `Loading games... (${loaded}/${total})`;
 
-        // small delay makes progress visible
         setTimeout(() => loadNext(index + 1), 2);
     }
 
     loadNext(0);
 }
 
-// ✅ Hide loader
 function hideLoader() {
     loadingScreen.classList.add("fade-out");
 
@@ -167,8 +227,6 @@ function openGame(game) {
     frame.src = `/Spatium-Games/games/${game.folder}/index.html`;
 
     viewer.style.display = 'flex';
-
-    console.log("Opening:", frame.src);
 }
 
 function closeZone() {
