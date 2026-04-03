@@ -1,3 +1,4 @@
+// ====================== PARTICLES ======================
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let particles = [];
@@ -16,14 +17,13 @@ class Particle {
         this.y = Math.random() * canvas.height - 100;
         this.size = Math.random() * 3 + 1.5;
         this.speedX = Math.random() * 0.7 + 0.3;
-        this.speedY = Math.random() * 0.9 + 0.5; 
+        this.speedY = Math.random() * 0.9 + 0.5;
         this.opacity = Math.random() * 0.4 + 0.25;
     }
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
 
-   
         if (this.x > canvas.width + 100 || this.y > canvas.height + 100) {
             this.reset();
         }
@@ -55,6 +55,7 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
+// ====================== GAME LOADING ======================
 let allGames = [];
 
 async function loadGames() {
@@ -80,7 +81,7 @@ function displayGames(games) {
         const div = document.createElement('div');
         div.className = 'zone-item';
         div.innerHTML = `
-            <img src="${game.thumbnail}" alt="${game.name}" 
+            <img src="${game.thumbnail}" alt="${game.name}"
                  onerror="this.src='https://via.placeholder.com/300x170/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
             <button>${game.name}</button>
         `;
@@ -95,17 +96,20 @@ function filterGames() {
         displayGames(allGames);
         return;
     }
-    const filtered = allGames.filter(game => 
+    const filtered = allGames.filter(game =>
         game.name.toLowerCase().includes(query)
     );
     displayGames(filtered);
 }
 
+// UPDATED openGame function - loads single .html files directly
 function openGame(game) {
     document.getElementById('zoneName').textContent = game.name;
     
     const frame = document.getElementById('zoneFrame');
-    frame.src = `games/${game.folder}/index.html`;
+    
+    // Changed from folder/index.html to direct file
+    frame.src = `games/${game.file}`;
     
     document.getElementById('zoneViewer').style.display = 'flex';
 }
@@ -123,6 +127,7 @@ function fullscreenZone() {
     else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
 }
 
+// ====================== INIT ======================
 window.onload = () => {
     resizeCanvas();
     initParticles();
