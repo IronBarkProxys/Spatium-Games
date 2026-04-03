@@ -143,32 +143,32 @@
     {
       "name": "Moto X3M",
       "folder": "MotoX3m",
-      "thumbnail": "images/motox3m.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/96.png"
     },
     {
       "name": "Moto X3M 2",
       "folder": "MotoX3m2",
-      "thumbnail": "images/motox3m2.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/97.png"
     },
     {
       "name": "Moto X3M 3",
       "folder": "MotoX3m3",
-      "thumbnail": "images/motox3m3.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/98.png"
     },
     {
       "name": "Moto X3M Pool Party",
       "folder": "MotoX3m-Pool-Party",
-      "thumbnail": "images/motox3m_pool.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/124.png"
     },
     {
       "name": "Moto X3M Spooky Land",
       "folder": "MotoX3m-Spooky-Land",
-      "thumbnail": "images/motox3m_spooky.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/99.png"
     },
     {
       "name": "Moto X3M Winter",
       "folder": "MotoX3m-Winter",
-      "thumbnail": "images/motox3m_winter.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/100.png"
     }
   ]
 }
