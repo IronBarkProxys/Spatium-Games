@@ -6,53 +6,24 @@
     <title>Spatium</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-    <!-- SETTINGS BUTTON -->
-    <button id="openSettings" class="settings-fab">⚙</button>
-
-    <!-- SETTINGS MODAL -->
-    <div id="settingsModal" class="settings-modal">
-        <div class="settings-box">
-            <h2>Settings</h2>
-
-            <label>Theme</label>
-            <select id="themeSelect">
-                <option value="dark">Dark</option>
-                <option value="light">Light</option>
-            </select>
-
-            <label>Custom Background</label>
-            <input type="color" id="bgColor">
-
-            <label>Custom Surface</label>
-            <input type="color" id="surfaceColor">
-
-            <label>Particles</label>
-            <button id="toggleParticles">Toggle Particles</button>
-
-            <label>Site Title</label>
-            <input type="text" id="titleInput" placeholder="Enter title">
-
-            <label>Favicon URL</label>
-            <input type="text" id="faviconInput" placeholder="https://.../icon.png">
-
-            <label>About:Blank Mode</label>
-            <button id="openAboutBlank">Open in About:Blank</button>
-
-            <button id="closeSettings">Close</button>
-        </div>
-    </div>
-
     <canvas id="particles"></canvas>
 
     <header>
         <div class="header-content">
             <div class="logo">Spatium</div>
+
             <div class="search-container">
-                <input type="text" id="searchBar" placeholder="Search games..." oninput="filterGames()">
+                <input
+                    type="text"
+                    id="searchBar"
+                    placeholder="Search games..."
+                    oninput="filterGames()"
+                >
             </div>
-            <button id="settingsBtn" onclick="document.getElementById('openSettings').click()">Settings</button>
+
+            <button id="settingsBtn">Settings</button>
         </div>
     </header>
 
@@ -66,14 +37,16 @@
     <div id="zoneViewer">
         <div class="zone-header">
             <h2 id="zoneName">Game Title</h2>
+
             <div class="zone-controls">
                 <button onclick="fullscreenZone()">Fullscreen</button>
                 <button onclick="closeZone()">Close</button>
             </div>
         </div>
+
         <iframe id="zoneFrame" allowfullscreen></iframe>
     </div>
-    
+
     <div id="onlineCounter">Online: 23</div>
 
     <script src="script.js"></script>
