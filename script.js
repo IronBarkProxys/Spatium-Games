@@ -1,4 +1,3 @@
-// ====================== PARTICLES ======================
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 
@@ -64,71 +63,6 @@ function animateParticles() {
 // ====================== LOADING SCREEN ======================
 const loadingScreen = document.getElementById("loadingScreen");
 const loadingText = document.getElementById("loadingText");
-
-// ====================== SETTINGS ======================
-const settingsBtn = document.getElementById("settingsBtn");
-const settingsModal = document.getElementById("settingsModal");
-
-settingsBtn.addEventListener("click", () => {
-    settingsModal.style.display = "flex";
-});
-
-function closeSettings() {
-    settingsModal.style.display = "none";
-}
-
-function applySettings() {
-    const color = document.getElementById("themeColor").value;
-    const particlesEnabled = document.getElementById("toggleParticles").checked;
-    const title = document.getElementById("siteTitle").value;
-    const favicon = document.getElementById("faviconInput").value;
-
-    // Theme color
-    document.documentElement.style.setProperty('--textbox', color);
-
-    // Toggle particles
-    canvas.style.display = particlesEnabled ? "block" : "none";
-
-    // Title
-    if (title) {
-        document.title = title;
-        document.querySelector(".logo").textContent = title;
-    }
-
-    // Favicon
-    if (favicon) {
-        let link = document.querySelector("link[rel~='icon']");
-        if (!link) {
-            link = document.createElement('link');
-            link.rel = 'icon';
-            document.head.appendChild(link);
-        }
-        link.href = favicon;
-    }
-
-    closeSettings();
-}
-
-// ====================== ABOUT:BLANK ======================
-function openAboutBlank() {
-    const newTab = window.open("about:blank", "_blank");
-
-    const doc = newTab.document;
-
-    doc.open();
-    doc.write(`
-        <html>
-        <head>
-            <title>${document.title}</title>
-        </head>
-        <body style="margin:0; overflow:hidden;">
-            <iframe src="${window.location.href}" 
-                style="border:none; width:100vw; height:100vh;"></iframe>
-        </body>
-        </html>
-    `);
-    doc.close();
-}
 
 // ====================== GAME LOADING ======================
 let allGames = [];
@@ -205,7 +139,7 @@ function filterGames() {
     const query = document.getElementById('searchBar').value.toLowerCase().trim();
 
     if (!query) {
-        displayGames(allGames);
+        displayGamesWithProgress(allGames, allGames.length, 0);
         return;
     }
 
@@ -213,7 +147,21 @@ function filterGames() {
         game.name.toLowerCase().includes(query)
     );
 
-    displayGames(filtered);
+    const container = document.getElementById('allZones');
+    container.innerHTML = '';
+
+    filtered.forEach(game => {
+        const div = document.createElement('div');
+        div.className = 'zone-item';
+
+        div.innerHTML = `
+            <img src="${game.thumbnail}">
+            <button>${game.name}</button>
+        `;
+
+        div.addEventListener('click', () => openGame(game));
+        container.appendChild(div);
+    });
 }
 
 // ====================== GAME PLAYER ======================
@@ -223,7 +171,6 @@ function openGame(game) {
     const title = document.getElementById('zoneName');
 
     title.textContent = game.name;
-
     frame.src = `/Spatium-Games/games/${game.folder}/index.html`;
 
     viewer.style.display = 'flex';
@@ -247,6 +194,78 @@ function fullscreenZone() {
     }
 }
 
+// ====================== SETTINGS ======================
+const settingsBtn = document.getElementById("openSettings");
+const modal = document.getElementById("settingsModal");
+
+const closeSettings = document.getElementById("closeSettings");
+
+settingsBtn.onclick = () => modal.style.display = "flex";
+closeSettings.onclick = () => modal.style.display = "none";
+
+// Theme switch
+document.getElementById("themeSelect").onchange = (e) => {
+    if (e.target.value === "light") {
+        document.documentElement.style.setProperty("--bg", "#ffffff");
+        document.documentElement.style.setProperty("--surface", "#f1f1f1");
+        document.documentElement.style.setProperty("--text", "#000000");
+        document.documentElement.style.setProperty("--border", "#cccccc");
+    } else {
+        document.documentElement.style.setProperty("--bg", "#0a0a0a");
+        document.documentElement.style.setProperty("--surface", "#111111");
+        document.documentElement.style.setProperty("--text", "#eeeeee");
+        document.documentElement.style.setProperty("--border", "#333333");
+    }
+};
+
+// Custom colors
+document.getElementById("bgColor").oninput = (e) => {
+    document.documentElement.style.setProperty("--bg", e.target.value);
+};
+
+document.getElementById("surfaceColor").oninput = (e) => {
+    document.documentElement.style.setProperty("--surface", e.target.value);
+};
+
+// Toggle particles
+let particlesEnabled = true;
+document.getElementById("toggleParticles").onclick = () => {
+    particlesEnabled = !particlesEnabled;
+    canvas.style.display = particlesEnabled ? "block" : "none";
+};
+
+// Change title
+document.getElementById("titleInput").oninput = (e) => {
+    document.title = e.target.value || "Spatium";
+};
+
+// Change favicon
+document.getElementById("faviconInput").oninput = (e) => {
+    if (!e.target.value) return;
+
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+        link = document.createElement("link");
+        link.rel = "icon";
+        document.head.appendChild(link);
+    }
+    link.href = e.target.value;
+};
+
+// About:blank launcher
+document.getElementById("openAboutBlank").onclick = () => {
+    const win = window.open("about:blank");
+
+    win.document.write(`
+        <html>
+        <head><title>Spatium</title></head>
+        <body style="margin:0;overflow:hidden;">
+            <iframe src="${location.href}" style="border:none;width:100%;height:100vh;"></iframe>
+        </body>
+        </html>
+    `);
+};
+
 // ====================== INIT ======================
 window.onload = () => {
     resizeCanvas();
@@ -260,8 +279,6 @@ window.onload = () => {
     window.addEventListener('resize', resizeCanvas);
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === "Escape") {
-            closeZone();
-        }
+        if (e.key === "Escape") closeZone();
     });
 };
