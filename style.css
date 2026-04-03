@@ -112,7 +112,6 @@ header {
 .zone-container {
     width: 100%;
     padding: 0 40px 4rem;
-
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 30px;
@@ -121,16 +120,12 @@ header {
 .zone-item {
     width: 100%;
     aspect-ratio: 1 / 1.5;
-
     display: flex;
     flex-direction: column;
-
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 16px;
-
     overflow: hidden;
-
     cursor: pointer;
     transition: transform 0.2s ease, border-color 0.2s ease;
 }
@@ -150,20 +145,15 @@ header {
 .zone-item button {
     width: 100%;
     height: 35%;
-
     background: var(--textbox);
     border: none;
     color: white;
-
     font-size: 1rem;
     font-weight: 600;
     text-align: center;
-
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-
     padding: 10px;
 }
 
@@ -204,15 +194,73 @@ header {
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-
     background: #111;
     border: 1px solid #333;
     padding: 8px 16px;
     border-radius: 10px;
-
     color: white;
     font-size: 14px;
     z-index: 9999;
+}
+
+/* ================= SETTINGS UI ================= */
+
+/* settings button (top-left) */
+.settings-fab {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+
+    background: #111;
+    color: white;
+    border: 1px solid #333;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* modal overlay */
+.settings-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* modal box */
+.settings-box {
+    background: var(--surface);
+    padding: 20px;
+    border-radius: 12px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid var(--border);
+}
+
+/* inputs */
+.settings-box input,
+.settings-box select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #000;
+    color: white;
+}
+
+/* buttons inside modal */
+.settings-box button {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: white;
+    cursor: pointer;
 }
 
 @media (max-width: 1200px) {
