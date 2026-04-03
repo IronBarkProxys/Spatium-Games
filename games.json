@@ -1,166 +1,174 @@
 {
   "games": [
     {
-      "id": -1,
-      "name": "[!] SUGGEST GAMES",
-      "folder": "suggest-games",
-      "thumbnail": "thumbnails/suggest.png"
-    },
-    {
-      "id": 1,
       "name": "1v1.lol",
       "folder": "1v1.lol",
-      "thumbnail": "thumbnails/1v1.lol.png"
+      "thumbnail": "images/1v1lol.png"
     },
     {
-      "id": 2,
       "name": "2-3-4 Player Games",
       "folder": "2-3-4-Player-Games",
-      "thumbnail": "thumbnails/2-3-4-player-games.png"
+      "thumbnail": "images/234.png"
     },
     {
-      "id": 3,
       "name": "20 Small Mazes",
       "folder": "20-Small-Mazes",
-      "thumbnail": "thumbnails/20-small-mazes.png"
+      "thumbnail": "images/mazes.png"
     },
     {
-      "id": 4,
       "name": "2048",
       "folder": "2048",
-      "thumbnail": "thumbnails/2048.png"
+      "thumbnail": "images/2048.png"
     },
     {
-      "id": 5,
       "name": "2048 Cupcakes",
       "folder": "2048-Cupcakes",
-      "thumbnail": "thumbnails/2048-cupcakes.png"
+      "thumbnail": "images/2048cupcakes.png"
     },
     {
-      "id": 6,
       "name": "99 Nights In The Forest",
-      "folder": "99-Nights-Nn-The-Forest",
-      "thumbnail": "thumbnails/99-nights-in-the-forest.png"
+      "folder": "99-Nights-In-The-Forest",
+      "thumbnail": "images/99nights.png"
     },
     {
-      "id": 7,
       "name": "A Dance of Fire and Ice",
-      "folder": "A-Dance-Of-Fire-and-Ice",
-      "thumbnail": "thumbnails/a-dance-of-fire-and-ice.png"
+      "folder": "A-Dance-of Fire-and-Ice",
+      "thumbnail": "images/adofai.png"
     },
     {
-      "id": 8,
       "name": "A Dark Room",
-      "folder": "a-dark-room",
-      "thumbnail": "thumbnails/a-dark-room.png"
+      "folder": "A-Dark-Room",
+      "thumbnail": "images/darkroom.png"
     },
     {
-      "id": 9,
       "name": "Adventure Capitalist",
-      "folder": "adventure-capitalist",
-      "thumbnail": "thumbnails/adventure-capitalist.png"
+      "folder": "Adventure-Capitalist",
+      "thumbnail": "images/adcap.png"
     },
     {
-      "id": 10,
       "name": "Agar.io Lite",
-      "folder": "agar-io-lite",
-      "thumbnail": "thumbnails/agar-io-lite.png"
+      "folder": "Agar.io-Lite",
+      "thumbnail": "images/agario.png"
     },
     {
-      "id": 11,
       "name": "Bad Parenting",
-      "folder": "bad-parenting",
-      "thumbnail": "thumbnails/bad-parenting.png"
+      "folder": "Bad-Parenting",
+      "thumbnail": "images/badparenting.png"
     },
     {
-      "id": 12,
-      "name": "Baldi’s Basics",
-      "folder": "baldis-basics",
-      "thumbnail": "thumbnails/baldis-basics.png"
+      "name": "Baldi's Basics",
+      "folder": "Baldi’s-Basics",
+      "thumbnail": "images/baldi.png"
     },
     {
-      "id": 13,
       "name": "Bendy and the Ink Machine",
-      "folder": "bendy-and-the-ink-machine",
-      "thumbnail": "thumbnails/bendy-and-the-ink-machine.png"
+      "folder": "Bendy-and-the-Ink-Machine",
+      "thumbnail": "images/bendy.png"
     },
     {
-      "id": 14,
       "name": "Buckshot Roulette",
-      "folder": "buckshot-roulette",
-      "thumbnail": "thumbnails/buckshot-roulette.png"
+      "folder": "Buckshot-Roulette",
+      "thumbnail": "images/buckshot.png"
     },
     {
-      "id": 15,
       "name": "Celeste",
-      "folder": "celeste",
-      "thumbnail": "thumbnails/celeste.png"
+      "folder": "Celeste",
+      "thumbnail": "images/celeste.png"
     },
     {
-      "id": 16,
       "name": "Clover Pit",
-      "folder": "clover-pit",
-      "thumbnail": "thumbnails/clover-pit.png"
+      "folder": "Clover-Pit",
+      "thumbnail": "images/clover.png"
     },
     {
-      "id": 17,
       "name": "Cuphead",
-      "folder": "cuphead",
-      "thumbnail": "thumbnails/cuphead.png"
+      "folder": "Cuphead",
+      "thumbnail": "images/cuphead.png"
     },
     {
-      "id": 18,
-      "name": "Five Nights at Freddy's",
-      "folder": "fnaf",
-      "thumbnail": "thumbnails/fnaf.png"
+      "name": "FNAF",
+      "folder": "FNAF",
+      "thumbnail": "images/fnaf.png"
     },
     {
-      "id": 19,
       "name": "Five Nights at Epstein’s",
-      "folder": "five-nights-at-epsteins",
-      "thumbnail": "thumbnails/five-nights-at-epsteins.png"
+      "folder": "Five-Nights-at-Epstein’s",
+      "thumbnail": "images/epstein.png"
     },
     {
-      "id": 20,
       "name": "Madalin Stunt Cars 2",
-      "folder": "madalin-stunt-cars-2",
-      "thumbnail": "thumbnails/madalin-stunt-cars-2.png"
+      "folder": "Madalin-Stunt-Cars-2",
+      "thumbnail": "images/madalin2.png"
     },
     {
-      "id": 21,
       "name": "Madalin Stunt Cars Multiplayer",
-      "folder": "madalin-stunt-cars-multiplayer",
-      "thumbnail": "thumbnails/madalin-stunt-cars-multiplayer.png"
+      "folder": "Madalin-Stunt-Cars-Multiplayer",
+      "thumbnail": "images/madalinmp.png"
     },
     {
-      "id": 22,
+      "name": "Mage Tower Idle Defense",
+      "folder": "Mage-Tower-Idle-Defense",
+      "thumbnail": "images/mage.png"
+    },
+    {
+      "name": "Mari0",
+      "folder": "Mari0",
+      "thumbnail": "images/mari0.png"
+    },
+    {
       "name": "Mario VS Luigi Online",
-      "folder": "mario-vs-luigi-online",
-      "thumbnail": "thumbnails/mario-vs-luigi-online.png"
+      "folder": "Mario-VS-Luigi-Online",
+      "thumbnail": "images/mario.png"
     },
     {
-      "id": 23,
       "name": "Melon Playground",
-      "folder": "melon-playground",
-      "thumbnail": "thumbnails/melon-playground.png"
+      "folder": "Melon-Playground",
+      "thumbnail": "images/melon.png"
     },
     {
-      "id": 24,
+      "name": "Merge Round Racers",
+      "folder": "Merge-Round-Racers",
+      "thumbnail": "images/merge.png"
+    },
+    {
       "name": "Monkey Mart",
-      "folder": "monkey-mart",
-      "thumbnail": "thumbnails/monkey-mart.png"
+      "folder": "Monkey-Mart",
+      "thumbnail": "images/monkeymart.png"
     },
     {
-      "id": 25,
+      "name": "Moto Road Rash",
+      "folder": "Moto-Road-Rash",
+      "thumbnail": "images/moto.png"
+    },
+    {
       "name": "Moto X3M",
-      "folder": "motox3m",
-      "thumbnail": "thumbnails/motox3m.png"
+      "folder": "MotoX3m",
+      "thumbnail": "images/motox3m.png"
     },
     {
-      "id": 26,
+      "name": "Moto X3M 2",
+      "folder": "MotoX3m2",
+      "thumbnail": "images/motox3m2.png"
+    },
+    {
+      "name": "Moto X3M 3",
+      "folder": "MotoX3m3",
+      "thumbnail": "images/motox3m3.png"
+    },
+    {
       "name": "Moto X3M Pool Party",
-      "folder": "motox3m-pool-party",
-      "thumbnail": "thumbnails/motox3m-pool-party.png"
+      "folder": "MotoX3m-Pool-Party",
+      "thumbnail": "images/motox3m_pool.png"
+    },
+    {
+      "name": "Moto X3M Spooky Land",
+      "folder": "MotoX3m-Spooky-Land",
+      "thumbnail": "images/motox3m_spooky.png"
+    },
+    {
+      "name": "Moto X3M Winter",
+      "folder": "MotoX3m-Winter",
+      "thumbnail": "images/motox3m_winter.png"
     }
   ]
 }
