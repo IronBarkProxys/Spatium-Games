@@ -4,31 +4,31 @@
       "id": -1,
       "name": "[!] SUGGEST GAMES .gg/6fJ8GrsjMz",
       "folder": "suggest-games",
-      "thumbnail": "thumbnails/suggest.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/dc.png"
     },
     {
       "id": 1,
       "name": "1v1.lol",
       "folder": "1v1.lol",
-      "thumbnail": "thumbnails/1v1.lol.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/58.png"
     },
     {
       "id": 2,
-      "name": "2 3 4 Player Games",
+      "name": "2-3-4 Player Games",
       "folder": "2-3-4-player-games",
-      "thumbnail": "thumbnails/2-3-4-player-games.png"
+      "thumbnail": ""
     },
     {
       "id": 3,
       "name": "20 Small Mazes",
       "folder": "20-small-mazes",
-      "thumbnail": "thumbnails/20-small-mazes.png"
+      "thumbnail": ""
     },
     {
       "id": 4,
       "name": "2048",
       "folder": "2048",
-      "thumbnail": "thumbnails/2048.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/114.png"
     },
     {
       "id": 5,
@@ -46,30 +46,30 @@
       "id": 7,
       "name": "A Dance of Fire and Ice",
       "folder": "a-dance-of-fire-and-ice",
-      "thumbnail": "thumbnails/a-dance-of-fire-and-ice.png"
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/59.png"
     },
     {
       "id": 8,
       "name": "A Dark Room",
-      "folder": "a-dark-room",
+      "folder": "A-Dark-Room",
       "thumbnail": "thumbnails/a-dark-room.png"
     },
     {
       "id": 9,
       "name": "Adventure Capitalist",
-      "folder": "adventure-capitalist",
+      "folder": "Adventure-Capitalist",
       "thumbnail": "thumbnails/adventure-capitalist.png"
     },
     {
       "id": 10,
       "name": "Agar.io Lite",
-      "folder": "agar-io-lite",
+      "folder": "Agar-Io-Lite",
       "thumbnail": "thumbnails/agar-io-lite.png"
     },
     {
       "id": 11,
       "name": "Bad Parenting",
-      "folder": "bad-parenting",
+      "folder": "Bad-Parenting",
       "thumbnail": "thumbnails/bad-parenting.png"
     },
     {
