@@ -12,7 +12,6 @@
     box-sizing: border-box;
 }
 
-/* ✅ FIXED BODY (THIS WAS YOUR ISSUE) */
 body {
     background: var(--bg);
     color: var(--text);
