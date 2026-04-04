@@ -45,46 +45,59 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-// ====================== LOADING SCREEN ======================
-const loadingScreen = document.getElementById("loadingScreen");
-const loadingText = document.getElementById("loadingText");
-
 // ====================== GAME LOADING ======================
 let allGames = [];
 
 async function loadGames() {
+    const loadingText = document.getElementById('loadingText');
+    const loadingScreen = document.getElementById('loadingScreen');
+
     try {
+        loadingText.textContent = "Loading games...";
+
         const res = await fetch('games.json?t=' + Date.now());
+        if (!res.ok) throw new Error("games.json not found");
+
         const data = await res.json();
-        
-        // ✅ Sort games alphabetically by name
-        allGames = (data.games || []).sort((a, b) => 
+        allGames = (data.games || data).sort((a, b) =>
             a.name.toLowerCase().localeCompare(b.name.toLowerCase())
         );
 
-        const total = allGames.length;
-        let loaded = 0;
-        displayGamesWithProgress(allGames, total, loaded);
+        if (allGames.length === 0) throw new Error("No games in JSON");
+
+        // Show Featured Games
+        const featured = allGames.filter(game => game.featured === true);
+        displayGames(featured, 'featuredGrid');
+
+        // Show All Games
+        displayGames(allGames, 'allGamesGrid');
+
+        // Hide loading screen
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 600);
+
     } catch (err) {
-        console.error("Failed to load games.json:", err);
-        document.getElementById('allZones').innerHTML = `
-            <p style="text-align:center; color:#888; grid-column:1/-1;">
-                Failed to load games.
-            </p>
-        `;
-        hideLoader();
+        console.error("Load error:", err);
+        loadingText.textContent = "Failed to load games. Check console (F12)";
+        loadingText.style.color = "#f365ac";
     }
 }
 
-// ✅ Reusable display function
-function displayGames(games) {
-    const container = document.getElementById('allZones');
+function displayGames(games, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.error(`Container #${containerId} not found in HTML`);
+        return;
+    }
+
     container.innerHTML = '';
 
     if (games.length === 0) {
         container.innerHTML = `
-            <p style="text-align:center; color:#888; grid-column:1/-1;">
-                No games found.
+            <p style="grid-column: 1 / -1; text-align: center; color: #888; padding: 3rem 1rem;">
+                No games found
             </p>`;
         return;
     }
@@ -95,7 +108,7 @@ function displayGames(games) {
         div.innerHTML = `
             <img src="${game.thumbnail}" 
                  alt="${game.name}"
-                 onerror="this.src='https://dummyimage.com/300x170/111/fff&text=${encodeURIComponent(game.name)}'">
+                 onerror="this.src='https://via.placeholder.com/300x400/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
             <button>${game.name}</button>
         `;
         div.addEventListener('click', () => openGame(game));
@@ -103,46 +116,13 @@ function displayGames(games) {
     });
 }
 
-// ✅ Progress loading (only used at start)
-function displayGamesWithProgress(games, total, loaded) {
-    const container = document.getElementById('allZones');
-    container.innerHTML = '';
-
-    function loadNext(index) {
-        if (index >= games.length) {
-            hideLoader();
-            return;
-        }
-        const game = games[index];
-        const div = document.createElement('div');
-        div.className = 'zone-item';
-        div.innerHTML = `
-            <img src="${game.thumbnail}" 
-                 alt="${game.name}"
-                 onerror="this.src='https://dummyimage.com/300x170/111/fff&text=${encodeURIComponent(game.name)}'">
-            <button>${game.name}</button>
-        `;
-        div.addEventListener('click', () => openGame(game));
-        container.appendChild(div);
-
-        loaded++;
-        loadingText.textContent = `Loading games... (${loaded}/${total})`;
-        setTimeout(() => loadNext(index + 1), 2);
-    }
-    loadNext(0);
-}
-
-function hideLoader() {
-    loadingScreen.classList.add("fade-out");
-    setTimeout(() => loadingScreen.style.display = "none", 500);
-}
-
 // ====================== SEARCH ======================
 function filterGames() {
     const query = document.getElementById('searchBar').value.toLowerCase().trim();
-    
+    const container = document.getElementById('allGamesGrid');
+
     if (!query) {
-        displayGames(allGames);   // Already sorted
+        displayGames(allGames, 'allGamesGrid');
         return;
     }
 
@@ -150,10 +130,7 @@ function filterGames() {
         game.name.toLowerCase().includes(query)
     );
 
-    // ✅ Sort search results alphabetically too
-    filtered.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-
-    displayGames(filtered);
+    displayGames(filtered, 'allGamesGrid');
 }
 
 // ====================== GAME PLAYER ======================
@@ -161,9 +138,9 @@ function openGame(game) {
     const viewer = document.getElementById('zoneViewer');
     const frame = document.getElementById('zoneFrame');
     const title = document.getElementById('zoneName');
-    
+
     title.textContent = game.name;
-    frame.src = `/Spatium-Games/games/${game.folder}/index.html`;
+    frame.src = `games/${game.folder}/index.html`;   // Change path if needed
     viewer.style.display = 'flex';
 }
 
@@ -185,9 +162,14 @@ window.onload = () => {
     resizeCanvas();
     initParticles();
     animateParticles();
+
     loadGames();
 
-    document.getElementById('searchBar').addEventListener('input', filterGames);
+    // Search listener
+    const searchBar = document.getElementById('searchBar');
+    if (searchBar) {
+        searchBar.addEventListener('input', filterGames);
+    }
 
     window.addEventListener('resize', resizeCanvas);
 
