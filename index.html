@@ -8,22 +8,35 @@
 </head>
 <body>
 
+    <!-- ✅ CUSTOM CURSOR -->
+    <div id="customCursor"></div>
+
+    <!-- ✅ LOADING SCREEN -->
     <div id="loadingScreen">
         <div class="loader"></div>
         <p id="loadingText">Loading games... (0/0)</p>
     </div>
 
+    <!-- PARTICLES -->
     <canvas id="particles"></canvas>
 
-    <header>
+    <!-- HEADER (with blur applied) -->
+    <header class="backdrop-blur-md">
         <div class="header-content">
             <div class="logo">Spatium</div>
+
             <div class="search-container">
-                <input type="text" id="searchBar" placeholder="Search games..." oninput="filterGames()">
+                <input 
+                    type="text" 
+                    id="searchBar" 
+                    placeholder="Search games..." 
+                    oninput="filterGames()"
+                >
             </div>
         </div>
     </header>
 
+    <!-- MAIN -->
     <main>
         <h1 class="title">Games</h1>
 
@@ -31,20 +44,35 @@
         <div id="allZones" class="zone-container"></div>
     </main>
 
+    <!-- GAME VIEWER -->
     <div id="zoneViewer">
         <div class="zone-header">
             <h2 id="zoneName">Game Title</h2>
+
             <div class="zone-controls">
                 <button onclick="fullscreenZone()">Fullscreen</button>
                 <button onclick="closeZone()">Close</button>
             </div>
         </div>
+
         <iframe id="zoneFrame" allowfullscreen></iframe>
     </div>
 
+    <!-- ONLINE COUNTER -->
     <div id="onlineCounter">Online: 23</div>
 
+    <!-- SCRIPT -->
     <script src="script.js"></script>
+
+    <!-- ✅ CURSOR SCRIPT -->
+    <script>
+        const cursor = document.getElementById("customCursor");
+
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";
+        });
+    </script>
 
 </body>
 </html>
