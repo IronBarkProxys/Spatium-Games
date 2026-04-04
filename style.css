@@ -1,11 +1,20 @@
 :root {
     --bg: #000000;
-    --surface: #111111;
-    --text: #eeeeee;
-    --border: #333333;
-    --textbox: #1e293b;
+    --bg-2: #0a0a0a;
+    --bg-3: #121212;
+    --bg-4: #1a1a1a;
+    --border-grey: #2a2a2a;
+    --search-border: #1c1c1c;
     --accent: #f365ac;
-    --accent-glow: rgba(243, 101, 172, 0.3);
+    --accent-glow: rgba(243, 101, 172, 0.4);
+    --text-white: #ffffff;
+    --text-bright-grey: #e0e0e0;
+    --text-grey: #b0b0b0;
+    --nav-width: 75px;
+    --tooltip-bg: #1a1a1a;
+    --cherri-pink-light: #ffb3d9;
+    --cherri-pink-mid: #f365ac;
+    --cherri-pink-soft-dark: #d64d92;
 }
 
 * {
@@ -265,6 +274,112 @@ details[open] .collapse-arrow {
     align-items: center;
     justify-content: center;
     padding: 10px;
+}
+
+/* ====================== TRENDING THIS WEEK ====================== */
+.trending-section {
+    margin: 3rem 0 2.5rem;
+    padding: 0 20px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    padding: 0 10px;
+}
+
+.section-header h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+}
+
+.section-header .view-all {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.section-header .view-all:hover {
+    color: #ffb3d9;
+    text-decoration: underline;
+}
+
+/* Trending Container - Horizontal Scroll */
+#trendingWrapper {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 10px 10px 20px;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+#trendingWrapper::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Edge */
+}
+
+/* Trending Card Style */
+#trendingWrapper .swiper-slide,
+.trending-item {
+    flex: 0 0 220px;
+    min-width: 220px;
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+}
+
+#trendingWrapper .swiper-slide:hover,
+.trending-item:hover {
+    transform: translateY(-12px) scale(1.04);
+    box-shadow: 0 20px 40px var(--accent-glow);
+    border: 1px solid var(--accent);
+}
+
+#trendingWrapper img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+#trendingWrapper p {
+    margin: 0;
+    padding: 14px 16px 16px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: linear-gradient(to bottom, var(--surface), #0a0a0a);
+}
+
+/* Optional "TRENDING" badge */
+.trending-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--accent);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px var(--accent-glow);
+    z-index: 2;
+    letter-spacing: 0.5px;
 }
 
 /* ================= SWIPER STYLES (for featured & trending) ================= */
