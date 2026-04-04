@@ -12,6 +12,17 @@
     box-sizing: border-box;
 }
 
+/* ✅ FIXED BODY (THIS WAS YOUR ISSUE) */
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: none;
+}
+
+/* ================= LOADING SCREEN ================= */
 #loadingScreen {
     position: fixed;
     inset: 0;
@@ -46,6 +57,7 @@
     transition: opacity 0.5s ease;
 }
 
+/* ================= PARTICLES ================= */
 #particles {
     position: fixed;
     inset: 0;
@@ -54,6 +66,7 @@
     opacity: 0.6;
 }
 
+/* ================= HEADER ================= */
 header {
     position: sticky;
     top: 0;
@@ -106,7 +119,6 @@ header {
 .zone-container {
     width: 100%;
     padding: 0 40px 4rem;
-
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 30px;
@@ -116,23 +128,20 @@ header {
 .zone-item {
     width: 100%;
     aspect-ratio: 1 / 1.5;
-
     display: flex;
     flex-direction: column;
-
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
-
+    border-radius: 18px;
     overflow: hidden;
-
     cursor: pointer;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .zone-item:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px) scale(1.02);
     border-color: white;
+    box-shadow: 0 10px 30px rgba(255,255,255,0.1);
 }
 
 /* IMAGE */
@@ -140,27 +149,21 @@ header {
     width: 100%;
     height: 65%;
     object-fit: cover;
-    display: block;
 }
 
 /* TEXT BOX */
 .zone-item button {
     width: 100%;
     height: 35%;
-
     background: var(--textbox);
     border: none;
     color: white;
-
     font-size: 1rem;
     font-weight: 600;
     text-align: center;
-
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-
     padding: 10px;
 }
 
@@ -203,18 +206,16 @@ header {
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-
     background: #111;
     border: 1px solid #333;
     padding: 8px 16px;
     border-radius: 10px;
-
     color: white;
     font-size: 14px;
     z-index: 9999;
 }
 
-/* ================= CUSTOM GLOWING CURSOR ================= */
+/* ================= CUSTOM CURSOR ================= */
 #customCursor {
     position: fixed;
     top: 0;
@@ -225,7 +226,6 @@ header {
     border-radius: 50%;
     pointer-events: none;
     z-index: 999999;
-
     transform: translate(-50%, -50%);
     box-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
 }
