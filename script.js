@@ -54,7 +54,6 @@ async function loadGames() {
 
     try {
         loadingText.textContent = "Loading games...";
-
         const res = await fetch('games.json?t=' + Date.now());
         if (!res.ok) throw new Error("games.json not found");
 
@@ -65,11 +64,17 @@ async function loadGames() {
 
         if (allGames.length === 0) throw new Error("No games in JSON");
 
-        // Show Featured Games
+        console.log(`✅ Loaded ${allGames.length} games`);
+
+        // Featured Games
         const featured = allGames.filter(game => game.featured === true);
         displayGames(featured, 'featuredGrid');
+        console.log(`Featured games: ${featured.length}`);
 
-        // Show All Games
+        // Trending This Week
+        displayTrending();
+
+        // All Games
         displayGames(allGames, 'allGamesGrid');
 
         // Hide loading screen
@@ -88,17 +93,13 @@ async function loadGames() {
 function displayGames(games, containerId) {
     const container = document.getElementById(containerId);
     if (!container) {
-        console.error(`Container #${containerId} not found in HTML`);
+        console.error(`Container #${containerId} not found`);
         return;
     }
-
     container.innerHTML = '';
 
     if (games.length === 0) {
-        container.innerHTML = `
-            <p style="grid-column: 1 / -1; text-align: center; color: #888; padding: 3rem 1rem;">
-                No games found
-            </p>`;
+        container.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #888; padding: 3rem;">No games found</p>`;
         return;
     }
 
@@ -116,20 +117,51 @@ function displayGames(games, containerId) {
     });
 }
 
+// ====================== TRENDING THIS WEEK ======================
+function displayTrending() {
+    const container = document.getElementById('trendingWrapper');
+    if (!container) {
+        console.error("Container #trendingWrapper not found in HTML");
+        return;
+    }
+
+    container.innerHTML = '';
+
+    let trendingGames = allGames.filter(game => game.trending === true);
+
+    console.log(`Trending games marked: ${trendingGames.length}`);
+
+    // Fallback if none are marked as trending
+    if (trendingGames.length === 0) {
+        trendingGames = allGames.slice(0, 8);
+        console.warn("⚠️ No games with 'trending: true'. Showing first 8 games as fallback.");
+    }
+
+    trendingGames.forEach(game => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';   // or 'trending-item' depending on your CSS
+        slide.style.cursor = 'pointer';
+        slide.innerHTML = `
+            <img src="${game.thumbnail}" 
+                 alt="${game.name}"
+                 onerror="this.src='https://via.placeholder.com/280x380/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
+            <p>${game.name}</p>
+        `;
+        slide.addEventListener('click', () => openGame(game));
+        container.appendChild(slide);
+    });
+}
+
 // ====================== SEARCH ======================
 function filterGames() {
     const query = document.getElementById('searchBar').value.toLowerCase().trim();
-    const container = document.getElementById('allGamesGrid');
-
     if (!query) {
         displayGames(allGames, 'allGamesGrid');
         return;
     }
-
     const filtered = allGames.filter(game =>
         game.name.toLowerCase().includes(query)
     );
-
     displayGames(filtered, 'allGamesGrid');
 }
 
@@ -140,7 +172,7 @@ function openGame(game) {
     const title = document.getElementById('zoneName');
 
     title.textContent = game.name;
-    frame.src = `games/${game.folder}/index.html`;   // Change path if needed
+    frame.src = `games/${game.folder}/index.html`;
     viewer.style.display = 'flex';
 }
 
@@ -162,17 +194,14 @@ window.onload = () => {
     resizeCanvas();
     initParticles();
     animateParticles();
-
     loadGames();
 
-    // Search listener
     const searchBar = document.getElementById('searchBar');
     if (searchBar) {
         searchBar.addEventListener('input', filterGames);
     }
 
     window.addEventListener('resize', resizeCanvas);
-
     document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") closeZone();
     });
