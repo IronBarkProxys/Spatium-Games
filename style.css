@@ -18,7 +18,6 @@ body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
-    cursor: none;
 }
 
 /* ================= BLUR UTILITIES ================= */
