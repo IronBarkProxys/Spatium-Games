@@ -98,6 +98,7 @@ header {
 .logo {
     font-size: 2rem;
     font-weight: 800;
+    cursor: pointer;
 }
 
 .search-wrapper {
@@ -106,15 +107,75 @@ header {
     position: relative;
 }
 
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+}
+
 #searchBar {
     width: 100%;
-    padding: 14px 20px;
+    padding: 14px 20px 14px 50px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     color: white;
     outline: none;
     font-size: 1.05rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-icon {
+    background: #222;
+    color: white;
+    border: 1px solid #444;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-icon:hover {
+    background: #333;
+    border-color: var(--accent);
+}
+
+.nav-bar {
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+}
+
+.nav-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    background: rgba(243, 101, 172, 0.15);
+    color: var(--accent);
 }
 
 .hometitle {
@@ -128,17 +189,6 @@ header {
     -webkit-text-fill-color: transparent;
 }
 
-.section-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-white);
-}
-
-.section-subtitle {
-    font-size: 0.95rem;
-    color: var(--text-grey);
-}
-
 .section-header {
     max-width: 1400px;
     margin: 0 auto;
@@ -146,6 +196,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
 }
 
 .zone-container,
@@ -195,7 +250,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
 }
 
 .trending-section {
@@ -207,8 +261,7 @@ header {
     display: flex;
     gap: 18px;
     overflow-x: auto;
-    padding: 10px 10px 20px;
-    scroll-behavior: smooth;
+    padding: 10px;
     scrollbar-width: none;
 }
 
@@ -218,18 +271,15 @@ header {
 
 .trending-item {
     flex: 0 0 220px;
-    min-width: 220px;
     background: var(--surface);
     border-radius: 16px;
     overflow: hidden;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    transition: 0.3s;
 }
 
 .trending-item:hover {
     transform: translateY(-12px) scale(1.04);
     box-shadow: 0 20px 40px var(--accent-glow);
-    border: 1px solid var(--accent);
 }
 
 .trending-item img {
@@ -258,16 +308,14 @@ header {
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #333;
 }
 
 .zone-controls button {
     background: #222;
-    color: white;
     border: 1px solid #444;
-    padding: 10px 16px;
-    margin-left: 10px;
+    padding: 10px;
     border-radius: 6px;
+    color: white;
     cursor: pointer;
 }
 
@@ -285,15 +333,10 @@ header {
     border: 1px solid #333;
     padding: 8px 16px;
     border-radius: 10px;
-    color: white;
-    font-size: 14px;
-    z-index: 9999;
 }
 
 #customCursor {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 10px;
     height: 10px;
     background: white;
@@ -305,24 +348,19 @@ header {
 }
 
 @media (max-width: 1200px) {
-    .zone-container,
-    .grid-layout {
+    .zone-container {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media (max-width: 800px) {
-    .zone-container,
-    .grid-layout {
+    .zone-container {
         grid-template-columns: repeat(3, 1fr);
-        padding: 0 30px 4rem;
     }
 }
 
 @media (max-width: 500px) {
-    .zone-container,
-    .grid-layout {
+    .zone-container {
         grid-template-columns: repeat(2, 1fr);
-        padding: 0 20px 4rem;
     }
 }
