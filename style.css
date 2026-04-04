@@ -5,6 +5,7 @@
     --border: #333333;
     --textbox: #1e293b;
     --accent: #f365ac;
+    --accent-glow: rgba(243, 101, 172, 0.3);
 }
 
 * {
@@ -19,7 +20,7 @@ body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
-    cursor: default; /* Fixed: was "none" */
+    cursor: default;
 }
 
 /* ================= BLUR UTILITIES ================= */
@@ -67,7 +68,7 @@ body {
     z-index: 1;
     pointer-events: none;
     opacity: 0.6;
-    cursor: none; /* Only hide on particles */
+    cursor: none;
 }
 
 /* ================= HEADER ================= */
@@ -81,7 +82,7 @@ header {
     padding: 1rem 0;
 }
 
-.header-content {
+.header-upper {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -94,25 +95,87 @@ header {
 .logo {
     font-size: 2rem;
     font-weight: 800;
+    cursor: pointer;
 }
 
-.search-container {
+.search-wrapper {
     flex: 1;
     max-width: 500px;
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
 }
 
 #searchBar {
     width: 100%;
-    padding: 14px 20px;
+    padding: 14px 20px 14px 50px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 12px;
     color: white;
     outline: none;
     font-size: 1.05rem;
 }
 
-/* ================= TITLE (Cherri-style) ================= */
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-icon {
+    background: #222;
+    color: white;
+    border: 1px solid #444;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-icon:hover {
+    background: #333;
+    border-color: var(--accent);
+}
+
+/* Nav Bar */
+.nav-bar {
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+}
+
+.nav-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.nav-link.active, .nav-link:hover {
+    background: rgba(243, 101, 172, 0.15);
+    color: var(--accent);
+}
+
+/* ================= TITLE ================= */
 .hometitle {
     text-align: center;
     font-size: clamp(2.8rem, 8vw, 5rem);
@@ -124,8 +187,35 @@ header {
     -webkit-text-fill-color: transparent;
 }
 
+/* ================= SECTION HEADER ================= */
+.section-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.collapse-arrow {
+    transition: transform 0.3s;
+}
+
+details[open] .collapse-arrow {
+    transform: rotate(180deg);
+}
+
 /* ================= GRID ================= */
-.zone-container {
+.zone-container, .grid-layout {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
@@ -175,6 +265,28 @@ header {
     align-items: center;
     justify-content: center;
     padding: 10px;
+}
+
+/* ================= SWIPER STYLES (for featured & trending) ================= */
+.swiper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.swiper-slide {
+    width: 280px;
+    height: 380px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* ================= GAME VIEWER ================= */
@@ -227,25 +339,21 @@ header {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1200px) {
-    .zone-container {
+    .zone-container, .grid-layout {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media (max-width: 800px) {
-    .zone-container {
+    .zone-container, .grid-layout {
         grid-template-columns: repeat(3, 1fr);
         padding: 0 30px 4rem;
     }
 }
 
 @media (max-width: 500px) {
-    .zone-container {
+    .zone-container, .grid-layout {
         grid-template-columns: repeat(2, 1fr);
         padding: 0 20px 4rem;
-    }
-    
-    .hometitle {
-        font-size: 2.8rem;
     }
 }
