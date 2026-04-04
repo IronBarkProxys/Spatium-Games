@@ -21,6 +21,19 @@ body {
     cursor: none;
 }
 
+/* ================= BLUR UTILITIES ================= */
+.backdrop-blur-md {
+    --tw-backdrop-blur: blur(12px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur);
+    backdrop-filter: var(--tw-backdrop-blur);
+}
+
+.backdrop-blur-sm {
+    --tw-backdrop-blur: blur(4px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur);
+    backdrop-filter: var(--tw-backdrop-blur);
+}
+
 /* ================= LOADING SCREEN ================= */
 #loadingScreen {
     position: fixed;
