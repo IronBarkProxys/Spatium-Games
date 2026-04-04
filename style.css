@@ -19,7 +19,7 @@ body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
-    cursor: default; /* Fixed: was "none" before */
+    cursor: default; /* Fixed: was "none" */
 }
 
 /* ================= BLUR UTILITIES ================= */
@@ -67,7 +67,7 @@ body {
     z-index: 1;
     pointer-events: none;
     opacity: 0.6;
-    cursor: none; /* Only hide cursor on particles */
+    cursor: none; /* Only hide on particles */
 }
 
 /* ================= HEADER ================= */
@@ -147,6 +147,7 @@ header {
     overflow: hidden;
     cursor: pointer;
     transition: all 0.25s ease;
+    position: relative;
 }
 
 .zone-item:hover {
