@@ -230,5 +230,75 @@
       "folder": "MotoX3m-Winter",
       "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/100.png"
     }
+    {
+      "name": "Papa’s Bakeria",
+      "folder": "Papa’s-Bakeria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/218.png"
+    },
+    {
+      "name": "Papa’s Burgeria",
+      "folder": "Papa’s-Burgeria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/219.png"
+    },
+    {
+      "name": "Papa’s Cheeseria",
+      "folder": "Papa’s-Cheeseria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/220.png"
+    },
+    {
+      "name": "Papa’s Cupcakeria",
+      "folder": "Papa’s-Cupcakeria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/221.png"
+    },
+    {
+      "name": "Papa’s Donuteria",
+      "folder": "Papa’s-Donuteria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/222.png"
+    },
+    {
+      "name": "Papa’s Freezeria",
+      "folder": "Papa’s-Freezeria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/223.png"
+    },
+    {
+      "name": "Papa’s Hot Doggeria",
+      "folder": "Papa’s Hot-Doggeria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/224.png"
+    },
+    {
+      "name": "Papa's Pancakeria",
+      "folder": "Papa's-Pancakeria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/225.png"
+    },
+    {
+      "name": "Papa's Pastaria",
+      "folder": "Papa's-Pastaria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/226.png"
+    },
+    {
+      "name": "Papa's Pizeria",
+      "folder": "Papa's-Pizeria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/227.png"
+    },
+    {
+      "name": "Papa's Scooperia",
+      "folder": "Papa's-Scooperia",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/228.png"
+    },
+    {
+      "name": "Papa's Sushiria",
+      "folder": "Papa's-Sushiria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/229.png"
+    },
+    {
+      "name": "Papa's Taco Mia",
+      "folder": "Papa's-Taco-Mia",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/230.png"
+    },
+    {
+      "name": "Papa’s Wingeria",
+      "folder": "Papa’s-Wingeria",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/231.png"
+    },
   ]
 }
