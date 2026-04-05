@@ -72,7 +72,6 @@
       "folder": "Baseball-Bros",
       "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/547.png",
       "featured": false
-
     },
     {
       "name": "Basketball Stars",
@@ -409,6 +408,6 @@
       "folder": "Drive-Mad",
       "thumbnail": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=80,height=80,fit=cover,f=auto/4abc77cf2ca8a1ca37416249429501f4/drive-mad.png",
       "featured": false
-    },
+    }
   ]
 }
