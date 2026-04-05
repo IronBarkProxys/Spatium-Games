@@ -362,7 +362,7 @@ details[open] .collapse-arrow {
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0, 0, 0, 0.9);
     display: none;
     align-items: center;
     justify-content: center;
@@ -388,7 +388,11 @@ details[open] .collapse-arrow {
     border-bottom: 1px solid var(--border);
 }
 
-.modal-header h2 { margin: 0; font-size: 1.6rem; color: var(--text); }
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    color: var(--text);
+}
 
 .modal-close {
     background: none;
@@ -396,10 +400,14 @@ details[open] .collapse-arrow {
     font-size: 2rem;
     color: #888;
     cursor: pointer;
+    padding: 0 10px;
 }
 
-.modal-close:hover { color: var(--accent); }
+.modal-close:hover {
+    color: var(--accent);
+}
 
+/* Modal Body */
 .modal-body {
     padding: 2rem;
 }
@@ -410,11 +418,87 @@ details[open] .collapse-arrow {
 
 .setting-row label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: 600;
+    color: var(--text);
+    font-size: 1.05rem;
+}
+
+/* Toggle Switch */
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
     color: var(--text);
 }
 
+.toggle-label input[type="checkbox"] {
+    width: 48px;
+    height: 26px;
+    appearance: none;
+    background: #333;
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.toggle-label input[type="checkbox"]:checked {
+    background: var(--accent);
+}
+
+.toggle-label input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.toggle-label input[type="checkbox"]:checked::before {
+    transform: translateX(22px);
+}
+
+/* Buttons */
+.modal-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: #222;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 8px;
+}
+
+.modal-btn:hover {
+    background: #333;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.accent-btn {
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+}
+
+.accent-btn:hover {
+    background: #ffb3d9;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px var(--accent-glow);
+}
+
+/* Theme Grid */
 .theme-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -422,21 +506,22 @@ details[open] .collapse-arrow {
 }
 
 .theme-option {
-    padding: 16px;
+    padding: 16px 12px;
     text-align: center;
     background: var(--surface);
     border: 2px solid transparent;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s;
     font-weight: 500;
+    transition: all 0.25s ease;
 }
 
 .theme-option:hover {
-    transform: translateY(-4px);
+    transform: scale(1.05);
 }
 
 .theme-option.active {
     border-color: var(--accent);
-    background: rgba(243, 101, 172, 0.1);
+    background: rgba(243, 101, 172, 0.15);
+    box-shadow: 0 0 15px var(--accent-glow);
 }
