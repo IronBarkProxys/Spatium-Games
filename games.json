@@ -361,6 +361,54 @@
       "folder": "Papa’s-Wingeria",
       "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/231.png",
       "featured": false
-    }
+    },
+    {
+      "name": "Plinko",
+      "folder": "Plinko",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/544.png",
+      "featured": false
+    },
+    {
+      "name": "Paper.io",
+      "folder": "Paper.io",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/102.png",
+      "featured": false
+    },
+    {
+      "name": "Crossy Road",
+      "folder": "Crossy-Road",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/24.png",
+      "featured": false
+    },
+    {
+      "name": "Core Ball",
+      "folder": "Core-Ball",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/83.png",
+      "featured": false
+    },
+    {
+      "name": "Block Blast",
+      "folder": "Block-Blast",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/6.png",
+      "featured": false
+    },
+    {
+      "name": "Bit Planes",
+      "folder": "Bit-Planes",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/330.png",
+      "featured": false
+    },
+    {
+      "name": "Bit Life",
+      "folder": "Bit-Life",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/70.png",
+      "featured": false
+    },
+    {
+      "name": "Drive Mad",
+      "folder": "Drive-Mad",
+      "thumbnail": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=80,height=80,fit=cover,f=auto/4abc77cf2ca8a1ca37416249429501f4/drive-mad.png",
+      "featured": false
+    },
   ]
 }
