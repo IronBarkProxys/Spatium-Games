@@ -186,9 +186,25 @@ function toggleParticles(enabled) {
     canvas.style.opacity = enabled ? '0.6' : '0';
 }
 
+// ==================== FIXED ABOUT:BLANK FUNCTION ====================
 function openInAboutBlank() {
-    window.open(window.location.href, '_blank');
-    closeSettings();
+    try {
+        const newTab = window.open('about:blank', '_blank');
+        
+        if (newTab) {
+            newTab.document.write(`
+                <script>
+                    window.location.href = "${window.location.href}";
+                <\/script>
+            `);
+            closeSettings();
+        } else {
+            alert("❌ Popup blocked!\n\nPlease allow popups for this site and try again.");
+        }
+    } catch (e) {
+        console.error("About:blank error:", e);
+        alert("Could not open new tab.\nTry right-clicking the page → Open link in new tab.");
+    }
 }
 
 function changeSiteTitle() {
