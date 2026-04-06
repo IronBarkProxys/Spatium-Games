@@ -23,12 +23,10 @@ body {
     cursor: default;
 }
 
-/* ================= BLUR UTILITIES ================= */
 .backdrop-blur-md {
     backdrop-filter: blur(12px);
 }
 
-/* ================= LOADING SCREEN ================= */
 #loadingScreen {
     position: fixed;
     inset: 0;
@@ -61,7 +59,6 @@ body {
     transition: opacity 0.5s ease;
 }
 
-/* ================= PARTICLES ================= */
 #particles {
     position: fixed;
     inset: 0;
@@ -71,7 +68,6 @@ body {
     cursor: none;
 }
 
-/* ================= HEADER ================= */
 header {
     position: sticky;
     top: 0;
@@ -147,7 +143,6 @@ header {
     border-color: var(--accent);
 }
 
-/* Nav Bar */
 .nav-bar {
     background: rgba(10, 10, 10, 0.95);
     border-bottom: 1px solid var(--border);
@@ -175,7 +170,6 @@ header {
     color: var(--accent);
 }
 
-/* ================= TITLE ================= */
 .hometitle {
     text-align: center;
     font-size: clamp(2.8rem, 8vw, 5rem);
@@ -187,7 +181,6 @@ header {
     -webkit-text-fill-color: transparent;
 }
 
-/* ================= SECTION HEADER ================= */
 .section-header {
     max-width: 1400px;
     margin: 0 auto;
@@ -214,7 +207,6 @@ details[open] .collapse-arrow {
     transform: rotate(180deg);
 }
 
-/* ================= GRID ================= */
 .zone-container, .grid-layout {
     width: 100%;
     max-width: 1400px;
@@ -225,7 +217,6 @@ details[open] .collapse-arrow {
     gap: 30px;
 }
 
-/* ================= GAME CARD ================= */
 .zone-item {
     width: 100%;
     aspect-ratio: 1 / 1.5;
@@ -267,7 +258,6 @@ details[open] .collapse-arrow {
     padding: 10px;
 }
 
-/* ================= SWIPER STYLES (for featured & trending) ================= */
 .swiper {
     width: 100%;
     max-width: 1400px;
@@ -289,7 +279,6 @@ details[open] .collapse-arrow {
     object-fit: cover;
 }
 
-/* ================= GAME VIEWER ================= */
 #zoneViewer {
     position: fixed;
     inset: 0;
@@ -322,7 +311,6 @@ details[open] .collapse-arrow {
     border: none;
 }
 
-/* ================= ONLINE COUNTER ================= */
 #onlineCounter {
     position: fixed;
     bottom: 15px;
@@ -337,7 +325,6 @@ details[open] .collapse-arrow {
     z-index: 9999;
 }
 
-/* ================= RESPONSIVE ================= */
 @media (max-width: 1200px) {
     .zone-container, .grid-layout {
         grid-template-columns: repeat(4, 1fr);
@@ -358,7 +345,6 @@ details[open] .collapse-arrow {
     }
 }
 
-/* ====================== SETTINGS MODAL ====================== */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -424,7 +410,6 @@ details[open] .collapse-arrow {
     font-size: 1.05rem;
 }
 
-/* Toggle Switch */
 .toggle-label {
     display: flex;
     align-items: center;
@@ -465,7 +450,6 @@ details[open] .collapse-arrow {
     transform: translateX(22px);
 }
 
-/* Buttons */
 .modal-btn {
     width: 100%;
     padding: 14px 20px;
@@ -498,7 +482,6 @@ details[open] .collapse-arrow {
     box-shadow: 0 10px 25px var(--accent-glow);
 }
 
-/* Theme Grid */
 .theme-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
