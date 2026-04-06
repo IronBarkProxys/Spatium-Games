@@ -1,4 +1,3 @@
-// ====================== PARTICLES ======================
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let particles = [];
@@ -45,7 +44,6 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-// ====================== GAME LOADING ======================
 let allGames = [];
 
 async function loadGames() {
@@ -61,15 +59,11 @@ async function loadGames() {
         );
         if (allGames.length === 0) throw new Error("No games in JSON");
         console.log(`✅ Loaded ${allGames.length} games`);
-        // Featured Games
         const featured = allGames.filter(game => game.featured === true);
         displayGames(featured, 'featuredGrid');
         console.log(`Featured games: ${featured.length}`);
-        // Trending This Week
         displayTrending();
-        // All Games
         displayGames(allGames, 'allGamesGrid');
-        // Hide loading screen
         loadingScreen.classList.add('fade-out');
         setTimeout(() => {
             loadingScreen.style.display = 'none';
@@ -106,7 +100,6 @@ function displayGames(games, containerId) {
     });
 }
 
-// ====================== TRENDING THIS WEEK ======================
 function displayTrending() {
     const container = document.getElementById('trendingWrapper');
     if (!container) {
@@ -135,7 +128,6 @@ function displayTrending() {
     });
 }
 
-// ====================== SEARCH ======================
 function filterGames() {
     const query = document.getElementById('searchBar').value.toLowerCase().trim();
     if (!query) {
@@ -148,7 +140,6 @@ function filterGames() {
     displayGames(filtered, 'allGamesGrid');
 }
 
-// ====================== GAME PLAYER ======================
 function openGame(game) {
     const viewer = document.getElementById('zoneViewer');
     const frame = document.getElementById('zoneFrame');
@@ -171,7 +162,6 @@ function fullscreenZone() {
     else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
 }
 
-// ====================== SETTINGS ======================
 function openSettings() {
     document.getElementById('settingsModal').style.display = 'flex';
     document.getElementById('siteTitleInput').value = document.title;
@@ -186,7 +176,6 @@ function toggleParticles(enabled) {
     canvas.style.opacity = enabled ? '0.6' : '0';
 }
 
-// ==================== FIXED ABOUT:BLANK FUNCTION ====================
 function openInAboutBlank() {
     try {
         const newTab = window.open('about:blank', '_blank');
@@ -246,7 +235,6 @@ function setTheme(themeName) {
     closeSettings();
 }
 
-// ====================== INIT ======================
 window.onload = () => {
     resizeCanvas();
     initParticles();
