@@ -8,7 +8,7 @@
     --accent-glow: rgba(243, 101, 172, 0.3);
 }
 
-/* Reset */
+/* ====================== RESET & BASE ====================== */
 * {
     margin: 0;
     padding: 0;
@@ -18,18 +18,19 @@
 body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     cursor: default;
+    transition: background 0.4s ease;
 }
 
-/* Utility */
+/* ====================== UTILITIES ====================== */
 .backdrop-blur-md {
     backdrop-filter: blur(12px);
 }
 
-/* Loading Screen */
+/* ====================== LOADING SCREEN ====================== */
 #loadingScreen {
     position: fixed;
     inset: 0;
@@ -40,6 +41,7 @@ body {
     justify-content: center;
     z-index: 99999;
     color: white;
+    transition: opacity 0.6s ease;
 }
 
 .loader {
@@ -59,20 +61,19 @@ body {
 #loadingScreen.fade-out {
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.5s ease;
 }
 
-/* Particles */
+/* ====================== PARTICLES ====================== */
 #particles {
     position: fixed;
     inset: 0;
     z-index: 1;
     pointer-events: none;
     opacity: 0.6;
-    cursor: none;
+    transition: opacity 0.4s ease;
 }
 
-/* Header */
+/* ====================== HEADER ====================== */
 header {
     position: sticky;
     top: 0;
@@ -81,6 +82,7 @@ header {
     border-bottom: 1px solid var(--border);
     z-index: 100;
     padding: 1rem 0;
+    transition: all 0.3s ease;
 }
 
 .header-upper {
@@ -97,6 +99,11 @@ header {
     font-size: 2rem;
     font-weight: 800;
     cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.logo:hover {
+    transform: scale(1.08);
 }
 
 .search-wrapper {
@@ -111,6 +118,7 @@ header {
     top: 50%;
     transform: translateY(-50%);
     color: var(--accent);
+    transition: color 0.2s ease;
 }
 
 #searchBar {
@@ -119,9 +127,15 @@ header {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
-    color: white;
+    color: var(--text);
     outline: none;
     font-size: 1.05rem;
+    transition: all 0.25s ease;
+}
+
+#searchBar:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
 .header-actions {
@@ -131,7 +145,7 @@ header {
 
 .btn-icon {
     background: #222;
-    color: white;
+    color: var(--text);
     border: 1px solid #444;
     width: 42px;
     height: 42px;
@@ -140,15 +154,16 @@ header {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-icon:hover {
     background: #333;
     border-color: var(--accent);
+    transform: translateY(-3px) scale(1.05);
 }
 
-/* Navigation */
+/* ====================== NAVIGATION ====================== */
 .nav-bar {
     background: rgba(10, 10, 10, 0.95);
     border-bottom: 1px solid var(--border);
@@ -168,28 +183,17 @@ header {
     font-weight: 600;
     cursor: pointer;
     border-radius: 8px;
-    transition: all 0.2s;
+    transition: all 0.25s ease;
 }
 
 .nav-link.active,
 .nav-link:hover {
     background: rgba(243, 101, 172, 0.15);
     color: var(--accent);
+    transform: translateY(-1px);
 }
 
-/* Home Title */
-.hometitle {
-    text-align: center;
-    font-size: clamp(2.8rem, 8vw, 5rem);
-    font-weight: 900;
-    margin: 2.5rem 0 1.5rem;
-    letter-spacing: -3px;
-    background: linear-gradient(to bottom, #ffb3d9, var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Section Headers */
+/* ====================== SECTION HEADERS ====================== */
 .section-header {
     max-width: 1400px;
     margin: 0 auto;
@@ -206,18 +210,22 @@ header {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.section-title:hover {
+    color: var(--accent);
 }
 
 .collapse-arrow {
-    transition: transform 0.3s;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 details[open] .collapse-arrow {
     transform: rotate(180deg);
 }
 
-/* Grid Layouts */
-.zone-container,
+/* ====================== GRID LAYOUTS ====================== */
 .grid-layout {
     width: 100%;
     max-width: 1400px;
@@ -228,6 +236,7 @@ details[open] .collapse-arrow {
     gap: 30px;
 }
 
+/* ====================== GAME CARDS ====================== */
 .zone-item {
     width: 100%;
     aspect-ratio: 1 / 1.5;
@@ -238,20 +247,25 @@ details[open] .collapse-arrow {
     border-radius: 18px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 }
 
 .zone-item:hover {
-    transform: translateY(-8px) scale(1.03);
+    transform: translateY(-12px) scale(1.04);
     border-color: var(--accent);
-    box-shadow: 0 15px 35px rgba(243, 101, 172, 0.2);
+    box-shadow: 0 20px 40px var(--accent-glow);
 }
 
 .zone-item img {
     width: 100%;
     height: 65%;
     object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.zone-item:hover img {
+    transform: scale(1.08);
 }
 
 .zone-item button {
@@ -259,14 +273,14 @@ details[open] .collapse-arrow {
     height: 35%;
     background: var(--textbox);
     border: none;
-    color: white;
+    color: var(--text);
     font-size: 1rem;
     font-weight: 600;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
+    transition: all 0.25s ease;
 }
 
 .zone-item button:hover {
@@ -274,7 +288,7 @@ details[open] .collapse-arrow {
     color: #000;
 }
 
-/* Swiper */
+/* ====================== SWIPER ====================== */
 .swiper {
     width: 100%;
     max-width: 1400px;
@@ -287,7 +301,12 @@ details[open] .collapse-arrow {
     height: 380px;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.swiper-slide:hover {
+    transform: scale(1.05);
 }
 
 .swiper-slide img {
@@ -296,32 +315,46 @@ details[open] .collapse-arrow {
     object-fit: cover;
 }
 
-/* Zone Viewer */
+/* ====================== ZONE VIEWER ====================== */
 #zoneViewer {
     position: fixed;
     inset: 0;
-    background: black;
+    background: rgba(0, 0, 0, 0.98);
     z-index: 2000;
     display: none;
     flex-direction: column;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .zone-header {
-    background: #111;
+    background: var(--surface);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #333;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
 }
 
 .zone-controls button {
     background: #222;
-    color: white;
-    border: 1px solid #444;
+    color: var(--text);
+    border: 1px solid var(--border);
     padding: 10px 16px;
     margin-left: 10px;
     border-radius: 6px;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.zone-controls button:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
 }
 
 #zoneFrame {
@@ -329,55 +362,22 @@ details[open] .collapse-arrow {
     border: none;
 }
 
-/* Online Counter */
-#onlineCounter {
-    position: fixed;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #111;
-    border: 1px solid #333;
-    padding: 8px 16px;
-    border-radius: 10px;
-    color: white;
-    font-size: 14px;
-    z-index: 9999;
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-    .zone-container,
-    .grid-layout {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (max-width: 800px) {
-    .zone-container,
-    .grid-layout {
-        grid-template-columns: repeat(3, 1fr);
-        padding: 0 30px 4rem;
-    }
-}
-
-@media (max-width: 500px) {
-    .zone-container,
-    .grid-layout {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 0 20px 4rem;
-    }
-}
-
-/* Modals */
+/* ====================== MODALS ====================== */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.92);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 10000;
     backdrop-filter: blur(12px);
+    animation: modalFade 0.3s ease;
+}
+
+@keyframes modalFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .modal-content {
@@ -388,6 +388,18 @@ details[open] .collapse-arrow {
     overflow: hidden;
     box-shadow: 0 30px 60px var(--accent-glow);
     border: 1px solid var(--border);
+    animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .modal-header {
@@ -398,12 +410,6 @@ details[open] .collapse-arrow {
     border-bottom: 1px solid var(--border);
 }
 
-.modal-header h2 {
-    margin: 0;
-    font-size: 1.6rem;
-    color: var(--text);
-}
-
 .modal-close {
     background: none;
     border: none;
@@ -411,17 +417,14 @@ details[open] .collapse-arrow {
     color: #888;
     cursor: pointer;
     padding: 0 10px;
+    transition: color 0.2s ease;
 }
 
 .modal-close:hover {
     color: var(--accent);
 }
 
-.modal-body {
-    padding: 2rem;
-}
-
-/* Settings */
+/* ====================== SETTINGS ====================== */
 .setting-row {
     margin-bottom: 2rem;
 }
@@ -441,8 +444,14 @@ details[open] .collapse-arrow {
     cursor: pointer;
     font-size: 1.1rem;
     color: var(--text);
+    transition: color 0.2s;
 }
 
+.toggle-label:hover {
+    color: var(--accent);
+}
+
+/* Toggle Switch */
 .toggle-label input[type="checkbox"] {
     width: 48px;
     height: 26px;
@@ -451,7 +460,7 @@ details[open] .collapse-arrow {
     border-radius: 50px;
     position: relative;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s ease;
 }
 
 .toggle-label input[type="checkbox"]:checked {
@@ -467,7 +476,7 @@ details[open] .collapse-arrow {
     height: 20px;
     background: white;
     border-radius: 50%;
-    transition: 0.3s;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .toggle-label input[type="checkbox"]:checked::before {
@@ -485,14 +494,14 @@ details[open] .collapse-arrow {
     font-size: 1.05rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin-top: 8px;
 }
 
 .modal-btn:hover {
     background: #333;
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .accent-btn {
@@ -504,10 +513,10 @@ details[open] .collapse-arrow {
 .accent-btn:hover {
     background: #ffb3d9;
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px var(--accent-glow);
+    box-shadow: 0 10px 30px var(--accent-glow);
 }
 
-/* Theme Selector */
+/* ====================== THEME SELECTOR ====================== */
 .theme-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -522,15 +531,37 @@ details[open] .collapse-arrow {
     border-radius: 12px;
     cursor: pointer;
     font-weight: 500;
-    transition: all 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .theme-option:hover {
-    transform: scale(1.05);
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .theme-option.active {
     border-color: var(--accent);
-    background: rgba(243, 101, 172, 0.15);
-    box-shadow: 0 0 15px var(--accent-glow);
+    background: rgba(243, 101, 172, 0.12);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* ====================== RESPONSIVE ====================== */
+@media (max-width: 1200px) {
+    .grid-layout {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .grid-layout {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 30px 4rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .grid-layout {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 20px 4rem;
+    }
 }
