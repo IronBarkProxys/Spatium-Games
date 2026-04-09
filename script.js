@@ -1,6 +1,6 @@
 // ========================================================
-// SPATIUM - Clean UI JavaScript
-// No favorites/hearts | Improved particle colors
+// SPATIUM - Clean & Enhanced UI JavaScript
+// Improved themes + better colors | No hearts/favorites
 // ========================================================
 
 const canvas = document.getElementById('particles');
@@ -18,7 +18,7 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 
-// ====================== PARTICLE STYLES (better colors) ======================
+// ====================== PARTICLE STYLES ======================
 class ClassicParticle {
     constructor() { this.reset(); }
     reset() {
@@ -38,7 +38,7 @@ class ClassicParticle {
     draw() {
         ctx.save();
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = '#e6e9ff';
+        ctx.fillStyle = '#e0e6ff';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -52,24 +52,24 @@ class SparkParticle {
         this.x = Math.random() * canvas.width;
         this.y = canvas.height + 30;
         this.size = Math.random() * 2.2 + 0.9;
-        this.speedX = (Math.random() - 0.5) * 3.2;
-        this.speedY = -(Math.random() * 5.5 + 4);
+        this.speedX = (Math.random() - 0.5) * 3.5;
+        this.speedY = -(Math.random() * 6 + 4.5);
         this.opacity = 0.95;
-        this.hue = 325; // electric pink/cyan range
+        this.hue = 330;
     }
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.speedY += 0.095;
-        this.opacity -= 0.022;
-        this.size *= 0.982;
+        this.speedY += 0.1;
+        this.opacity -= 0.023;
+        this.size *= 0.98;
         if (this.opacity <= 0.08) this.reset();
     }
     draw() {
         ctx.save();
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = `hsl(325, 95%, 88%)`;
-        ctx.shadowBlur = 8;
+        ctx.fillStyle = `hsl(330, 100%, 92%)`;
+        ctx.shadowBlur = 12;
         ctx.shadowColor = '#ff6ec7';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -83,24 +83,24 @@ class NebulaParticle {
     reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 32 + 22;
-        this.speedX = (Math.random() - 0.5) * 0.35;
-        this.speedY = (Math.random() - 0.5) * 0.25;
-        this.opacity = Math.random() * 0.22 + 0.11;
+        this.size = Math.random() * 35 + 22;
+        this.speedX = (Math.random() - 0.5) * 0.38;
+        this.speedY = (Math.random() - 0.5) * 0.26;
+        this.opacity = Math.random() * 0.23 + 0.12;
     }
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.opacity = Math.max(0.09, this.opacity + Math.sin(Date.now() / 1800) * 0.004);
-        if (Math.abs(this.x) > canvas.width * 1.1) this.speedX *= -0.92;
-        if (Math.abs(this.y) > canvas.height * 1.1) this.speedY *= -0.92;
+        this.opacity = Math.max(0.1, this.opacity + Math.sin(Date.now() / 2000) * 0.004);
+        if (Math.abs(this.x) > canvas.width * 1.15) this.speedX *= -0.9;
+        if (Math.abs(this.y) > canvas.height * 1.15) this.speedY *= -0.9;
     }
     draw() {
         ctx.save();
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = '#d8c4ff';
-        ctx.shadowBlur = 25;
-        ctx.shadowColor = '#c084fc';
+        ctx.fillStyle = '#d4c3ff';
+        ctx.shadowBlur = 28;
+        ctx.shadowColor = '#b794f4';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -113,7 +113,7 @@ let currentParticles = [];
 
 function createParticles(style) {
     currentParticles = [];
-    const count = style === 'nebula' ? 28 : (style === 'spark' ? 65 : 135);
+    const count = style === 'nebula' ? 28 : (style === 'spark' ? 68 : 135);
 
     for (let i = 0; i < count; i++) {
         if (style === 'spark') currentParticles.push(new SparkParticle());
@@ -131,75 +131,68 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-// ====================== THEMES ======================
+// ====================== IMPROVED THEMES ======================
 const themes = {
-space: { 
-  '--bg': '#0b0c10', 
-  '--surface': '#15171c', 
-  '--accent': '#7c8cff', 
-  '--text': '#e6e8ee', 
-  '--border': '#23262d' 
-},
-
-aquatic: { 
-  '--bg': '#0c1a24', 
-  '--surface': '#142733', 
-  '--accent': '#4db6c9', 
-  '--text': '#e4f1f5', 
-  '--border': '#223c4a' 
-},
-
-cherry: { 
-  '--bg': '#1a1013', 
-  '--surface': '#24161a', 
-  '--accent': '#d96a8a', 
-  '--text': '#f2e8ea', 
-  '--border': '#3a252b' 
-},
-
-swamp: { 
-  '--bg': '#10160f', 
-  '--surface': '#1a2218', 
-  '--accent': '#8aa86d', 
-  '--text': '#e8efe5', 
-  '--border': '#2c3829' 
-},
-
-neon: { 
-  '--bg': '#0e0f14', 
-  '--surface': '#1a1c24', 
-  '--accent': '#9f7bff', 
-  '--text': '#e7e6f2', 
-  '--border': '#2a2d3a' 
-},
-
-violet: { 
-  '--bg': '#0f0d18', 
-  '--surface': '#1b1726', 
-  '--accent': '#a78bfa', 
-  '--text': '#ece9f6', 
-  '--border': '#2e2940' 
-},
-
-cyber: { 
-  '--bg': '#0c0f0e', 
-  '--surface': '#161a19', 
-  '--accent': '#93ecf8', 
-  '--text': '#e6f4ef', 
-  '--border': '#26312d' 
-},
-
-rose: { 
-  '--bg': '#1a0f12', 
-  '--surface': '#26171c', 
-  '--accent': '#e06c8a', 
-  '--text': '#f3e7ea', 
-  '--border': '#3b252c' 
-},
+    space: {
+        '--bg': '#0a0b0f',
+        '--surface': '#12151c',
+        '--accent': '#8b9eff',
+        '--text': '#e8ebf5',
+        '--border': '#252a38'
+    },
+    aquatic: {
+        '--bg': '#0b1a24',
+        '--surface': '#132a3a',
+        '--accent': '#4fc3e0',
+        '--text': '#e0f0f8',
+        '--border': '#1f3a4f'
+    },
+    cherry: {
+        '--bg': '#1a0f14',
+        '--surface': '#26161e',
+        '--accent': '#e06c8a',
+        '--text': '#f4e8ec',
+        '--border': '#3a252e'
+    },
+    swamp: {
+        '--bg': '#0f160f',
+        '--surface': '#1a2219',
+        '--accent': '#9cc66d',
+        '--text': '#e9f0e4',
+        '--border': '#2c3828'
+    },
+    neon: {
+        '--bg': '#0c0d14',
+        '--surface': '#1a1c2a',
+        '--accent': '#ff5ef7',
+        '--text': '#ece8f5',
+        '--border': '#2a2d44'
+    },
+    violet: {
+        '--bg': '#0f0d1a',
+        '--surface': '#1b1729',
+        '--accent': '#a78bfa',
+        '--text': '#ede9f6',
+        '--border': '#2e2943'
+    },
+    cyber: {
+        '--bg': '#0c0f0e',
+        '--surface': '#161a19',
+        '--accent': '#67f0e0',
+        '--text': '#e6f4ef',
+        '--border': '#26312d'
+    },
+    rose: {
+        '--bg': '#1a0f13',
+        '--surface': '#26171d',
+        '--accent': '#ff6b9d',
+        '--text': '#f3e8eb',
+        '--border': '#3b252e'
+    },
     midnight: {
-        '--bg': '#020617',
+        '--bg': '#02050f',
         '--surface': '#0f172a',
-        '--accent': '#64748b',
+        '--accent': '#94a3c0',
         '--text': '#e2e8f0',
         '--border': '#334155'
     }
@@ -264,7 +257,7 @@ function changeParticleStyle(style) {
     saveSettings();
 }
 
-// ====================== GAME LOADING & DISPLAY ======================
+// ====================== GAME FUNCTIONS ======================
 async function loadGames() {
     const loadingText = document.getElementById('loadingText');
     const loadingScreen = document.getElementById('loadingScreen');
@@ -342,7 +335,6 @@ function displayTrending() {
     });
 }
 
-// ====================== SEARCH ======================
 let searchTimeout;
 function filterGames() {
     clearTimeout(searchTimeout);
@@ -359,7 +351,6 @@ function filterGames() {
     }, 280);
 }
 
-// ====================== GAME VIEWER ======================
 function openGame(game) {
     const viewer = document.getElementById('zoneViewer');
     const frame = document.getElementById('zoneFrame');
@@ -518,5 +509,5 @@ window.onload = () => {
         });
     }
 
-    console.log("🚀 Spatium loaded with improved particles");
+    console.log("🚀 Spatium loaded with improved colors & themes");
 };
