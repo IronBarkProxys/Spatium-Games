@@ -1,6 +1,6 @@
 // ========================================================
-// SPATIUM - Fixed & Clean UI JavaScript
-// Full theme support (Midnight included) | No favorites/hearts
+// SPATIUM - Original Enhanced UI JavaScript
+// With hearts/favorites restored
 // ========================================================
 
 const canvas = document.getElementById('particles');
@@ -8,8 +8,10 @@ const ctx = canvas.getContext('2d');
 
 let particles = [];
 let allGames = [];
+let favorites = JSON.parse(localStorage.getItem('spatium_favorites') || '[]');
 let recentlyPlayed = JSON.parse(localStorage.getItem('spatium_recentlyPlayed') || '[]');
 let currentSortMode = 'name';
+let currentView = 'all';
 
 // ====================== CANVAS & PARTICLES ======================
 function resizeCanvas() {
@@ -27,6 +29,7 @@ class Particle {
         this.speedX = Math.random() * 0.7 + 0.3;
         this.speedY = Math.random() * 0.9 + 0.5;
         this.opacity = Math.random() * 0.4 + 0.25;
+        this.hueShift = Math.random() * 20 - 10;
     }
 
     update() {
@@ -105,10 +108,11 @@ function setTheme(themeName) {
 function saveSettings() {
     const activeThemeEl = document.querySelector('.theme-option.active');
     const themeName = activeThemeEl ? activeThemeEl.getAttribute('data-theme') : 'space';
-    const particlesEnabled = document.getElementById('particlesToggle')?.checked ?? true;
+    const particlesEnabled = document.getElementById('particlesToggle').checked;
 
     localStorage.setItem('spatium_theme', themeName);
     localStorage.setItem('spatium_particles', particlesEnabled);
+    localStorage.setItem('spatium_favorites', JSON.stringify(favorites));
     localStorage.setItem('spatium_recentlyPlayed', JSON.stringify(recentlyPlayed));
 }
 
@@ -123,6 +127,7 @@ function loadSavedSettings() {
         toggleParticles(particlesEnabled);
     }
 
+    favorites = JSON.parse(localStorage.getItem('spatium_favorites') || '[]');
     recentlyPlayed = JSON.parse(localStorage.getItem('spatium_recentlyPlayed') || '[]');
 }
 
@@ -141,6 +146,8 @@ async function loadGames() {
             a.name.toLowerCase().localeCompare(b.name.toLowerCase())
         );
 
+        if (allGames.length === 0) throw new Error("No games found");
+
         console.log(`✅ Loaded ${allGames.length} games`);
 
         const featured = allGames.filter(g => g.featured === true);
@@ -154,7 +161,7 @@ async function loadGames() {
     } catch (err) {
         console.error("Load error:", err);
         loadingText.textContent = "Failed to load games. Check console (F12)";
-        loadingText.style.color = "var(--accent)";
+        loadingText.style.color = "#f365ac";
     }
 }
 
@@ -171,6 +178,7 @@ function displayGames(games, containerId) {
     }
 
     games.forEach(game => {
+        const isFavorite = favorites.includes(game.folder || game.name);
         const div = document.createElement('div');
         div.className = 'zone-item';
         div.innerHTML = `
@@ -179,13 +187,40 @@ function displayGames(games, containerId) {
                  loading="lazy"
                  onerror="this.src='https://via.placeholder.com/300x400/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
             <button>${game.name}</button>
+            <div class="favorite-heart ${isFavorite ? 'active' : ''}" data-game="${game.folder || game.name}">
+                ❤️
+            </div>
         `;
 
-        div.addEventListener('click', () => openGame(game));
+        div.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('favorite-heart')) {
+                openGame(game);
+            }
+        });
+
+        const heart = div.querySelector('.favorite-heart');
+        heart.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleFavorite(game, heart);
+        });
+
         container.appendChild(div);
     });
 }
 
+function toggleFavorite(game, heartElement) {
+    const gameId = game.folder || game.name;
+    if (favorites.includes(gameId)) {
+        favorites = favorites.filter(id => id !== gameId);
+        heartElement.classList.remove('active');
+    } else {
+        favorites.push(gameId);
+        heartElement.classList.add('active');
+    }
+    saveSettings();
+}
+
+// Trending display
 function displayTrending() {
     const container = document.getElementById('trendingWrapper');
     if (!container) return;
@@ -199,9 +234,7 @@ function displayTrending() {
         slide.className = 'swiper-slide';
         slide.style.cursor = 'pointer';
         slide.innerHTML = `
-            <img src="${game.thumbnail}" 
-                 alt="${game.name}" 
-                 onerror="this.src='https://via.placeholder.com/280x380/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
+            <img src="${game.thumbnail}" alt="${game.name}" onerror="this.src='https://via.placeholder.com/280x380/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
             <p>${game.name}</p>
         `;
         slide.addEventListener('click', () => openGame(game));
@@ -209,7 +242,7 @@ function displayTrending() {
     });
 }
 
-// ====================== SEARCH ======================
+// ====================== SEARCH WITH DEBOUNCE ======================
 let searchTimeout;
 function filterGames() {
     clearTimeout(searchTimeout);
@@ -236,7 +269,6 @@ function openGame(game) {
     frame.src = `games/${game.folder}/index.html`;
     viewer.style.display = 'flex';
 
-    // Add to recently played
     const gameId = game.folder || game.name;
     recentlyPlayed = recentlyPlayed.filter(id => id !== gameId);
     recentlyPlayed.unshift(gameId);
@@ -271,7 +303,7 @@ function closeSettings() {
 
 function toggleParticles(enabled) {
     const canvasEl = document.getElementById('particles');
-    if (canvasEl) canvasEl.style.opacity = enabled ? '0.6' : '0';
+    canvasEl.style.opacity = enabled ? '0.6' : '0';
     saveSettings();
 }
 
@@ -279,7 +311,9 @@ function openInAboutBlank() {
     try {
         const newTab = window.open('about:blank', '_blank');
         if (newTab) {
-            newTab.document.write(`<script>window.location.href = "${window.location.href}";<\/script>`);
+            newTab.document.write(`
+                <script>window.location.href = "${window.location.href}";<\/script>
+            `);
             closeSettings();
         } else {
             alert("Popup blocked! Please allow popups.");
@@ -367,8 +401,9 @@ function sortZones() {
 
     currentSortMode = select.value;
     let sorted = [...allGames];
-    if (currentSortMode === 'id') sorted.reverse();
-
+    if (currentSortMode === 'id') {
+        sorted.reverse();
+    }
     displayGames(sorted, 'allGamesGrid');
 }
 
@@ -400,5 +435,5 @@ window.onload = () => {
         });
     }
 
-    console.log("🚀 Spatium UI loaded successfully");
+    console.log("🚀 Spatium UI fully loaded with hearts & favorites");
 };
