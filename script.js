@@ -133,14 +133,69 @@ function animateParticles() {
 
 // ====================== THEMES ======================
 const themes = {
-    space: { '--bg': '#000000', '--surface': '#111111', '--accent': '#f365ac', '--text': '#eeeeee', '--border': '#333333' },
-    aquatic: { '--bg': '#0a1f2f', '--surface': '#132e44', '--accent': '#00d4ff', '--text': '#eeeeee', '--border': '#2a4a66' },
-    cherry: { '--bg': '#1a0f14', '--surface': '#2c1b22', '--accent': '#ff8ac4', '--text': '#eeeeee', '--border': '#4a2f38' },
-    swamp: { '--bg': '#0f1a0f', '--surface': '#1f2a1f', '--accent': '#7cff7c', '--text': '#eeeeee', '--border': '#2f3f2f' },
-    neon: { '--bg': '#0a0a1f', '--surface': '#1a1a3a', '--accent': '#ff00ff', '--text': '#eeeeee', '--border': '#3a3a66' },
-    violet: { '--bg': '#0f0a1f', '--surface': '#1f1533', '--accent': '#c26bff', '--text': '#eeeeee', '--border': '#3a2f55' },
-    cyber: { '--bg': '#0d0d0d', '--surface': '#1f1f1f', '--accent': '#00ff9f', '--text': '#eeeeee', '--border': '#3f3f3f' },
-    rose: { '--bg': '#1f0f14', '--surface': '#2f1b22', '--accent': '#ff4d94', '--text': '#eeeeee', '--border': '#4a2f38' },
+space: { 
+  '--bg': '#0b0c10', 
+  '--surface': '#15171c', 
+  '--accent': '#7c8cff', 
+  '--text': '#e6e8ee', 
+  '--border': '#23262d' 
+},
+
+aquatic: { 
+  '--bg': '#0c1a24', 
+  '--surface': '#142733', 
+  '--accent': '#4db6c9', 
+  '--text': '#e4f1f5', 
+  '--border': '#223c4a' 
+},
+
+cherry: { 
+  '--bg': '#1a1013', 
+  '--surface': '#24161a', 
+  '--accent': '#d96a8a', 
+  '--text': '#f2e8ea', 
+  '--border': '#3a252b' 
+},
+
+swamp: { 
+  '--bg': '#10160f', 
+  '--surface': '#1a2218', 
+  '--accent': '#8aa86d', 
+  '--text': '#e8efe5', 
+  '--border': '#2c3829' 
+},
+
+neon: { 
+  '--bg': '#0e0f14', 
+  '--surface': '#1a1c24', 
+  '--accent': '#9f7bff', 
+  '--text': '#e7e6f2', 
+  '--border': '#2a2d3a' 
+},
+
+violet: { 
+  '--bg': '#0f0d18', 
+  '--surface': '#1b1726', 
+  '--accent': '#a78bfa', 
+  '--text': '#ece9f6', 
+  '--border': '#2e2940' 
+},
+
+cyber: { 
+  '--bg': '#0c0f0e', 
+  '--surface': '#161a19', 
+  '--accent': '#3ddc97', 
+  '--text': '#e6f4ef', 
+  '--border': '#26312d' 
+},
+
+rose: { 
+  '--bg': '#1a0f12', 
+  '--surface': '#26171c', 
+  '--accent': '#e06c8a', 
+  '--text': '#f3e7ea', 
+  '--border': '#3b252c' 
+},
     midnight: {
         '--bg': '#020617',
         '--surface': '#0f172a',
