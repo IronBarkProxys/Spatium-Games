@@ -184,7 +184,7 @@ violet: {
 cyber: { 
   '--bg': '#0c0f0e', 
   '--surface': '#161a19', 
-  '--accent': '#3ddc97', 
+  '--accent': '#93ecf8', 
   '--text': '#e6f4ef', 
   '--border': '#26312d' 
 },
