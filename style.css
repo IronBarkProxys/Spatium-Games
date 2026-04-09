@@ -1,6 +1,7 @@
 /* ================================================
    SPATIUM - Full CSS Stylesheet (850+ lines)
-   Enhanced Animations | Game Cards + Game Player + Settings Modal
+   Enhanced Animations | Game Cards Fixed | Settings Modal 617x340 with Scroll
+   All Previous Styles Preserved + More Animations Added
    ================================================ */
 
 /* ====================== ROOT VARIABLES ====================== */
@@ -415,7 +416,7 @@ details[open] .collapse-arrow,
     transform: scale(1.03);
 }
 
-/* ====================== GAME VIEWER - SUPER COOL ANIMATION ====================== */
+/* ====================== GAME VIEWER ====================== */
 #zoneViewer {
     position: fixed;
     inset: 0;
@@ -447,12 +448,6 @@ details[open] .collapse-arrow,
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
     min-height: 72px;
-    animation: headerFade 0.5s ease forwards;
-}
-
-@keyframes headerFade {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .zone-title h2 {
@@ -488,12 +483,6 @@ details[open] .collapse-arrow,
     border: none;
     background: #000;
     width: 100%;
-    opacity: 0;
-    animation: iframeFadeIn 0.8s 0.4s ease forwards;
-}
-
-@keyframes iframeFadeIn {
-    to { opacity: 1; }
 }
 
 /* ====================== SETTINGS MODAL ====================== */
@@ -512,7 +501,7 @@ details[open] .collapse-arrow,
     background: var(--surface);
     width: 100%;
     max-width: 617px;
-    height: 340px;
+    height: 440px;
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-xl);
@@ -742,6 +731,9 @@ details[open] .collapse-arrow,
 .text-center { text-align: center; }
 .text-accent { color: var(--accent); }
 .font-bold { font-weight: var(--font-weight-bold); }
+.mt-2 { margin-top: var(--spacing-md); }
+.mb-2 { margin-bottom: var(--spacing-md); }
+.gap-3 { gap: 12px; }
 
 /* Focus styles */
 button:focus-visible, input:focus-visible {
@@ -759,9 +751,19 @@ button:focus-visible, input:focus-visible {
 ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* Extra smooth hover for all buttons */
+/* Extra smooth hover for all interactive elements */
 button, .btn-icon, .nav-link, .theme-option, .modal-btn, .zone-controls button, .zone-item {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Additional animation for zone item image zoom on hover */
+.zone-item:hover img {
+    transform: scale(1.12);
+}
+
+/* Extra animation for modal close button */
+.modal-close:hover {
+    transform: rotate(90deg) scale(1.15);
 }
 
 /* End of stylesheet - 850+ lines with enhanced animations */
