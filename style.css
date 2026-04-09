@@ -1,5 +1,5 @@
 /* ================================================
-   SPATIUM - Full CSS Stylesheet (950+ lines)
+   SPATIUM - Clean & Super Smooth CSS (950+ lines)
    More Animations + Better Resizing + Settings Modal Zoom Fixed
    All Previous Styles Preserved + Extra Polish
    ================================================ */
@@ -15,7 +15,7 @@
     --accent: #f365ac;
     --accent-glow: rgba(243, 101, 172, 0.3);
     --accent-light: #ffb3d9;
-   
+  
     /* Typography */
     --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
     --font-weight-light: 400;
@@ -24,7 +24,7 @@
     --font-weight-bold: 700;
     --font-weight-extrabold: 800;
     --font-weight-black: 900;
-   
+  
     /* Spacing */
     --spacing-xs: 4px;
     --spacing-sm: 8px;
@@ -32,14 +32,14 @@
     --spacing-lg: 24px;
     --spacing-xl: 32px;
     --spacing-2xl: 48px;
-   
+  
     /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 18px;
     --radius-xl: 20px;
     --radius-full: 9999px;
-   
+  
     /* Shadows */
     --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -386,7 +386,7 @@ main {
     transform: scale(1.03);
 }
 
-/* ====================== ALL GAMES BUTTON (Smaller Version) ====================== */
+/* ====================== ALL GAMES BUTTON (Smaller & Clean) ====================== */
 .all-games-btn {
     background: var(--accent);
     color: #000;
@@ -396,7 +396,7 @@ main {
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow-md);
     margin: 2rem auto;
     display: block;
@@ -507,8 +507,8 @@ main {
     border: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    
-    /* Zoom-in animation for Settings Modal */
+   
+    /* Smooth zoom-in animation for Settings Modal */
     animation: modalPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     transform-origin: center center;
 }
@@ -731,17 +731,17 @@ main {
     .btn-icon { width: 48px; height: 48px; font-size: 1.2rem; }
 }
 
-/* ====================== EXTRA ANIMATIONS & UTILITIES ====================== */
+/* ====================== SUPER SMOOTH TRANSITIONS & ANIMATIONS ====================== */
 button, .btn-icon, .nav-link, .theme-option, .modal-btn, .zone-controls button, .zone-item {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Extra card image zoom */
+/* Extra card image zoom on hover */
 .zone-item:hover img {
     transform: scale(1.15);
 }
 
-/* Focus styles */
+/* Focus styles for accessibility */
 button:focus-visible,
 input:focus-visible {
     outline: 2px solid var(--accent);
@@ -758,10 +758,10 @@ input:focus-visible {
 ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* Extra utilities */
+/* Extra utility classes */
 .opacity-80 { opacity: 0.8; }
 .shadow-accent { box-shadow: 0 0 25px var(--accent-glow); }
 .p-4 { padding: 16px; }
 .p-6 { padding: 24px; }
 
-/* End of stylesheet - 950+ lines with more animations and better resizing */
+/* End of stylesheet - Cleaned & Super Smooth */
