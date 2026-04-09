@@ -1,6 +1,6 @@
 /* ================================================
    SPATIUM - Full CSS Stylesheet (730+ lines)
-   Game Cards Fixed + All Previous Styles Kept
+   Game Cards Fixed + Settings Modal 617x340 with Scroll
    ================================================ */
 
 /* ====================== ROOT VARIABLES ====================== */
@@ -317,7 +317,7 @@ details[open] .collapse-arrow,
     transform: rotate(180deg);
 }
 
-/* ====================== GAME CARDS (FIXED) ====================== */
+/* ====================== GAME CARDS ====================== */
 .grid-layout {
     width: 100%;
     max-width: 1400px;
@@ -431,7 +431,7 @@ details[open] .collapse-arrow,
     width: 100%;
 }
 
-/* ====================== MODAL SYSTEM ====================== */
+/* ====================== SETTINGS MODAL (617px wide, taller + scrollable) ====================== */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -446,11 +446,14 @@ details[open] .collapse-arrow,
 .modal-content {
     background: var(--surface);
     width: 100%;
-    max-width: 520px;
+    max-width: 617px;
+    height: 340px;                    /* A little taller than 292px */
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-xl);
     border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
     animation: modalPop 0.3s ease forwards;
 }
 
@@ -465,6 +468,7 @@ details[open] .collapse-arrow,
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
 }
 
 .modal-header h2 {
@@ -489,12 +493,39 @@ details[open] .collapse-arrow,
     color: var(--accent);
 }
 
+/* Scrollable Settings Body */
 .modal-body {
     padding: 2rem;
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #555 var(--surface);
 }
 
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: var(--surface);
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Settings Content */
 .setting-row {
     margin-bottom: 2.2rem;
+}
+
+.setting-row:last-child {
+    margin-bottom: 0;
 }
 
 .setting-row label {
@@ -546,6 +577,7 @@ details[open] .collapse-arrow,
     transform: translateX(22px);
 }
 
+/* Modal Buttons */
 .modal-btn {
     width: 100%;
     padding: 14px 20px;
@@ -578,6 +610,7 @@ details[open] .collapse-arrow,
     box-shadow: var(--shadow-lg);
 }
 
+/* Theme Selector */
 .theme-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -619,17 +652,12 @@ details[open] .collapse-arrow,
 }
 
 @media (max-width: 900px) {
-    .grid-layout {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    .grid-layout { grid-template-columns: repeat(3, 1fr); }
     .header-upper { gap: 1.2rem; }
 }
 
 @media (max-width: 700px) {
-    .grid-layout {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 0 20px 4rem;
-    }
+    .grid-layout { grid-template-columns: repeat(2, 1fr); padding: 0 20px 4rem; }
     .nav-content { gap: 15px; justify-content: center; }
     .section-header { padding: 0 1.2rem 1rem; }
 }
@@ -638,7 +666,7 @@ details[open] .collapse-arrow,
     .header-upper { padding: 0 1rem; gap: 0.8rem; }
     .logo { font-size: 1.7rem; }
     .section-title { font-size: 1.6rem; }
-    .modal-content { margin: 1rem; max-width: 92%; }
+    .modal-content { max-width: 92%; }
 }
 
 /* ====================== EXTRA UTILITIES ====================== */
