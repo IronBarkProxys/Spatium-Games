@@ -1,6 +1,6 @@
 /* ================================================
-   SPATIUM - Full CSS Stylesheet
-   Clean, Organized & Expanded
+   SPATIUM - Full CSS Stylesheet (720+ lines)
+   Clean, Organized & Expanded | Game Player Fully Styled
    ================================================ */
 
 /* ====================== ROOT VARIABLES ====================== */
@@ -14,6 +14,11 @@
     --accent: #f365ac;
     --accent-glow: rgba(243, 101, 172, 0.3);
     --accent-light: #ffb3d9;
+    
+    /* Extended Theme Palette */
+    --accent-hover: #ff8ac4;
+    --text-secondary: #aaaaaa;
+    --text-muted: #777777;
     
     /* Typography */
     --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -44,6 +49,11 @@
     --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 15px 35px var(--accent-glow);
     --shadow-xl: 0 30px 60px var(--accent-glow);
+    
+    /* Transitions */
+    --transition-fast: all 0.2s ease;
+    --transition-normal: all 0.25s ease;
+    --transition-slow: all 0.4s ease;
 }
 
 /* ====================== GLOBAL RESET ====================== */
@@ -328,11 +338,11 @@ details[open] .collapse-arrow,
     gap: 30px;
 }
 
-/* ====================== GAME VIEWER ====================== */
+/* ====================== GAME VIEWER (FIXED & THEME-AWARE) ====================== */
 #zoneViewer {
     position: fixed;
     inset: 0;
-    background: black;
+    background: var(--bg);
     z-index: 2000;
     display: none;
     flex-direction: column;
@@ -340,18 +350,20 @@ details[open] .collapse-arrow,
 }
 
 .zone-header {
-    background: #111;
+    background: var(--surface);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border);
     flex-shrink: 0;
-    min-height: 70px;
+    min-height: 72px;
+    box-shadow: var(--shadow-sm);
 }
 
 .zone-title {
     flex: 1;
+    min-width: 0;
 }
 
 .zone-title h2 {
@@ -362,7 +374,6 @@ details[open] .collapse-arrow,
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 70%;
 }
 
 .zone-controls {
@@ -372,25 +383,27 @@ details[open] .collapse-arrow,
 }
 
 .zone-controls button {
-    background: #222;
-    color: white;
-    border: 1px solid #444;
-    padding: 10px 18px;
-    border-radius: 6px;
+    background: var(--textbox);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
     cursor: pointer;
     font-weight: var(--font-weight-semibold);
-    transition: all 0.25s ease;
+    transition: var(--transition-normal);
     white-space: nowrap;
 }
 
 .zone-controls button:hover {
-    background: #333;
+    background: var(--accent);
+    color: #000;
     border-color: var(--accent);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .zone-controls button:active {
-    transform: scale(0.98);
+    transform: scale(0.96);
 }
 
 #zoneFrame {
@@ -398,6 +411,8 @@ details[open] .collapse-arrow,
     border: none;
     background: #000;
     width: 100%;
+    height: 100%;
+    display: block;
 }
 
 /* ====================== MODAL SYSTEM ====================== */
@@ -606,7 +621,6 @@ details[open] .collapse-arrow,
     .grid-layout {
         grid-template-columns: repeat(3, 1fr);
     }
-    
     .header-upper {
         gap: 1.2rem;
     }
@@ -617,12 +631,10 @@ details[open] .collapse-arrow,
         grid-template-columns: repeat(2, 1fr);
         padding: 0 20px 4rem;
     }
-    
     .nav-content {
         gap: 15px;
         justify-content: center;
     }
-    
     .section-header {
         padding: 0 1.2rem 1rem;
     }
@@ -633,18 +645,25 @@ details[open] .collapse-arrow,
         padding: 0 1rem;
         gap: 0.8rem;
     }
-    
     .logo {
         font-size: 1.7rem;
     }
-    
     .section-title {
         font-size: 1.6rem;
     }
-    
     .modal-content {
         margin: 1rem;
         max-width: 92%;
+    }
+    #zoneViewer .zone-header {
+        padding: 1rem 1.2rem;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    .zone-controls {
+        width: 100%;
+        justify-content: flex-end;
     }
 }
 
@@ -657,7 +676,12 @@ details[open] .collapse-arrow,
 .gap-3 { gap: 12px; }
 
 /* Smooth transitions for all interactive elements */
-button, .btn-icon, .nav-link, .theme-option, .modal-btn, .zone-controls button {
+button, 
+.btn-icon, 
+.nav-link, 
+.theme-option, 
+.modal-btn, 
+.zone-controls button {
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -688,4 +712,15 @@ input:focus-visible,
     background: var(--accent);
 }
 
-/* End of stylesheet */
+/* ====================== ADDITIONAL POLISH ====================== */
+/* Make sure game viewer iframe content doesn't have weird scrollbars */
+#zoneFrame::-webkit-scrollbar {
+    display: none;
+}
+
+/* Extra hover depth for zone controls */
+.zone-controls button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(243, 101, 172, 0.3);
+}
+
+/* End of stylesheet - 720+ lines with full game player styling */
