@@ -117,61 +117,73 @@
     </div>
 
     <!-- ==================== SETTINGS MODAL ==================== -->
-    <div id="settingsModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Settings</h2>
-                <button class="modal-close" onclick="closeSettings()">✕</button>
+<div id="settingsModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Settings</h2>
+            <button class="modal-close" onclick="closeSettings()">✕</button>
+        </div>
+        <div class="modal-body">
+            
+            <!-- Particles Toggle -->
+            <div class="setting-row">
+                <label class="toggle-label">
+                    <input type="checkbox" id="particlesToggle" checked onchange="toggleParticles(this.checked)">
+                    Enable background particles
+                </label>
             </div>
-            <div class="modal-body">
-                <!-- Particles -->
-                <div class="setting-row">
-                    <label class="toggle-label">
-                        <input type="checkbox" id="particlesToggle" checked onchange="toggleParticles(this.checked)">
-                        Enable background particles
-                    </label>
-                </div>
 
-                <!-- Open in about:blank -->
-                <div class="setting-row">
-                    <button onclick="openInAboutBlank()" class="modal-btn">
-                        🌐 Open site in about:blank (new tab)
-                    </button>
-                </div>
+            <!-- Particle Style Selector (NEW) -->
+            <div class="setting-row">
+                <label>Particle Style</label>
+                <select id="particleStyle" onchange="changeParticleStyle(this.value)" 
+                        style="width:100%; padding:12px; background:var(--surface); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:1.05rem;">
+                    <option value="classic">Classic (Soft Dots)</option>
+                    <option value="spark">Spark (Energetic)</option>
+                    <option value="nebula">Nebula (Dreamy Clouds)</option>
+                </select>
+            </div>
 
-                <!-- Change Title -->
-                <div class="setting-row">
-                    <label>Site Title (Tab Name)</label>
-                    <input type="text" id="siteTitleInput" placeholder="Spatium" 
-                           style="width:100%; padding:12px; background:var(--surface); border:1px solid var(--border); border-radius:8px; color:var(--text);">
-                    <button onclick="changeSiteTitle()" class="modal-btn accent-btn" style="margin-top:8px;">Save Title</button>
-                </div>
+            <!-- Open in about:blank -->
+            <div class="setting-row">
+                <button onclick="openInAboutBlank()" class="modal-btn">
+                    🌐 Open site in about:blank (new tab)
+                </button>
+            </div>
 
-                <!-- Upload Favicon -->
-                <div class="setting-row">
-                    <label>Custom Favicon</label>
-                    <input type="file" id="faviconUpload" accept="image/*" style="display:block; width:100%; margin:8px 0;">
-                    <button onclick="uploadFavicon()" class="modal-btn">Upload Favicon</button>
-                </div>
+            <!-- Change Title -->
+            <div class="setting-row">
+                <label>Site Title (Tab Name)</label>
+                <input type="text" id="siteTitleInput" placeholder="Spatium"
+                       style="width:100%; padding:12px; background:var(--surface); border:1px solid var(--border); border-radius:8px; color:var(--text);">
+                <button onclick="changeSiteTitle()" class="modal-btn accent-btn" style="margin-top:8px;">Save Title</button>
+            </div>
 
-                <!-- Themes -->
-                <div class="setting-row">
-                    <label>Theme</label>
-                    <div class="theme-grid">
-                        <div class="theme-option" data-theme="space" onclick="setTheme('space')">Space</div>
-                        <div class="theme-option" data-theme="aquatic" onclick="setTheme('aquatic')">Aquatic</div>
-                        <div class="theme-option" data-theme="cherry" onclick="setTheme('cherry')">Cherry Blossom</div>
-                        <div class="theme-option" data-theme="swamp" onclick="setTheme('swamp')">Swamp</div>
-                        <div class="theme-option" data-theme="neon" onclick="setTheme('neon')">Neon</div>
-                        <div class="theme-option" data-theme="violet" onclick="setTheme('violet')">Violet</div>
-                        <div class="theme-option" data-theme="cyber" onclick="setTheme('cyber')">Cyber</div>
-                        <div class="theme-option" data-theme="rose" onclick="setTheme('rose')">Rose</div>
-                        <div class="theme-option" data-theme="midnight" onclick="setTheme('midnight')">Midnight</div>
-                    </div>
+            <!-- Upload Favicon -->
+            <div class="setting-row">
+                <label>Custom Favicon</label>
+                <input type="file" id="faviconUpload" accept="image/*" style="display:block; width:100%; margin:8px 0;">
+                <button onclick="uploadFavicon()" class="modal-btn">Upload Favicon</button>
+            </div>
+
+            <!-- Themes -->
+            <div class="setting-row">
+                <label>Theme</label>
+                <div class="theme-grid">
+                    <div class="theme-option" data-theme="space" onclick="setTheme('space')">Space</div>
+                    <div class="theme-option" data-theme="aquatic" onclick="setTheme('aquatic')">Aquatic</div>
+                    <div class="theme-option" data-theme="cherry" onclick="setTheme('cherry')">Cherry Blossom</div>
+                    <div class="theme-option" data-theme="swamp" onclick="setTheme('swamp')">Swamp</div>
+                    <div class="theme-option" data-theme="neon" onclick="setTheme('neon')">Neon</div>
+                    <div class="theme-option" data-theme="violet" onclick="setTheme('violet')">Violet</div>
+                    <div class="theme-option" data-theme="cyber" onclick="setTheme('cyber')">Cyber</div>
+                    <div class="theme-option" data-theme="rose" onclick="setTheme('rose')">Rose</div>
+                    <div class="theme-option" data-theme="midnight" onclick="setTheme('midnight')">Midnight</div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <script src="script.js"></script>
 </body>
