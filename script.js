@@ -1,6 +1,6 @@
 // ========================================================
-// SPATIUM - Clean Enhanced UI JavaScript
-// Full theme support (including Midnight) | No favorites/hearts
+// SPATIUM - Fixed & Clean UI JavaScript
+// Full theme support (Midnight included) | No favorites/hearts
 // ========================================================
 
 const canvas = document.getElementById('particles');
@@ -18,9 +18,7 @@ function resizeCanvas() {
 }
 
 class Particle {
-    constructor() {
-        this.reset();
-    }
+    constructor() { this.reset(); }
 
     reset() {
         this.x = Math.random() * canvas.width;
@@ -35,7 +33,6 @@ class Particle {
         this.x += this.speedX;
         this.y += this.speedY;
         this.opacity = Math.max(0.1, this.opacity - 0.0005);
-
         if (this.x > canvas.width + 100 || this.y > canvas.height + 100 || this.opacity <= 0.1) {
             this.reset();
         }
@@ -70,62 +67,14 @@ function animateParticles() {
 
 // ====================== THEMES ======================
 const themes = {
-    space: {
-        '--bg': '#000000',
-        '--surface': '#111111',
-        '--accent': '#f365ac',
-        '--text': '#eeeeee',
-        '--border': '#333333'
-    },
-    aquatic: {
-        '--bg': '#0a1f2f',
-        '--surface': '#132e44',
-        '--accent': '#00d4ff',
-        '--text': '#eeeeee',
-        '--border': '#2a4a66'
-    },
-    cherry: {
-        '--bg': '#1a0f14',
-        '--surface': '#2c1b22',
-        '--accent': '#ff8ac4',
-        '--text': '#eeeeee',
-        '--border': '#4a2f38'
-    },
-    swamp: {
-        '--bg': '#0f1a0f',
-        '--surface': '#1f2a1f',
-        '--accent': '#7cff7c',
-        '--text': '#eeeeee',
-        '--border': '#2f3f2f'
-    },
-    neon: {
-        '--bg': '#0a0a1f',
-        '--surface': '#1a1a3a',
-        '--accent': '#ff00ff',
-        '--text': '#eeeeee',
-        '--border': '#3a3a66'
-    },
-    violet: {
-        '--bg': '#0f0a1f',
-        '--surface': '#1f1533',
-        '--accent': '#c26bff',
-        '--text': '#eeeeee',
-        '--border': '#3a2f55'
-    },
-    cyber: {
-        '--bg': '#0d0d0d',
-        '--surface': '#1f1f1f',
-        '--accent': '#00ff9f',
-        '--text': '#eeeeee',
-        '--border': '#3f3f3f'
-    },
-    rose: {
-        '--bg': '#1f0f14',
-        '--surface': '#2f1b22',
-        '--accent': '#ff4d94',
-        '--text': '#eeeeee',
-        '--border': '#4a2f38'
-    },
+    space: { '--bg': '#000000', '--surface': '#111111', '--accent': '#f365ac', '--text': '#eeeeee', '--border': '#333333' },
+    aquatic: { '--bg': '#0a1f2f', '--surface': '#132e44', '--accent': '#00d4ff', '--text': '#eeeeee', '--border': '#2a4a66' },
+    cherry: { '--bg': '#1a0f14', '--surface': '#2c1b22', '--accent': '#ff8ac4', '--text': '#eeeeee', '--border': '#4a2f38' },
+    swamp: { '--bg': '#0f1a0f', '--surface': '#1f2a1f', '--accent': '#7cff7c', '--text': '#eeeeee', '--border': '#2f3f2f' },
+    neon: { '--bg': '#0a0a1f', '--surface': '#1a1a3a', '--accent': '#ff00ff', '--text': '#eeeeee', '--border': '#3a3a66' },
+    violet: { '--bg': '#0f0a1f', '--surface': '#1f1533', '--accent': '#c26bff', '--text': '#eeeeee', '--border': '#3a2f55' },
+    cyber: { '--bg': '#0d0d0d', '--surface': '#1f1f1f', '--accent': '#00ff9f', '--text': '#eeeeee', '--border': '#3f3f3f' },
+    rose: { '--bg': '#1f0f14', '--surface': '#2f1b22', '--accent': '#ff4d94', '--text': '#eeeeee', '--border': '#4a2f38' },
     midnight: {
         '--bg': '#020617',
         '--surface': '#0f172a',
@@ -144,7 +93,6 @@ function setTheme(themeName) {
         root.style.setProperty(key, theme[key]);
     });
 
-    // Update active theme option
     document.querySelectorAll('.theme-option').forEach(el => {
         el.classList.toggle('active', el.getAttribute('data-theme') === themeName);
     });
@@ -193,8 +141,6 @@ async function loadGames() {
             a.name.toLowerCase().localeCompare(b.name.toLowerCase())
         );
 
-        if (allGames.length === 0) throw new Error("No games found");
-
         console.log(`✅ Loaded ${allGames.length} games`);
 
         const featured = allGames.filter(g => g.featured === true);
@@ -202,11 +148,8 @@ async function loadGames() {
         displayGames(allGames, 'allGamesGrid');
         displayTrending();
 
-        // Fade out loading screen
         loadingScreen.classList.add('fade-out');
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 600);
+        setTimeout(() => { loadingScreen.style.display = 'none'; }, 600);
 
     } catch (err) {
         console.error("Load error:", err);
@@ -266,18 +209,16 @@ function displayTrending() {
     });
 }
 
-// ====================== SEARCH WITH DEBOUNCE ======================
+// ====================== SEARCH ======================
 let searchTimeout;
 function filterGames() {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
         const query = document.getElementById('searchBar').value.toLowerCase().trim();
-        
         if (!query) {
             displayGames(allGames, 'allGamesGrid');
             return;
         }
-
         const filtered = allGames.filter(game =>
             game.name.toLowerCase().includes(query)
         );
@@ -338,9 +279,7 @@ function openInAboutBlank() {
     try {
         const newTab = window.open('about:blank', '_blank');
         if (newTab) {
-            newTab.document.write(`
-                <script>window.location.href = "${window.location.href}";<\/script>
-            `);
+            newTab.document.write(`<script>window.location.href = "${window.location.href}";<\/script>`);
             closeSettings();
         } else {
             alert("Popup blocked! Please allow popups.");
@@ -382,9 +321,7 @@ function setupKeyboardShortcuts() {
                 closeZone();
                 break;
             case 'f':
-                if (document.getElementById('zoneViewer').style.display === 'flex') {
-                    fullscreenZone();
-                }
+                if (document.getElementById('zoneViewer').style.display === 'flex') fullscreenZone();
                 break;
             case 's':
                 openSettings();
@@ -430,15 +367,12 @@ function sortZones() {
 
     currentSortMode = select.value;
     let sorted = [...allGames];
-
-    if (currentSortMode === 'id') {
-        sorted.reverse();
-    }
+    if (currentSortMode === 'id') sorted.reverse();
 
     displayGames(sorted, 'allGamesGrid');
 }
 
-// ====================== FINAL INIT ======================
+// ====================== INIT ======================
 window.onload = () => {
     resizeCanvas();
     initParticles();
@@ -455,7 +389,6 @@ window.onload = () => {
 
     window.addEventListener('resize', resizeCanvas);
 
-    // Extra escape support
     document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") closeZone();
     });
@@ -467,5 +400,5 @@ window.onload = () => {
         });
     }
 
-    console.log("🚀 Spatium UI loaded successfully with full theme support");
+    console.log("🚀 Spatium UI loaded successfully");
 };
