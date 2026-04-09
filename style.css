@@ -1,5 +1,4 @@
 :root {
-    /* Core Colors */
     --bg: #000000;
     --surface: #111111;
     --text: #eeeeee;
@@ -7,11 +6,9 @@
     --textbox: #1e293b;
     --accent: #f365ac;
     --accent-glow: rgba(243, 101, 172, 0.3);
-    
-    /* Typography */
-    --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -21,13 +18,13 @@
 body {
     background: var(--bg);
     color: var(--text);
-    font-family: var(--font-main);
+    font-family: 'Segoe UI', system-ui, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     cursor: default;
 }
 
-/* Utilities */
+/* Utility */
 .backdrop-blur-md {
     backdrop-filter: blur(12px);
 }
@@ -49,7 +46,7 @@ body {
     width: 50px;
     height: 50px;
     border: 5px solid #333;
-    border-top-color: white;
+    border-top: 5px solid white;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-bottom: 20px;
@@ -65,13 +62,14 @@ body {
     transition: opacity 0.5s ease;
 }
 
-/* Particles Background */
+/* Particles */
 #particles {
     position: fixed;
     inset: 0;
     z-index: 1;
     pointer-events: none;
     opacity: 0.6;
+    cursor: none;
 }
 
 /* Header */
@@ -99,7 +97,6 @@ header {
     font-size: 2rem;
     font-weight: 800;
     cursor: pointer;
-    letter-spacing: -1px;
 }
 
 .search-wrapper {
@@ -114,7 +111,6 @@ header {
     top: 50%;
     transform: translateY(-50%);
     color: var(--accent);
-    pointer-events: none;
 }
 
 #searchBar {
@@ -126,14 +122,8 @@ header {
     color: white;
     outline: none;
     font-size: 1.05rem;
-    transition: border-color 0.2s;
 }
 
-#searchBar:focus {
-    border-color: var(--accent);
-}
-
-/* Header Actions */
 .header-actions {
     display: flex;
     gap: 12px;
@@ -150,16 +140,15 @@ header {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
 .btn-icon:hover {
     background: #333;
     border-color: var(--accent);
-    transform: translateY(-2px);
 }
 
-/* Navigation Bar */
+/* Navigation */
 .nav-bar {
     background: rgba(10, 10, 10, 0.95);
     border-bottom: 1px solid var(--border);
@@ -179,7 +168,7 @@ header {
     font-weight: 600;
     cursor: pointer;
     border-radius: 8px;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
 .nav-link.active,
@@ -188,7 +177,7 @@ header {
     color: var(--accent);
 }
 
-/* Hero / Home Title */
+/* Home Title */
 .hometitle {
     text-align: center;
     font-size: clamp(2.8rem, 8vw, 5rem);
@@ -220,14 +209,14 @@ header {
 }
 
 .collapse-arrow {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s;
 }
 
 details[open] .collapse-arrow {
     transform: rotate(180deg);
 }
 
-/* Main Content Grids */
+/* Grid Layouts */
 .zone-container,
 .grid-layout {
     width: 100%;
@@ -256,7 +245,7 @@ details[open] .collapse-arrow {
 .zone-item:hover {
     transform: translateY(-8px) scale(1.03);
     border-color: var(--accent);
-    box-shadow: 0 15px 35px var(--accent-glow);
+    box-shadow: 0 15px 35px rgba(243, 101, 172, 0.2);
 }
 
 .zone-item img {
@@ -273,11 +262,11 @@ details[open] .collapse-arrow {
     color: white;
     font-size: 1rem;
     font-weight: 600;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
-    transition: background 0.2s;
 }
 
 .zone-item button:hover {
@@ -285,7 +274,7 @@ details[open] .collapse-arrow {
     color: #000;
 }
 
-/* Swiper / Carousel */
+/* Swiper */
 .swiper {
     width: 100%;
     max-width: 1400px;
@@ -298,7 +287,7 @@ details[open] .collapse-arrow {
     height: 380px;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 .swiper-slide img {
@@ -307,7 +296,7 @@ details[open] .collapse-arrow {
     object-fit: cover;
 }
 
-/* Zone Viewer Modal */
+/* Zone Viewer */
 #zoneViewer {
     position: fixed;
     inset: 0;
@@ -322,7 +311,6 @@ details[open] .collapse-arrow {
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid #333;
 }
 
@@ -334,12 +322,11 @@ details[open] .collapse-arrow {
     margin-left: 10px;
     border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s;
 }
 
-.zone-controls button:hover {
-    background: #333;
-    border-color: var(--accent);
+#zoneFrame {
+    flex: 1;
+    border: none;
 }
 
 /* Online Counter */
@@ -355,10 +342,9 @@ details[open] .collapse-arrow {
     color: white;
     font-size: 14px;
     z-index: 9999;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Responsive Grid */
+/* Responsive */
 @media (max-width: 1200px) {
     .zone-container,
     .grid-layout {
@@ -382,7 +368,7 @@ details[open] .collapse-arrow {
     }
 }
 
-/* Modal System */
+/* Modals */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -425,7 +411,6 @@ details[open] .collapse-arrow {
     color: #888;
     cursor: pointer;
     padding: 0 10px;
-    transition: color 0.2s;
 }
 
 .modal-close:hover {
@@ -466,7 +451,7 @@ details[open] .collapse-arrow {
     border-radius: 50px;
     position: relative;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: 0.3s;
 }
 
 .toggle-label input[type="checkbox"]:checked {
@@ -482,14 +467,14 @@ details[open] .collapse-arrow {
     height: 20px;
     background: white;
     border-radius: 50%;
-    transition: transform 0.3s ease;
+    transition: 0.3s;
 }
 
 .toggle-label input[type="checkbox"]:checked::before {
     transform: translateX(22px);
 }
 
-/* Modal Buttons */
+/* Buttons */
 .modal-btn {
     width: 100%;
     padding: 14px 20px;
