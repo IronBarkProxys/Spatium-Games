@@ -366,26 +366,26 @@ main {
     transform: scale(1.03);
 }
 
-/* ====================== ALL GAMES BUTTON (Fixed & Larger) ====================== */
+
 .all-games-btn {
     background: var(--accent);
     color: #000;
     border: none;
-    padding: 18px 48px;
-    border-radius: 14px;
-    font-size: 1.25rem;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.35s ease;
+    transition: all 0.3s ease;
     box-shadow: var(--shadow-md);
-    margin: 2.5rem auto;
+    margin: 2rem auto;
     display: block;
-    min-width: 280px;
+    min-width: 220px;
 }
 
 .all-games-btn:hover {
     background: var(--accent-light);
-    transform: translateY(-6px) scale(1.05);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
 }
 
