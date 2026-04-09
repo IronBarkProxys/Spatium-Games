@@ -1,6 +1,6 @@
 // ========================================================
-// SPATIUM - Original Enhanced UI JavaScript
-// With hearts/favorites restored
+// SPATIUM - Clean UI JavaScript
+// No favorites/hearts | Improved particle colors
 // ========================================================
 
 const canvas = document.getElementById('particles');
@@ -8,43 +8,37 @@ const ctx = canvas.getContext('2d');
 
 let particles = [];
 let allGames = [];
-let favorites = JSON.parse(localStorage.getItem('spatium_favorites') || '[]');
 let recentlyPlayed = JSON.parse(localStorage.getItem('spatium_recentlyPlayed') || '[]');
 let currentSortMode = 'name';
-let currentView = 'all';
+let currentParticleStyle = localStorage.getItem('spatium_particleStyle') || 'classic';
 
-// ====================== CANVAS & PARTICLES ======================
+// ====================== CANVAS SETUP ======================
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 
-class Particle {
+// ====================== PARTICLE STYLES (better colors) ======================
+class ClassicParticle {
     constructor() { this.reset(); }
-
     reset() {
         this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height - 100;
-        this.size = Math.random() * 3 + 1.5;
-        this.speedX = Math.random() * 0.7 + 0.3;
-        this.speedY = Math.random() * 0.9 + 0.5;
-        this.opacity = Math.random() * 0.4 + 0.25;
-        this.hueShift = Math.random() * 20 - 10;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.8 + 1.2;
+        this.speedX = Math.random() * 0.5 + 0.15;
+        this.speedY = Math.random() * 0.7 + 0.35;
+        this.opacity = Math.random() * 0.45 + 0.25;
     }
-
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.opacity = Math.max(0.1, this.opacity - 0.0005);
-        if (this.x > canvas.width + 100 || this.y > canvas.height + 100 || this.opacity <= 0.1) {
-            this.reset();
-        }
+        this.opacity -= 0.0007;
+        if (this.opacity <= 0.04 || this.y > canvas.height + 40) this.reset();
     }
-
     draw() {
         ctx.save();
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = `hsl(210, 30%, 95%)`;
+        ctx.fillStyle = '#e6e9ff';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -52,16 +46,85 @@ class Particle {
     }
 }
 
-function initParticles() {
-    particles = [];
-    for (let i = 0; i < 120; i++) {
-        particles.push(new Particle());
+class SparkParticle {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + 30;
+        this.size = Math.random() * 2.2 + 0.9;
+        this.speedX = (Math.random() - 0.5) * 3.2;
+        this.speedY = -(Math.random() * 5.5 + 4);
+        this.opacity = 0.95;
+        this.hue = 325; // electric pink/cyan range
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.speedY += 0.095;
+        this.opacity -= 0.022;
+        this.size *= 0.982;
+        if (this.opacity <= 0.08) this.reset();
+    }
+    draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = `hsl(325, 95%, 88%)`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#ff6ec7';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+class NebulaParticle {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 32 + 22;
+        this.speedX = (Math.random() - 0.5) * 0.35;
+        this.speedY = (Math.random() - 0.5) * 0.25;
+        this.opacity = Math.random() * 0.22 + 0.11;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.opacity = Math.max(0.09, this.opacity + Math.sin(Date.now() / 1800) * 0.004);
+        if (Math.abs(this.x) > canvas.width * 1.1) this.speedX *= -0.92;
+        if (Math.abs(this.y) > canvas.height * 1.1) this.speedY *= -0.92;
+    }
+    draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = '#d8c4ff';
+        ctx.shadowBlur = 25;
+        ctx.shadowColor = '#c084fc';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+// ====================== PARTICLE MANAGER ======================
+let currentParticles = [];
+
+function createParticles(style) {
+    currentParticles = [];
+    const count = style === 'nebula' ? 28 : (style === 'spark' ? 65 : 135);
+
+    for (let i = 0; i < count; i++) {
+        if (style === 'spark') currentParticles.push(new SparkParticle());
+        else if (style === 'nebula') currentParticles.push(new NebulaParticle());
+        else currentParticles.push(new ClassicParticle());
     }
 }
 
 function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
+    currentParticles.forEach(p => {
         p.update();
         p.draw();
     });
@@ -101,18 +164,17 @@ function setTheme(themeName) {
     });
 
     saveSettings();
-    console.log(`🎨 Theme applied: ${themeName}`);
 }
 
-// ====================== LOCALSTORAGE & SETTINGS ======================
+// ====================== SETTINGS ======================
 function saveSettings() {
     const activeThemeEl = document.querySelector('.theme-option.active');
     const themeName = activeThemeEl ? activeThemeEl.getAttribute('data-theme') : 'space';
-    const particlesEnabled = document.getElementById('particlesToggle').checked;
+    const particlesEnabled = document.getElementById('particlesToggle')?.checked ?? true;
 
     localStorage.setItem('spatium_theme', themeName);
     localStorage.setItem('spatium_particles', particlesEnabled);
-    localStorage.setItem('spatium_favorites', JSON.stringify(favorites));
+    localStorage.setItem('spatium_particleStyle', currentParticleStyle);
     localStorage.setItem('spatium_recentlyPlayed', JSON.stringify(recentlyPlayed));
 }
 
@@ -121,17 +183,33 @@ function loadSavedSettings() {
     setTheme(savedTheme);
 
     const particlesEnabled = localStorage.getItem('spatium_particles') !== 'false';
+    const savedStyle = localStorage.getItem('spatium_particleStyle') || 'classic';
+
+    currentParticleStyle = savedStyle;
+    const styleSelect = document.getElementById('particleStyle');
+    if (styleSelect) styleSelect.value = savedStyle;
+
     const toggle = document.getElementById('particlesToggle');
     if (toggle) {
         toggle.checked = particlesEnabled;
         toggleParticles(particlesEnabled);
     }
 
-    favorites = JSON.parse(localStorage.getItem('spatium_favorites') || '[]');
     recentlyPlayed = JSON.parse(localStorage.getItem('spatium_recentlyPlayed') || '[]');
 }
 
-// ====================== GAME LOADING ======================
+function toggleParticles(enabled) {
+    const canvasEl = document.getElementById('particles');
+    if (canvasEl) canvasEl.style.opacity = enabled ? '0.65' : '0';
+}
+
+function changeParticleStyle(style) {
+    currentParticleStyle = style;
+    createParticles(style);
+    saveSettings();
+}
+
+// ====================== GAME LOADING & DISPLAY ======================
 async function loadGames() {
     const loadingText = document.getElementById('loadingText');
     const loadingScreen = document.getElementById('loadingScreen');
@@ -142,11 +220,9 @@ async function loadGames() {
         if (!res.ok) throw new Error("games.json not found");
 
         const data = await res.json();
-        allGames = (data.games || data).sort((a, b) =>
+        allGames = (data.games || data).sort((a, b) => 
             a.name.toLowerCase().localeCompare(b.name.toLowerCase())
         );
-
-        if (allGames.length === 0) throw new Error("No games found");
 
         console.log(`✅ Loaded ${allGames.length} games`);
 
@@ -161,15 +237,12 @@ async function loadGames() {
     } catch (err) {
         console.error("Load error:", err);
         loadingText.textContent = "Failed to load games. Check console (F12)";
-        loadingText.style.color = "#f365ac";
     }
 }
 
-// ====================== DISPLAY FUNCTIONS ======================
 function displayGames(games, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
-
     container.innerHTML = '';
 
     if (games.length === 0) {
@@ -178,7 +251,6 @@ function displayGames(games, containerId) {
     }
 
     games.forEach(game => {
-        const isFavorite = favorites.includes(game.folder || game.name);
         const div = document.createElement('div');
         div.className = 'zone-item';
         div.innerHTML = `
@@ -187,46 +259,18 @@ function displayGames(games, containerId) {
                  loading="lazy"
                  onerror="this.src='https://via.placeholder.com/300x400/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
             <button>${game.name}</button>
-            <div class="favorite-heart ${isFavorite ? 'active' : ''}" data-game="${game.folder || game.name}">
-                ❤️
-            </div>
         `;
-
-        div.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('favorite-heart')) {
-                openGame(game);
-            }
-        });
-
-        const heart = div.querySelector('.favorite-heart');
-        heart.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleFavorite(game, heart);
-        });
-
+        div.addEventListener('click', () => openGame(game));
         container.appendChild(div);
     });
 }
 
-function toggleFavorite(game, heartElement) {
-    const gameId = game.folder || game.name;
-    if (favorites.includes(gameId)) {
-        favorites = favorites.filter(id => id !== gameId);
-        heartElement.classList.remove('active');
-    } else {
-        favorites.push(gameId);
-        heartElement.classList.add('active');
-    }
-    saveSettings();
-}
-
-// Trending display
 function displayTrending() {
     const container = document.getElementById('trendingWrapper');
     if (!container) return;
-
     container.innerHTML = '';
-    let trendingGames = allGames.filter(game => game.trending === true);
+
+    let trendingGames = allGames.filter(g => g.trending === true);
     if (trendingGames.length === 0) trendingGames = allGames.slice(0, 8);
 
     trendingGames.forEach(game => {
@@ -234,7 +278,8 @@ function displayTrending() {
         slide.className = 'swiper-slide';
         slide.style.cursor = 'pointer';
         slide.innerHTML = `
-            <img src="${game.thumbnail}" alt="${game.name}" onerror="this.src='https://via.placeholder.com/280x380/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
+            <img src="${game.thumbnail}" alt="${game.name}" 
+                 onerror="this.src='https://via.placeholder.com/280x380/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
             <p>${game.name}</p>
         `;
         slide.addEventListener('click', () => openGame(game));
@@ -242,7 +287,7 @@ function displayTrending() {
     });
 }
 
-// ====================== SEARCH WITH DEBOUNCE ======================
+// ====================== SEARCH ======================
 let searchTimeout;
 function filterGames() {
     clearTimeout(searchTimeout);
@@ -252,7 +297,7 @@ function filterGames() {
             displayGames(allGames, 'allGamesGrid');
             return;
         }
-        const filtered = allGames.filter(game =>
+        const filtered = allGames.filter(game => 
             game.name.toLowerCase().includes(query)
         );
         displayGames(filtered, 'allGamesGrid');
@@ -301,19 +346,11 @@ function closeSettings() {
     saveSettings();
 }
 
-function toggleParticles(enabled) {
-    const canvasEl = document.getElementById('particles');
-    canvasEl.style.opacity = enabled ? '0.6' : '0';
-    saveSettings();
-}
-
 function openInAboutBlank() {
     try {
         const newTab = window.open('about:blank', '_blank');
         if (newTab) {
-            newTab.document.write(`
-                <script>window.location.href = "${window.location.href}";<\/script>
-            `);
+            newTab.document.write(`<script>window.location.href = "${window.location.href}";<\/script>`);
             closeSettings();
         } else {
             alert("Popup blocked! Please allow popups.");
@@ -345,23 +382,18 @@ function uploadFavicon() {
     reader.readAsDataURL(file);
 }
 
-// ====================== KEYBOARD SHORTCUTS ======================
+// ====================== KEYBOARD & UTILITIES ======================
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
         switch (e.key.toLowerCase()) {
-            case 'escape':
-                closeZone();
-                break;
+            case 'escape': closeZone(); break;
             case 'f':
                 if (document.getElementById('zoneViewer').style.display === 'flex') fullscreenZone();
                 break;
-            case 's':
-                openSettings();
-                break;
-            case '/':
-            case 'k':
+            case 's': openSettings(); break;
+            case '/': case 'k':
                 if (e.ctrlKey || e.metaKey) {
                     e.preventDefault();
                     document.getElementById('searchBar').focus();
@@ -394,23 +426,19 @@ function addRandomButton() {
     headerActions.appendChild(randomBtn);
 }
 
-// ====================== SORT ======================
 function sortZones() {
     const select = document.getElementById('sortOptions');
     if (!select) return;
-
     currentSortMode = select.value;
     let sorted = [...allGames];
-    if (currentSortMode === 'id') {
-        sorted.reverse();
-    }
+    if (currentSortMode === 'id') sorted.reverse();
     displayGames(sorted, 'allGamesGrid');
 }
 
 // ====================== INIT ======================
 window.onload = () => {
     resizeCanvas();
-    initParticles();
+    createParticles(currentParticleStyle);
     animateParticles();
 
     loadSavedSettings();
@@ -435,5 +463,5 @@ window.onload = () => {
         });
     }
 
-    console.log("🚀 Spatium UI fully loaded with hearts & favorites");
+    console.log("🚀 Spatium loaded with improved particles");
 };
