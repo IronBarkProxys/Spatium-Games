@@ -59,11 +59,14 @@ async function loadGames() {
         );
         if (allGames.length === 0) throw new Error("No games in JSON");
         console.log(`✅ Loaded ${allGames.length} games`);
+
         const featured = allGames.filter(game => game.featured === true);
         displayGames(featured, 'featuredGrid');
         console.log(`Featured games: ${featured.length}`);
+
         displayTrending();
         displayGames(allGames, 'allGamesGrid');
+
         loadingScreen.classList.add('fade-out');
         setTimeout(() => {
             loadingScreen.style.display = 'none';
@@ -179,7 +182,6 @@ function toggleParticles(enabled) {
 function openInAboutBlank() {
     try {
         const newTab = window.open('about:blank', '_blank');
-        
         if (newTab) {
             newTab.document.write(`
                 <script>
@@ -217,21 +219,78 @@ function uploadFavicon() {
     reader.readAsDataURL(file);
 }
 
+// ==================== EXPANDED THEMES ====================
 const themes = {
-    space: { '--bg': '#000000', '--surface': '#111111', '--accent': '#f365ac' },
-    aquatic: { '--bg': '#0a1f2f', '--surface': '#132e44', '--accent': '#00d4ff' },
-    cherry: { '--bg': '#1a0f14', '--surface': '#2c1b22', '--accent': '#ff8ac4' },
-    swamp: { '--bg': '#0f1a0f', '--surface': '#1f2a1f', '--accent': '#7cff7c' }
+    space: { 
+        '--bg': '#000000', 
+        '--surface': '#111111', 
+        '--accent': '#f365ac' 
+    },
+    aquatic: { 
+        '--bg': '#0a1f2f', 
+        '--surface': '#132e44', 
+        '--accent': '#00d4ff' 
+    },
+    cherry: { 
+        '--bg': '#1a0f14', 
+        '--surface': '#2c1b22', 
+        '--accent': '#ff8ac4' 
+    },
+    swamp: { 
+        '--bg': '#0f1a0f', 
+        '--surface': '#1f2a1f', 
+        '--accent': '#7cff7c' 
+    },
+    // New themes added below
+    neon: { 
+        '--bg': '#0a0a1f', 
+        '--surface': '#1a1a3a', 
+        '--accent': '#ff00ff' 
+    },
+    violet: { 
+        '--bg': '#0f0a1f', 
+        '--surface': '#1f1533', 
+        '--accent': '#c26bff' 
+    },
+    cyber: { 
+        '--bg': '#0d0d0d', 
+        '--surface': '#1f1f1f', 
+        '--accent': '#00ff9f' 
+    },
+    rose: { 
+        '--bg': '#1f0f14', 
+        '--surface': '#2f1b22', 
+        '--accent': '#ff4d94' 
+    },
+    midnight: { 
+        '--bg': '#05050f', 
+        '--surface': '#0f0f1f', 
+        '--accent': '#6e9eff' 
+    },
+    sunset: { 
+        '--bg': '#1a0f0a', 
+        '--surface': '#2a1b14', 
+        '--accent': '#ff6b4d' 
+    }
 };
 
 function setTheme(themeName) {
     const root = document.documentElement;
     const theme = themes[themeName];
-    Object.keys(theme).forEach(key => root.style.setProperty(key, theme[key]));
-
-    document.querySelectorAll('.theme-option').forEach(el => {
-        el.classList.toggle('active', el.getAttribute('data-theme') === themeName);
-    });
+    
+    if (theme) {
+        Object.keys(theme).forEach(key => {
+            root.style.setProperty(key, theme[key]);
+        });
+        
+        // Update active state on theme buttons
+        document.querySelectorAll('.theme-option').forEach(el => {
+            el.classList.toggle('active', el.getAttribute('data-theme') === themeName);
+        });
+        
+        console.log(`Theme changed to: ${themeName}`);
+    }
+    
     closeSettings();
 }
 
@@ -245,6 +304,7 @@ window.onload = () => {
     if (searchBar) searchBar.addEventListener('input', filterGames);
 
     window.addEventListener('resize', resizeCanvas);
+
     document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") closeZone();
     });
