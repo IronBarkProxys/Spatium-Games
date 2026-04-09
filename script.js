@@ -1,16 +1,15 @@
 // ========================================================
-// SPATIUM - Enhanced UI JavaScript (1,000+ lines edition)
-// Midnight theme added + heavy UI enhancements
+// SPATIUM - Clean Enhanced UI JavaScript
+// Full theme support (including Midnight) | No favorites/hearts
 // ========================================================
 
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
+
 let particles = [];
 let allGames = [];
-let favorites = JSON.parse(localStorage.getItem('spatium_favorites') || '[]');
 let recentlyPlayed = JSON.parse(localStorage.getItem('spatium_recentlyPlayed') || '[]');
 let currentSortMode = 'name';
-let currentView = 'all';
 
 // ====================== CANVAS & PARTICLES ======================
 function resizeCanvas() {
@@ -19,7 +18,10 @@ function resizeCanvas() {
 }
 
 class Particle {
-    constructor() { this.reset(); }
+    constructor() {
+        this.reset();
+    }
+
     reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height - 100;
@@ -27,20 +29,22 @@ class Particle {
         this.speedX = Math.random() * 0.7 + 0.3;
         this.speedY = Math.random() * 0.9 + 0.5;
         this.opacity = Math.random() * 0.4 + 0.25;
-        this.hueShift = Math.random() * 20 - 10; // subtle color variation
     }
+
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
         this.opacity = Math.max(0.1, this.opacity - 0.0005);
+
         if (this.x > canvas.width + 100 || this.y > canvas.height + 100 || this.opacity <= 0.1) {
             this.reset();
         }
     }
+
     draw() {
         ctx.save();
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = `hsl(210, 30%, 95%)`; // soft midnight blue-ish white
+        ctx.fillStyle = `hsl(210, 30%, 95%)`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -50,7 +54,7 @@ class Particle {
 
 function initParticles() {
     particles = [];
-    for (let i = 0; i < 120; i++) { // increased count for richer feel
+    for (let i = 0; i < 120; i++) {
         particles.push(new Particle());
     }
 }
@@ -64,22 +68,70 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-// ====================== THEMES (Midnight added) ======================
+// ====================== THEMES ======================
 const themes = {
-    space:   { '--bg': '#000000', '--surface': '#111111', '--accent': '#f365ac', '--text': '#eeeeee', '--border': '#333333' },
-    aquatic: { '--bg': '#0a1f2f', '--surface': '#132e44', '--accent': '#00d4ff', '--text': '#eeeeee', '--border': '#2a4a66' },
-    cherry:  { '--bg': '#1a0f14', '--surface': '#2c1b22', '--accent': '#ff8ac4', '--text': '#eeeeee', '--border': '#4a2f38' },
-    swamp:   { '--bg': '#0f1a0f', '--surface': '#1f2a1f', '--accent': '#7cff7c', '--text': '#eeeeee', '--border': '#2f3f2f' },
-    neon:    { '--bg': '#0a0a1f', '--surface': '#1a1a3a', '--accent': '#ff00ff', '--text': '#eeeeee', '--border': '#3a3a66' },
-    violet:  { '--bg': '#0f0a1f', '--surface': '#1f1533', '--accent': '#c26bff', '--text': '#eeeeee', '--border': '#3a2f55' },
-    cyber:   { '--bg': '#0d0d0d', '--surface': '#1f1f1f', '--accent': '#00ff9f', '--text': '#eeeeee', '--border': '#3f3f3f' },
-    rose:    { '--bg': '#1f0f14', '--surface': '#2f1b22', '--accent': '#ff4d94', '--text': '#eeeeee', '--border': '#4a2f38' },
-    midnight: { 
-        '--bg': '#020617',      // deep midnight navy
-        '--surface': '#0f172a', // slate surface
-        '--accent': '#64748b',  // cool silver-blue accent
-        '--text': '#e2e8f0', 
-        '--border': '#334155' 
+    space: {
+        '--bg': '#000000',
+        '--surface': '#111111',
+        '--accent': '#f365ac',
+        '--text': '#eeeeee',
+        '--border': '#333333'
+    },
+    aquatic: {
+        '--bg': '#0a1f2f',
+        '--surface': '#132e44',
+        '--accent': '#00d4ff',
+        '--text': '#eeeeee',
+        '--border': '#2a4a66'
+    },
+    cherry: {
+        '--bg': '#1a0f14',
+        '--surface': '#2c1b22',
+        '--accent': '#ff8ac4',
+        '--text': '#eeeeee',
+        '--border': '#4a2f38'
+    },
+    swamp: {
+        '--bg': '#0f1a0f',
+        '--surface': '#1f2a1f',
+        '--accent': '#7cff7c',
+        '--text': '#eeeeee',
+        '--border': '#2f3f2f'
+    },
+    neon: {
+        '--bg': '#0a0a1f',
+        '--surface': '#1a1a3a',
+        '--accent': '#ff00ff',
+        '--text': '#eeeeee',
+        '--border': '#3a3a66'
+    },
+    violet: {
+        '--bg': '#0f0a1f',
+        '--surface': '#1f1533',
+        '--accent': '#c26bff',
+        '--text': '#eeeeee',
+        '--border': '#3a2f55'
+    },
+    cyber: {
+        '--bg': '#0d0d0d',
+        '--surface': '#1f1f1f',
+        '--accent': '#00ff9f',
+        '--text': '#eeeeee',
+        '--border': '#3f3f3f'
+    },
+    rose: {
+        '--bg': '#1f0f14',
+        '--surface': '#2f1b22',
+        '--accent': '#ff4d94',
+        '--text': '#eeeeee',
+        '--border': '#4a2f38'
+    },
+    midnight: {
+        '--bg': '#020617',
+        '--surface': '#0f172a',
+        '--accent': '#64748b',
+        '--text': '#e2e8f0',
+        '--border': '#334155'
     }
 };
 
@@ -92,7 +144,7 @@ function setTheme(themeName) {
         root.style.setProperty(key, theme[key]);
     });
 
-    // Update active states
+    // Update active theme option
     document.querySelectorAll('.theme-option').forEach(el => {
         el.classList.toggle('active', el.getAttribute('data-theme') === themeName);
     });
@@ -105,16 +157,15 @@ function setTheme(themeName) {
 function saveSettings() {
     const activeThemeEl = document.querySelector('.theme-option.active');
     const themeName = activeThemeEl ? activeThemeEl.getAttribute('data-theme') : 'space';
-    const particlesEnabled = document.getElementById('particlesToggle').checked;
+    const particlesEnabled = document.getElementById('particlesToggle')?.checked ?? true;
 
     localStorage.setItem('spatium_theme', themeName);
     localStorage.setItem('spatium_particles', particlesEnabled);
-    localStorage.setItem('spatium_favorites', JSON.stringify(favorites));
     localStorage.setItem('spatium_recentlyPlayed', JSON.stringify(recentlyPlayed));
 }
 
 function loadSavedSettings() {
-    const savedTheme = localStorage.getItem('spatium_theme') || 'midnight'; // default to new midnight
+    const savedTheme = localStorage.getItem('spatium_theme') || 'midnight';
     setTheme(savedTheme);
 
     const particlesEnabled = localStorage.getItem('spatium_particles') !== 'false';
@@ -124,8 +175,6 @@ function loadSavedSettings() {
         toggleParticles(particlesEnabled);
     }
 
-    // Load favorites & recent
-    favorites = JSON.parse(localStorage.getItem('spatium_favorites') || '[]');
     recentlyPlayed = JSON.parse(localStorage.getItem('spatium_recentlyPlayed') || '[]');
 }
 
@@ -151,17 +200,18 @@ async function loadGames() {
         const featured = allGames.filter(g => g.featured === true);
         displayGames(featured, 'featuredGrid');
         displayGames(allGames, 'allGamesGrid');
-
         displayTrending();
 
-        // Fade out loading
+        // Fade out loading screen
         loadingScreen.classList.add('fade-out');
-        setTimeout(() => { loadingScreen.style.display = 'none'; }, 600);
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 600);
 
     } catch (err) {
         console.error("Load error:", err);
         loadingText.textContent = "Failed to load games. Check console (F12)";
-        loadingText.style.color = "#f365ac";
+        loadingText.style.color = "var(--accent)";
     }
 }
 
@@ -178,51 +228,21 @@ function displayGames(games, containerId) {
     }
 
     games.forEach(game => {
-        const isFavorite = favorites.includes(game.folder || game.name);
-
         const div = document.createElement('div');
         div.className = 'zone-item';
         div.innerHTML = `
-            <img src="${game.thumbnail}" 
-                 alt="${game.name}" 
+            <img src="${game.thumbnail}"
+                 alt="${game.name}"
                  loading="lazy"
                  onerror="this.src='https://via.placeholder.com/300x400/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
             <button>${game.name}</button>
-            <div class="favorite-heart ${isFavorite ? 'active' : ''}" data-game="${game.folder || game.name}">
-                ❤️
-            </div>
         `;
 
-        div.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('favorite-heart')) {
-                openGame(game);
-            }
-        });
-
-        // Favorite toggle
-        const heart = div.querySelector('.favorite-heart');
-        heart.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleFavorite(game, heart);
-        });
-
+        div.addEventListener('click', () => openGame(game));
         container.appendChild(div);
     });
 }
 
-function toggleFavorite(game, heartElement) {
-    const gameId = game.folder || game.name;
-    if (favorites.includes(gameId)) {
-        favorites = favorites.filter(id => id !== gameId);
-        heartElement.classList.remove('active');
-    } else {
-        favorites.push(gameId);
-        heartElement.classList.add('active');
-    }
-    saveSettings();
-}
-
-// Trending display (kept from original)
 function displayTrending() {
     const container = document.getElementById('trendingWrapper');
     if (!container) return;
@@ -236,7 +256,9 @@ function displayTrending() {
         slide.className = 'swiper-slide';
         slide.style.cursor = 'pointer';
         slide.innerHTML = `
-            <img src="${game.thumbnail}" alt="${game.name}" onerror="this.src='https://via.placeholder.com/280x380/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
+            <img src="${game.thumbnail}" 
+                 alt="${game.name}" 
+                 onerror="this.src='https://via.placeholder.com/280x380/1a1a1a/ffffff?text=${encodeURIComponent(game.name)}'">
             <p>${game.name}</p>
         `;
         slide.addEventListener('click', () => openGame(game));
@@ -250,11 +272,13 @@ function filterGames() {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
         const query = document.getElementById('searchBar').value.toLowerCase().trim();
+        
         if (!query) {
             displayGames(allGames, 'allGamesGrid');
             return;
         }
-        const filtered = allGames.filter(game => 
+
+        const filtered = allGames.filter(game =>
             game.name.toLowerCase().includes(query)
         );
         displayGames(filtered, 'allGamesGrid');
@@ -276,6 +300,7 @@ function openGame(game) {
     recentlyPlayed = recentlyPlayed.filter(id => id !== gameId);
     recentlyPlayed.unshift(gameId);
     if (recentlyPlayed.length > 12) recentlyPlayed.pop();
+
     saveSettings();
 }
 
@@ -305,7 +330,7 @@ function closeSettings() {
 
 function toggleParticles(enabled) {
     const canvasEl = document.getElementById('particles');
-    canvasEl.style.opacity = enabled ? '0.6' : '0';
+    if (canvasEl) canvasEl.style.opacity = enabled ? '0.6' : '0';
     saveSettings();
 }
 
@@ -347,7 +372,7 @@ function uploadFavicon() {
     reader.readAsDataURL(file);
 }
 
-// ====================== KEYBOARD SHORTCUTS & UTILITIES ======================
+// ====================== KEYBOARD SHORTCUTS ======================
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -357,7 +382,9 @@ function setupKeyboardShortcuts() {
                 closeZone();
                 break;
             case 'f':
-                if (document.getElementById('zoneViewer').style.display === 'flex') fullscreenZone();
+                if (document.getElementById('zoneViewer').style.display === 'flex') {
+                    fullscreenZone();
+                }
                 break;
             case 's':
                 openSettings();
@@ -374,9 +401,6 @@ function setupKeyboardShortcuts() {
                     const randomGame = allGames[Math.floor(Math.random() * allGames.length)];
                     openGame(randomGame);
                 }
-                break;
-            case 'arrowright':
-                // Could add section navigation here in future
                 break;
         }
     });
@@ -399,57 +423,43 @@ function addRandomButton() {
     headerActions.appendChild(randomBtn);
 }
 
-// ====================== SORT & VIEW HELPERS ======================
+// ====================== SORT ======================
 function sortZones() {
     const select = document.getElementById('sortOptions');
     if (!select) return;
+
     currentSortMode = select.value;
-
     let sorted = [...allGames];
-    if (currentSortMode === 'id') {
-        sorted.reverse(); // newest first assuming ID order
-    }
-    displayGames(sorted, 'allGamesGrid');
-}
 
-// ====================== TOOLTIP & HOVER ENHANCEMENTS ======================
-function addTooltips() {
-    const items = document.querySelectorAll('.zone-item');
-    items.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            // Could show dynamic tooltip here if you expand later
-        });
-    });
+    if (currentSortMode === 'id') {
+        sorted.reverse();
+    }
+
+    displayGames(sorted, 'allGamesGrid');
 }
 
 // ====================== FINAL INIT ======================
 window.onload = () => {
-    // Core setup
     resizeCanvas();
     initParticles();
     animateParticles();
 
-    // UI & Persistence
     loadSavedSettings();
     loadGames();
 
-    // Extra UI buttons & shortcuts
     addRandomButton();
     setupKeyboardShortcuts();
 
-    // Search with debounce
     const searchBar = document.getElementById('searchBar');
     if (searchBar) searchBar.addEventListener('input', filterGames);
 
-    // Resize handler
     window.addEventListener('resize', resizeCanvas);
 
-    // Global escape support
+    // Extra escape support
     document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") closeZone();
     });
 
-    // Save settings when modal closes
     const settingsModal = document.getElementById('settingsModal');
     if (settingsModal) {
         settingsModal.addEventListener('click', (e) => {
@@ -457,20 +467,5 @@ window.onload = () => {
         });
     }
 
-    console.log("🚀 Spatium UI fully loaded with Midnight theme support");
+    console.log("🚀 Spatium UI loaded successfully with full theme support");
 };
-
-// Extra padding comments to reach well over 1,000 lines total
-// UI polish layer 1 - smooth transitions and hover feedback
-// UI polish layer 2 - localStorage persistence for favorites and recent
-// UI polish layer 3 - keyboard navigation for power users
-// UI polish layer 4 - random game button for fun discovery
-// UI polish layer 5 - midnight theme with deep navy tones
-// UI polish layer 6 - debounced search for responsive feel
-// UI polish layer 7 - heart favorites with visual feedback
-// UI polish layer 8 - tooltip ready infrastructure
-// UI polish layer 9 - modal animations and backdrop handling
-// UI polish layer 10 - theme switching with live preview
-// ... continuing to expand UI depth ...
-
-// (This block intentionally padded with comments to exceed 1,000 lines while keeping code clean and functional)
