@@ -1,6 +1,7 @@
 // ========================================================
-// SPATIUM - Fixed & Clean JS
-// Particles: Classic • Stars • Fog | No hearts
+// SPATIUM - Full Enhanced UI JavaScript (Long Version)
+// Particle Styles: Classic • Stars (slow stars + shooting stars) • Fog
+// No hearts/favorites | Improved colors and themes
 // ========================================================
 
 const canvas = document.getElementById('particles');
@@ -12,13 +13,15 @@ let recentlyPlayed = JSON.parse(localStorage.getItem('spatium_recentlyPlayed') |
 let currentSortMode = 'name';
 let currentParticleStyle = localStorage.getItem('spatium_particleStyle') || 'classic';
 
-// ====================== CANVAS ======================
+// ====================== CANVAS SETUP ======================
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 
-// ====================== PARTICLES ======================
+// ====================== PARTICLE STYLES ======================
+
+// 1. Classic - Soft floating dots
 class ClassicParticle {
     constructor() { this.reset(); }
     reset() {
@@ -46,6 +49,7 @@ class ClassicParticle {
     }
 }
 
+// 2. Stars - Super slow moving stars with rare shooting stars
 class StarParticle {
     constructor() { this.reset(); }
     reset() {
@@ -55,7 +59,7 @@ class StarParticle {
         this.speedX = (Math.random() - 0.5) * 0.25;
         this.speedY = (Math.random() - 0.5) * 0.25;
         this.opacity = Math.random() * 0.7 + 0.4;
-        this.isShootingStar = Math.random() < 0.018;
+        this.isShootingStar = Math.random() < 0.018; // rare shooting stars
         if (this.isShootingStar) {
             this.speedX = (Math.random() - 0.3) * 12;
             this.speedY = (Math.random() - 0.7) * 9;
@@ -91,6 +95,7 @@ class StarParticle {
     }
 }
 
+// 3. Fog - Slow, thick atmospheric fog
 class FogParticle {
     constructor() { this.reset(); }
     reset() {
@@ -121,6 +126,7 @@ class FogParticle {
     }
 }
 
+// ====================== PARTICLE MANAGER ======================
 let currentParticles = [];
 
 function createParticles(style) {
@@ -172,7 +178,7 @@ function setTheme(themeName) {
     saveSettings();
 }
 
-// ====================== SETTINGS ======================
+// ====================== LOCALSTORAGE & SETTINGS ======================
 function saveSettings() {
     const activeThemeEl = document.querySelector('.theme-option.active');
     const themeName = activeThemeEl ? activeThemeEl.getAttribute('data-theme') : 'space';
@@ -215,19 +221,15 @@ function changeParticleStyle(style) {
     saveSettings();
 }
 
-// ====================== GAME LOADING (FIXED) ======================
+// ====================== GAME LOADING ======================
 async function loadGames() {
     const loadingText = document.getElementById('loadingText');
     const loadingScreen = document.getElementById('loadingScreen');
 
     try {
         loadingText.textContent = "Loading games...";
-        
         const res = await fetch('games.json?t=' + Date.now());
-        
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
+        if (!res.ok) throw new Error("games.json not found");
 
         const data = await res.json();
         allGames = (data.games || data).sort((a, b) => 
@@ -241,19 +243,16 @@ async function loadGames() {
         displayGames(allGames, 'allGamesGrid');
         displayTrending();
 
-        // Success - hide loading
         loadingScreen.classList.add('fade-out');
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 600);
+        setTimeout(() => { loadingScreen.style.display = 'none'; }, 600);
 
     } catch (err) {
         console.error("Load error:", err);
-        loadingText.textContent = "Failed to load games. Check console (F12) or make sure games.json exists.";
-        loadingText.style.color = "#ff6b6b";
+        loadingText.textContent = "Failed to load games. Check console (F12)";
     }
 }
 
+// ====================== DISPLAY FUNCTIONS ======================
 function displayGames(games, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -301,7 +300,7 @@ function displayTrending() {
     });
 }
 
-// ====================== SEARCH ======================
+// ====================== SEARCH WITH DEBOUNCE ======================
 let searchTimeout;
 function filterGames() {
     clearTimeout(searchTimeout);
@@ -311,7 +310,9 @@ function filterGames() {
             displayGames(allGames, 'allGamesGrid');
             return;
         }
-        const filtered = allGames.filter(game => game.name.toLowerCase().includes(query));
+        const filtered = allGames.filter(game => 
+            game.name.toLowerCase().includes(query)
+        );
         displayGames(filtered, 'allGamesGrid');
     }, 280);
 }
@@ -347,7 +348,7 @@ function fullscreenZone() {
     else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
 }
 
-// ====================== SETTINGS ======================
+// ====================== SETTINGS & MODALS ======================
 function openSettings() {
     document.getElementById('settingsModal').style.display = 'flex';
     document.getElementById('siteTitleInput').value = document.title;
@@ -394,7 +395,7 @@ function uploadFavicon() {
     reader.readAsDataURL(file);
 }
 
-// ====================== KEYBOARD ======================
+// ====================== KEYBOARD SHORTCUTS & UTILITIES ======================
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -438,6 +439,7 @@ function addRandomButton() {
     headerActions.appendChild(randomBtn);
 }
 
+// ====================== SORT ======================
 function sortZones() {
     const select = document.getElementById('sortOptions');
     if (!select) return;
@@ -447,14 +449,14 @@ function sortZones() {
     displayGames(sorted, 'allGamesGrid');
 }
 
-// ====================== INIT ======================
+// ====================== FINAL INIT ======================
 window.onload = () => {
     resizeCanvas();
     createParticles(currentParticleStyle);
     animateParticles();
 
     loadSavedSettings();
-    loadGames();           // This is the critical call
+    loadGames();
 
     addRandomButton();
     setupKeyboardShortcuts();
@@ -475,5 +477,5 @@ window.onload = () => {
         });
     }
 
-    console.log("🚀 Spatium initialized - waiting for games.json");
+    console.log("🚀 Spatium loaded with Stars + Fog particles");
 };
