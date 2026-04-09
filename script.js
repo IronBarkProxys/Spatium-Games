@@ -1,6 +1,7 @@
 // ========================================================
-// SPATIUM - Clean & Enhanced UI JavaScript
-// Improved themes + better colors | No hearts/favorites
+// SPATIUM - Full Enhanced UI JavaScript (Long Version)
+// Particle Styles: Classic • Stars (slow stars + shooting stars) • Fog
+// No hearts/favorites | Improved colors and themes
 // ========================================================
 
 const canvas = document.getElementById('particles');
@@ -19,6 +20,8 @@ function resizeCanvas() {
 }
 
 // ====================== PARTICLE STYLES ======================
+
+// 1. Classic - Soft floating dots
 class ClassicParticle {
     constructor() { this.reset(); }
     reset() {
@@ -46,31 +49,45 @@ class ClassicParticle {
     }
 }
 
-class SparkParticle {
+// 2. Stars - Super slow moving stars with rare shooting stars
+class StarParticle {
     constructor() { this.reset(); }
     reset() {
         this.x = Math.random() * canvas.width;
-        this.y = canvas.height + 30;
-        this.size = Math.random() * 2.2 + 0.9;
-        this.speedX = (Math.random() - 0.5) * 3.5;
-        this.speedY = -(Math.random() * 6 + 4.5);
-        this.opacity = 0.95;
-        this.hue = 330;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.8;
+        this.speedX = (Math.random() - 0.5) * 0.25;
+        this.speedY = (Math.random() - 0.5) * 0.25;
+        this.opacity = Math.random() * 0.7 + 0.4;
+        this.isShootingStar = Math.random() < 0.018; // rare shooting stars
+        if (this.isShootingStar) {
+            this.speedX = (Math.random() - 0.3) * 12;
+            this.speedY = (Math.random() - 0.7) * 9;
+            this.size = Math.random() * 3.5 + 2;
+            this.opacity = 1;
+        }
     }
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.speedY += 0.1;
-        this.opacity -= 0.023;
-        this.size *= 0.98;
-        if (this.opacity <= 0.08) this.reset();
+        if (this.isShootingStar) {
+            this.opacity -= 0.038;
+            this.size *= 0.96;
+        } else {
+            this.opacity = Math.max(0.35, this.opacity + Math.sin(Date.now() / 3200) * 0.025);
+        }
+        if (this.opacity <= 0.08 || this.x < -60 || this.x > canvas.width + 60) this.reset();
     }
     draw() {
         ctx.save();
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = `hsl(330, 100%, 92%)`;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = '#ff6ec7';
+        if (this.isShootingStar) {
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowBlur = 18;
+            ctx.shadowColor = '#c4d0ff';
+        } else {
+            ctx.fillStyle = '#e0e6ff';
+        }
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -78,29 +95,30 @@ class SparkParticle {
     }
 }
 
-class NebulaParticle {
+// 3. Fog - Slow, thick atmospheric fog
+class FogParticle {
     constructor() { this.reset(); }
     reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 35 + 22;
-        this.speedX = (Math.random() - 0.5) * 0.38;
-        this.speedY = (Math.random() - 0.5) * 0.26;
-        this.opacity = Math.random() * 0.23 + 0.12;
+        this.size = Math.random() * 48 + 28;
+        this.speedX = (Math.random() - 0.5) * 0.28;
+        this.speedY = (Math.random() - 0.5) * 0.22;
+        this.opacity = Math.random() * 0.19 + 0.09;
     }
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.opacity = Math.max(0.1, this.opacity + Math.sin(Date.now() / 2000) * 0.004);
-        if (Math.abs(this.x) > canvas.width * 1.15) this.speedX *= -0.9;
-        if (Math.abs(this.y) > canvas.height * 1.15) this.speedY *= -0.9;
+        this.opacity = Math.max(0.07, this.opacity + Math.sin(Date.now() / 2400) * 0.005);
+        if (this.x < -90 || this.x > canvas.width + 90) this.speedX *= -0.88;
+        if (this.y < -90 || this.y > canvas.height + 90) this.speedY *= -0.88;
     }
     draw() {
         ctx.save();
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = '#d4c3ff';
-        ctx.shadowBlur = 28;
-        ctx.shadowColor = '#b794f4';
+        ctx.fillStyle = '#c4d0ff';
+        ctx.shadowBlur = 40;
+        ctx.shadowColor = '#a5b4fc';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -113,11 +131,13 @@ let currentParticles = [];
 
 function createParticles(style) {
     currentParticles = [];
-    const count = style === 'nebula' ? 28 : (style === 'spark' ? 68 : 135);
+    let count = 135;
+    if (style === 'stars') count = 75;
+    if (style === 'fog') count = 26;
 
     for (let i = 0; i < count; i++) {
-        if (style === 'spark') currentParticles.push(new SparkParticle());
-        else if (style === 'nebula') currentParticles.push(new NebulaParticle());
+        if (style === 'stars') currentParticles.push(new StarParticle());
+        else if (style === 'fog') currentParticles.push(new FogParticle());
         else currentParticles.push(new ClassicParticle());
     }
 }
@@ -131,71 +151,17 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-// ====================== IMPROVED THEMES ======================
+// ====================== THEMES ======================
 const themes = {
-    space: {
-        '--bg': '#0a0b0f',
-        '--surface': '#12151c',
-        '--accent': '#8b9eff',
-        '--text': '#e8ebf5',
-        '--border': '#252a38'
-    },
-    aquatic: {
-        '--bg': '#0b1a24',
-        '--surface': '#132a3a',
-        '--accent': '#4fc3e0',
-        '--text': '#e0f0f8',
-        '--border': '#1f3a4f'
-    },
-    cherry: {
-        '--bg': '#1a0f14',
-        '--surface': '#26161e',
-        '--accent': '#e06c8a',
-        '--text': '#f4e8ec',
-        '--border': '#3a252e'
-    },
-    swamp: {
-        '--bg': '#0f160f',
-        '--surface': '#1a2219',
-        '--accent': '#9cc66d',
-        '--text': '#e9f0e4',
-        '--border': '#2c3828'
-    },
-    neon: {
-        '--bg': '#0c0d14',
-        '--surface': '#1a1c2a',
-        '--accent': '#ff5ef7',
-        '--text': '#ece8f5',
-        '--border': '#2a2d44'
-    },
-    violet: {
-        '--bg': '#0f0d1a',
-        '--surface': '#1b1729',
-        '--accent': '#a78bfa',
-        '--text': '#ede9f6',
-        '--border': '#2e2943'
-    },
-    cyber: {
-        '--bg': '#0c0f0e',
-        '--surface': '#161a19',
-        '--accent': '#67f0e0',
-        '--text': '#e6f4ef',
-        '--border': '#26312d'
-    },
-    rose: {
-        '--bg': '#1a0f13',
-        '--surface': '#26171d',
-        '--accent': '#ff6b9d',
-        '--text': '#f3e8eb',
-        '--border': '#3b252e'
-    },
-    midnight: {
-        '--bg': '#02050f',
-        '--surface': '#0f172a',
-        '--accent': '#94a3c0',
-        '--text': '#e2e8f0',
-        '--border': '#334155'
-    }
+    space: { '--bg': '#0a0b0f', '--surface': '#12151c', '--accent': '#8b9eff', '--text': '#e8ebf5', '--border': '#252a38' },
+    aquatic: { '--bg': '#0b1a24', '--surface': '#132a3a', '--accent': '#4fc3e0', '--text': '#e0f0f8', '--border': '#1f3a4f' },
+    cherry: { '--bg': '#1a0f14', '--surface': '#26161e', '--accent': '#e06c8a', '--text': '#f4e8ec', '--border': '#3a252e' },
+    swamp: { '--bg': '#0f160f', '--surface': '#1a2219', '--accent': '#9cc66d', '--text': '#e9f0e4', '--border': '#2c3828' },
+    neon: { '--bg': '#0c0d14', '--surface': '#1a1c2a', '--accent': '#ff5ef7', '--text': '#ece8f5', '--border': '#2a2d44' },
+    violet: { '--bg': '#0f0d1a', '--surface': '#1b1729', '--accent': '#a78bfa', '--text': '#ede9f6', '--border': '#2e2943' },
+    cyber: { '--bg': '#0c0f0e', '--surface': '#161a19', '--accent': '#67f0e0', '--text': '#e6f4ef', '--border': '#26312d' },
+    rose: { '--bg': '#1a0f13', '--surface': '#26171d', '--accent': '#ff6b9d', '--text': '#f3e8eb', '--border': '#3b252e' },
+    midnight: { '--bg': '#02050f', '--surface': '#0f172a', '--accent': '#94a3c0', '--text': '#e2e8f0', '--border': '#334155' }
 };
 
 function setTheme(themeName) {
@@ -203,9 +169,7 @@ function setTheme(themeName) {
     const theme = themes[themeName];
     if (!theme) return;
 
-    Object.keys(theme).forEach(key => {
-        root.style.setProperty(key, theme[key]);
-    });
+    Object.keys(theme).forEach(key => root.style.setProperty(key, theme[key]));
 
     document.querySelectorAll('.theme-option').forEach(el => {
         el.classList.toggle('active', el.getAttribute('data-theme') === themeName);
@@ -214,7 +178,7 @@ function setTheme(themeName) {
     saveSettings();
 }
 
-// ====================== SETTINGS ======================
+// ====================== LOCALSTORAGE & SETTINGS ======================
 function saveSettings() {
     const activeThemeEl = document.querySelector('.theme-option.active');
     const themeName = activeThemeEl ? activeThemeEl.getAttribute('data-theme') : 'space';
@@ -257,7 +221,7 @@ function changeParticleStyle(style) {
     saveSettings();
 }
 
-// ====================== GAME FUNCTIONS ======================
+// ====================== GAME LOADING ======================
 async function loadGames() {
     const loadingText = document.getElementById('loadingText');
     const loadingScreen = document.getElementById('loadingScreen');
@@ -288,6 +252,7 @@ async function loadGames() {
     }
 }
 
+// ====================== DISPLAY FUNCTIONS ======================
 function displayGames(games, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -335,6 +300,7 @@ function displayTrending() {
     });
 }
 
+// ====================== SEARCH WITH DEBOUNCE ======================
 let searchTimeout;
 function filterGames() {
     clearTimeout(searchTimeout);
@@ -351,6 +317,7 @@ function filterGames() {
     }, 280);
 }
 
+// ====================== GAME VIEWER ======================
 function openGame(game) {
     const viewer = document.getElementById('zoneViewer');
     const frame = document.getElementById('zoneFrame');
@@ -428,7 +395,7 @@ function uploadFavicon() {
     reader.readAsDataURL(file);
 }
 
-// ====================== KEYBOARD & UTILITIES ======================
+// ====================== KEYBOARD SHORTCUTS & UTILITIES ======================
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -472,6 +439,7 @@ function addRandomButton() {
     headerActions.appendChild(randomBtn);
 }
 
+// ====================== SORT ======================
 function sortZones() {
     const select = document.getElementById('sortOptions');
     if (!select) return;
@@ -481,7 +449,7 @@ function sortZones() {
     displayGames(sorted, 'allGamesGrid');
 }
 
-// ====================== INIT ======================
+// ====================== FINAL INIT ======================
 window.onload = () => {
     resizeCanvas();
     createParticles(currentParticleStyle);
@@ -509,5 +477,5 @@ window.onload = () => {
         });
     }
 
-    console.log("🚀 Spatium loaded with improved colors & themes");
+    console.log("🚀 Spatium loaded with Stars + Fog particles");
 };
