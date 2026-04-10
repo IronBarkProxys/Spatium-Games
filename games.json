@@ -456,6 +456,12 @@
       "folder": "Terraria",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/669.png",
       "featured": false
+    },
+    {
+      "name": "Fears to Fathom: Home Alone",
+      "folder": "Fears-to-Fathom:-Home-Alone",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/460.png",
+      "featured": false
     }
   ]
 }
