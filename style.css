@@ -1,426 +1,590 @@
 /* ================================================
-SPATIUM - FULL CLEAN + FIXED CSS (FINAL)
-Keeps Original Structure + Fixes UI Issues
-================================================ */
+   SPATIUM - Ultra Clean & Minimal CSS
+   Super smooth, no heavy glows, refined polish
+   ================================================ */
 
 /* ====================== ROOT VARIABLES ====================== */
 :root {
---bg: #000000;
---surface: #111111;
---text: #eeeeee;
---border: #333333;
---textbox: #1e293b;
---accent: #f365ac;
---accent-glow: rgba(243, 101, 172, 0.22);
---accent-light: #ffb3d9;
+    /* Core Colors */
+    --bg: #000000;
+    --surface: #111111;
+    --text: #eeeeee;
+    --border: #333333;
+    --textbox: #1e293b;
+    --accent: #f365ac;
+    --accent-light: #ffb3d9;
 
-```
---font-main: 'Segoe UI', system-ui, sans-serif;
+    /* Typography */
+    --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-weight-light: 400;
+    --font-weight-regular: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
 
---radius-sm: 8px;
---radius-md: 12px;
---radius-lg: 18px;
-```
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
 
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+
+    /* Subtle Shadows (no heavy glows) */
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-/* ====================== RESET ====================== */
-
+/* ====================== GLOBAL RESET ====================== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-background: var(--bg);
-color: var(--text);
-font-family: var(--font-main);
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+    cursor: default;
+}
+
+/* ====================== UTILITIES ====================== */
+.text-center { text-align: center; }
+.text-accent { color: var(--accent); }
+.font-bold { font-weight: var(--font-weight-bold); }
+.mt-2 { margin-top: var(--spacing-md); }
+.mb-2 { margin-bottom: var(--spacing-md); }
+
+/* ====================== LOADING SCREEN ====================== */
+#loadingScreen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    color: white;
+    transition: opacity 0.8s ease;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top: 5px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#loadingText {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.5px;
+    opacity: 0.85;
+}
+
+/* ====================== PARTICLES ====================== */
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.4; /* Slightly toned down */
 }
 
 /* ====================== HEADER ====================== */
 header {
-position: sticky;
-top: 0;
-background: rgba(10, 10, 10, 0.95);
-backdrop-filter: blur(12px);
-border-bottom: 1px solid var(--border);
-z-index: 100;
-padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    background: rgba(10, 10, 10, 0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 1rem 0;
+    transition: all 0.4s ease;
 }
 
 .header-upper {
-max-width: 1400px;
-margin: 0 auto;
-padding: 0 2rem;
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
 }
 
 .logo {
-font-size: 2rem;
-font-weight: 800;
-cursor: pointer;
+    font-size: 2rem;
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: -1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .logo:hover {
-color: var(--accent);
+    color: var(--accent);
+    transform: scale(1.04);
 }
 
-/* SEARCH */
 #searchBar {
-width: 100%;
-max-width: 500px;
-padding: 14px 20px 14px 50px;
-background: var(--surface);
-border: 1px solid var(--border);
-border-radius: 12px;
-color: white;
-font-size: 1rem;
-transition: 0.25s;
+    width: 100%;
+    max-width: 500px;
+    padding: 14px 20px 14px 50px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: white;
+    outline: none;
+    font-size: 1.05rem;
+    transition: all 0.35s ease;
 }
 
 #searchBar:focus {
-border-color: var(--accent);
-box-shadow: 0 0 0 3px rgba(243,101,172,0.2);
-outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(243, 101, 172, 0.15);
 }
 
-/* BUTTONS */
 .header-actions {
-display: flex;
-gap: 14px;
+    display: flex;
+    gap: 14px;
 }
 
 .btn-icon {
-background: #222;
-border: 1px solid #444;
-width: 52px;
-height: 52px;
-border-radius: 12px;
-
-```
-display: flex;
-align-items: center;
-justify-content: center;
-
-cursor: pointer;
-transition: all 0.25s ease;
-```
-
+    background: #222;
+    color: white;
+    border: 1px solid #444;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
 }
 
 .btn-icon:hover {
-border-color: var(--accent);
-transform: translateY(-3px);
-box-shadow: 0 10px 25px var(--accent-glow);
+    background: #333;
+    border-color: var(--accent);
+    transform: translateY(-2px);
 }
 
-.btn-icon:active {
-transform: scale(0.92);
-}
-
-/* ====================== NAV ====================== */
+/* ====================== NAVIGATION ====================== */
 .nav-bar {
-background: rgba(10, 10, 10, 0.95);
-border-bottom: 1px solid var(--border);
-padding: 12px 0;
+    background: rgba(10, 10, 10, 0.96);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
 }
 
 .nav-content {
-max-width: 1400px;
-margin: 0 auto;
-padding: 0 2rem;
-display: flex;
-gap: 30px;
-flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 .nav-link {
-padding: 8px 16px;
-font-weight: 600;
-border-radius: 8px;
-cursor: pointer;
+    padding: 8px 16px;
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
 }
 
-.nav-link:hover,
-.nav-link.active {
-background: rgba(243,101,172,0.15);
-color: var(--accent);
+.nav-link.active,
+.nav-link:hover {
+    background: rgba(243, 101, 172, 0.1);
+    color: var(--accent);
 }
 
-/* ====================== GRID ====================== */
+/* ====================== MAIN CONTENT ====================== */
+main {
+    position: relative;
+    z-index: 10;
+    padding-top: 20px;
+}
+
+/* Game Grid */
 .grid-layout {
-max-width: 1400px;
-margin: 0 auto;
-padding: 0 40px 4rem;
-
-```
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-gap: 26px;
-```
-
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 30px;
 }
 
-/* ====================== GAME CARD ====================== */
 .zone-item {
-aspect-ratio: 1 / 1.5;
-background: var(--surface);
-border: 1px solid var(--border);
-border-radius: 18px;
-overflow: hidden;
-cursor: pointer;
-transition: all 0.35s ease;
+    aspect-ratio: 1 / 1.5;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .zone-item:hover {
-transform: translateY(-10px) scale(1.03);
-border-color: var(--accent);
-box-shadow: 0 20px 40px var(--accent-glow);
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
 }
 
 .zone-item img {
-width: 100%;
-height: 65%;
-object-fit: cover;
-transition: transform 0.5s ease;
+    width: 100%;
+    height: 65%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
 }
 
 .zone-item:hover img {
-transform: scale(1.08);
+    transform: scale(1.08);
 }
 
 .zone-item button {
-width: 100%;
-height: 35%;
-background: var(--textbox);
-border: none;
-color: var(--text);
-font-weight: 600;
+    width: 100%;
+    height: 35%;
+    background: var(--textbox);
+    border: none;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: all 0.3s ease;
 }
 
 .zone-item button:hover {
-background: var(--accent);
-color: #000;
+    background: var(--accent);
+    color: #000;
 }
 
 /* ====================== ALL GAMES BUTTON ====================== */
 .all-games-btn {
-background: var(--accent);
-color: #000;
-border: none;
-
-```
-padding: 10px 22px;
-border-radius: 10px;
-
-font-size: 0.95rem;
-font-weight: 600;
-
-cursor: pointer;
-
-margin: 1.8rem auto;
-display: block;
-min-width: 160px;
-
-box-shadow: 0 8px 20px var(--accent-glow);
-transition: all 0.25s ease;
-```
-
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 12px 32px;
+    border-radius: var(--radius-md);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+    margin: 2rem auto;
+    display: block;
+    min-width: 220px;
 }
 
 .all-games-btn:hover {
-background: var(--accent-light);
-transform: translateY(-2px);
+    background: var(--accent-light);
+    transform: translateY(-2px);
 }
 
 /* ====================== GAME VIEWER ====================== */
 #zoneViewer {
-position: fixed;
-inset: 0;
-background: var(--bg);
-z-index: 2000;
-
-```
-display: none;
-flex-direction: column;
-
-animation: viewerSlideUp 0.5s ease;
-```
-
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: viewerSlideUp 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 @keyframes viewerSlideUp {
-from {
-opacity: 0;
-transform: translateY(80px) scale(0.96);
-}
-to {
-opacity: 1;
-transform: translateY(0) scale(1);
-}
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .zone-header {
-background: var(--surface);
-padding: 1rem 2rem;
-
-```
-display: flex;
-justify-content: space-between;
-align-items: center;
-
-border-bottom: 1px solid var(--border);
-```
-
+    background: var(--surface);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
 }
 
 .zone-controls button {
-background: var(--textbox);
-border: 1px solid var(--border);
-color: var(--text);
-
-```
-padding: 10px 16px;
-border-radius: 8px;
-
-cursor: pointer;
-```
-
+    background: var(--textbox);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .zone-controls button:hover {
-background: var(--accent);
-color: #000;
+    background: var(--accent);
+    color: #000;
 }
 
 #zoneFrame {
-flex: 1;
-border: none;
-background: #000;
+    flex: 1;
+    border: none;
+    background: #000;
 }
 
 /* ====================== SETTINGS MODAL ====================== */
 .modal-overlay {
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.9);
-backdrop-filter: blur(10px);
-
-```
-display: flex;
-align-items: center;
-justify-content: center;
-
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.3s ease;
-```
-
-}
-
-.modal-overlay.active {
-opacity: 1;
-pointer-events: all;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(12px);
 }
 
 .modal-content {
-background: var(--surface);
-width: 100%;
-max-width: 600px;
-height: 360px;
-
-```
-border-radius: 20px;
-border: 1px solid var(--border);
-
-display: flex;
-flex-direction: column;
-
-transform: scale(0.88) translateY(40px);
-opacity: 0;
-
-transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
-```
-
+    background: var(--surface);
+    width: 100%;
+    max-width: 617px;
+    height: 360px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    animation: modalPop 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-.modal-overlay.active .modal-content {
-transform: scale(1) translateY(0);
-opacity: 1;
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .modal-header {
-padding: 1.5rem;
-border-bottom: 1px solid var(--border);
-display: flex;
-justify-content: space-between;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: var(--font-weight-bold);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #888;
+    cursor: pointer;
+    padding: 0 12px;
+    transition: all 0.25s ease;
+}
+
+.modal-close:hover {
+    color: var(--accent);
+    transform: rotate(90deg);
 }
 
 .modal-body {
-padding: 1.5rem;
+    padding: 2rem;
+    flex: 1;
+    overflow-y: auto;
 }
 
-/* SETTINGS ITEMS */
 .setting-row {
-margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.setting-row label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: var(--font-weight-semibold);
 }
 
 .toggle-label {
-display: flex;
-align-items: center;
-gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
 }
 
-.toggle-label input {
-width: 44px;
-height: 24px;
-appearance: none;
-background: #2a2a2a;
-border-radius: 999px;
-position: relative;
+.toggle-label input[type="checkbox"] {
+    width: 48px;
+    height: 26px;
+    appearance: none;
+    background: #333;
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.4s ease;
 }
 
-.toggle-label input:checked {
-background: var(--accent);
+.toggle-label input[type="checkbox"]:checked {
+    background: var(--accent);
 }
 
-.toggle-label input::before {
-content: '';
-position: absolute;
-top: 3px;
-left: 3px;
-width: 18px;
-height: 18px;
-background: white;
-border-radius: 50%;
-transition: 0.25s;
+.toggle-label input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.toggle-label input:checked::before {
-transform: translateX(20px);
+.toggle-label input[type="checkbox"]:checked::before {
+    transform: translateX(22px);
+}
+
+/* Modal Buttons */
+.modal-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: #222;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-top: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+.accent-btn {
+    background: var(--accent);
+    color: #000;
+    font-weight: var(--font-weight-bold);
+}
+
+.accent-btn:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+}
+
+/* Theme Selector */
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.theme-option {
+    padding: 16px 12px;
+    text-align: center;
+    background: var(--surface);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.35s ease;
+}
+
+.theme-option:hover {
+    border-color: rgba(243, 101, 172, 0.4);
+    transform: scale(1.03);
+}
+
+.theme-option.active {
+    border-color: var(--accent);
+    background: rgba(243, 101, 172, 0.12);
+}
+
+/* ====================== RESPONSIVE ====================== */
+@media (max-width: 1200px) {
+    .grid-layout {
+        grid-template-columns: repeat(4, 1fr);
+        padding: 0 30px 4rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .grid-layout { 
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+@media (max-width: 700px) {
+    .grid-layout { 
+        grid-template-columns: repeat(2, 1fr); 
+        padding: 0 20px 4rem; 
+    }
+}
+
+@media (max-width: 500px) {
+    .header-upper { 
+        padding: 0 1rem; 
+        gap: 0.8rem; 
+    }
+    .btn-icon { 
+        width: 48px; 
+        height: 48px; 
+    }
+    .modal-content { 
+        max-width: 92%; 
+        height: 380px; 
+    }
 }
 
 /* ====================== SCROLLBAR ====================== */
 ::-webkit-scrollbar {
-width: 8px;
+    width: 8px;
 }
-::-webkit-scrollbar-thumb {
-background: #444;
+::-webkit-scrollbar-track { 
+    background: #1a1a1a; 
 }
-
-/* ====================== RESPONSIVE ====================== */
-@media (max-width: 900px) {
-.grid-layout {
-grid-template-columns: repeat(3, 1fr);
+::-webkit-scrollbar-thumb { 
+    background: #444; 
+    border-radius: 4px; 
 }
-}
-
-@media (max-width: 600px) {
-.grid-layout {
-grid-template-columns: repeat(2, 1fr);
-}
+::-webkit-scrollbar-thumb:hover { 
+    background: var(--accent); 
 }
