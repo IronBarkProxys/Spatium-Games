@@ -462,6 +462,12 @@
       "folder": "Fears-to-Fathom:-Home-Alone",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/460.png",
       "featured": false
+    },
+    {
+      "name": "Tiny Fishing",
+      "folder": "Tiny-Fishing",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/108.png",
+      "featured": false
     }
   ]
 }
