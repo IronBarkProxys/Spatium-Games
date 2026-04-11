@@ -555,8 +555,44 @@
     },
     {
       "name": "Run 3",
-      "folder": "Run 3",
+      "folder": "Run-3",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/177.png",
+      "featured": false
+    },
+    {
+      "name": "Slope",
+      "folder": "Slope",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/198.png",
+      "featured": false
+    },
+    {
+      "name": "Slope 2",
+      "folder": "Slope-2",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/368.png",
+      "featured": false
+    },
+    {
+      "name": "Slow Roads",
+      "folder": "Slow-Roads",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/369.png",
+      "featured": false
+    },
+    {
+      "name": "Snow Rider 3D",
+      "folder": "Snow-Rider-3D",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/119.png",
+      "featured": false
+    },
+    {
+      "name": "Snowball.io",
+      "folder": "Snowball.io",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/207.png",
+      "featured": false
+    },
+    {
+      "name": "Slither.io",
+      "folder": "Slither.io",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/461.png",
       "featured": false
     }
   ]
