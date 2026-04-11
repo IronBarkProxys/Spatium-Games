@@ -672,6 +672,12 @@
       "folder": "Karlson",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/542.png",
       "featured": true
+    },
+    {
+      "name": "Space Waves",
+      "folder": "Space-Waves",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/117.png",
+      "featured": true
     }
   ]}
   
