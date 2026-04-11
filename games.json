@@ -468,6 +468,12 @@
       "folder": "Tiny-Fishing",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/108.png",
       "featured": false
+    },
+    {
+      "name": "Soundboard",
+      "folder": "Soundboard",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/179.png",
+      "featured": true
     }
   ]
 }
