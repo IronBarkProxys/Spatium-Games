@@ -498,6 +498,12 @@
       "folder": "Johnny-Trigger",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/93.png",
       "featured": false
+    },
+    {
+      "name": "Cubefield",
+      "folder": "Cubefield",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/84.png",
+      "featured": false
     }
   ]
 }
