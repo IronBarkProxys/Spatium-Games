@@ -486,6 +486,12 @@
       "folder": "Getaway-Shootout",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/338.png",
       "featured": false
+    },
+    {
+      "name": "Get Yoked",
+      "folder": "Get-Yoked",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/625.png",
+      "featured": false
     }
   ]
 }
