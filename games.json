@@ -546,6 +546,12 @@
       "folder": "Ragdoll-Hit",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/44.png",
       "featured": false
+    },
+    {
+      "name": "Andy's Apple Farm",
+      "folder": "Andy's-Apple-Farm",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/426.png",
+      "featured": false
     }
   ]
 }
