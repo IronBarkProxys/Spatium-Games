@@ -660,6 +660,12 @@
       "folder": "Tomb-Of-The-Mask",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/109.png",
       "featured": false
+    },
+    {
+      "name": "Basket Random",
+      "folder": "Basket-Random",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/66.png",
+      "featured": false
     }
   ]}
   
