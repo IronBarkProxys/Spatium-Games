@@ -600,6 +600,61 @@
       "folder": "Suika-Game",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/766.png",
       "featured": false
+    },
+    {
+      "name": "Infinite Craft",
+      "folder": "Infinite-Craft",
+      "thumbnail": "data:image/png;base64,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",
+      "featured": false
     }
+    {
+      "name": "Build a Big Army",
+      "folder": "Build-a-Big-Army",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/376.png",
+      "featured": false
+    },
+    {
+      "name": "Escape Road 2",
+      "folder": "Escape-Road-2",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/265.png",
+      "featured": false
+    },
+    {
+      "name": "Build a Plane",
+      "folder": "Build-a-Plane",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/377.png",
+      "featured": false
+    },
+    {
+      "name": "Kindergarten",
+      "folder": "Kindergarten",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/445.png",
+      "featured": true
+    },
+    {
+      "name": "Jeffrey Epstein Basics In Education And Kidnapping",
+      "folder": "Jeffrey-Epstein-Basics-In-Education-And-Kidnapping",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/751.png",
+      "featured": false
+    },
+    {
+      "name": "Escape Road",
+      "folder": "Escape-Road",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/264.png",
+      "featured": false
+    },
+    {
+      "name": "Retro Bowl",
+      "folder": "Retro-Bowl",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/33.png",
+      "featured": false
+    },
+    {
+      "name": "Retro Bowl College",
+      "folder": "Retro-Bowl-College",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/34.png",
+      "featured": false
+    }
+  ]
   ]
 }
