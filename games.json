@@ -492,6 +492,12 @@
       "folder": "Get-Yoked",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/625.png",
       "featured": false
+    },
+    {
+      "name": "Johnny Trigger",
+      "folder": "Johnny-Trigger",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/93.png",
+      "featured": false
     }
   ]
 }
