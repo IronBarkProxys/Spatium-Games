@@ -534,6 +534,18 @@
       "folder": "OvO-3-Dimensions",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/3.png",
       "featured": false
+    },
+    {
+      "name": "Ragdoll Archers",
+      "folder": "Ragdoll-Archers",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/186.png",
+      "featured": false
+    },
+    {
+      "name": "Ragdoll Hit",
+      "folder": "Ragdoll-Hit",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/44.png",
+      "featured": false
     }
   ]
 }
