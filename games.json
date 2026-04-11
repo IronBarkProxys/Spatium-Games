@@ -666,6 +666,12 @@
       "folder": "Basket-Random",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/66.png",
       "featured": false
+    },
+    {
+      "name": "Karlson",
+      "folder": "Karlson",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/542.png",
+      "featured": true
     }
   ]}
   
