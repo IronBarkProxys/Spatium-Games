@@ -552,6 +552,12 @@
       "folder": "Andy's-Apple-Farm",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/426.png",
       "featured": false
+    },
+    {
+      "name": "Run 3",
+      "folder": "Run 3",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/177.png",
+      "featured": false
     }
   ]
 }
