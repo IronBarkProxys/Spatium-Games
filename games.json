@@ -480,6 +480,12 @@
       "folder": "Aviamasters",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/552.png",
       "featured": false
+    },
+    {
+      "name": "Getaway Shootout",
+      "folder": "Getaway-Shootout",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/338.png",
+      "featured": false
     }
   ]
 }
