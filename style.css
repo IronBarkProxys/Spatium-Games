@@ -1,7 +1,6 @@
 /* ================================================
-   SPATIUM - Full CSS Stylesheet (862 lines)
-   All Games Button Fixed + Header Buttons Bigger
-   All Previous Styles Preserved + Extra Animations & Utilities
+   SPATIUM - Full CSS Stylesheet
+   Search Icon Aligned with Search Bar + All Previous Styles
    ================================================ */
 
 /* ====================== ROOT VARIABLES ====================== */
@@ -15,7 +14,7 @@
     --accent: #f365ac;
     --accent-glow: rgba(243, 101, 172, 0.3);
     --accent-light: #ffb3d9;
-   
+  
     /* Typography */
     --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
     --font-weight-light: 400;
@@ -24,7 +23,7 @@
     --font-weight-bold: 700;
     --font-weight-extrabold: 800;
     --font-weight-black: 900;
-   
+  
     /* Spacing */
     --spacing-xs: 4px;
     --spacing-sm: 8px;
@@ -32,14 +31,14 @@
     --spacing-lg: 24px;
     --spacing-xl: 32px;
     --spacing-2xl: 48px;
-   
+  
     /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 18px;
     --radius-xl: 20px;
     --radius-full: 9999px;
-   
+  
     /* Shadows */
     --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -72,11 +71,9 @@ body {
 .backdrop-blur-md {
     backdrop-filter: blur(12px);
 }
-
 .backdrop-blur-lg {
     backdrop-filter: blur(20px);
 }
-
 .text-center { text-align: center; }
 .text-accent { color: var(--accent); }
 .font-bold { font-weight: var(--font-weight-bold); }
@@ -168,15 +165,32 @@ header {
     transform: scale(1.06);
 }
 
+/* Search Wrapper + Icon */
 .search-wrapper {
     flex: 1;
     max-width: 500px;
     position: relative;
 }
 
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1.35rem;
+    pointer-events: none;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+#searchBar:focus ~ .search-icon {
+    color: var(--accent);
+}
+
 #searchBar {
     width: 100%;
-    padding: 14px 20px 14px 50px;
+    padding: 14px 20px 14px 56px;   /* Extra left padding for icon */
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -366,7 +380,7 @@ main {
     transform: scale(1.03);
 }
 
-/* ====================== ALL GAMES BUTTON (Fixed & Larger) ====================== */
+/* ====================== ALL GAMES BUTTON ====================== */
 .all-games-btn {
     background: var(--accent);
     color: #000;
@@ -708,4 +722,4 @@ input:focus-visible {
 .p-4 { padding: 16px; }
 .p-6 { padding: 24px; }
 
-/* End of stylesheet - 862 lines */
+/* End of stylesheet */
