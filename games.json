@@ -504,6 +504,18 @@
       "folder": "Cubefield",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/84.png",
       "featured": false
+    },
+    {
+      "name": "Drift Boss",
+      "folder": "Drift-Boss",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/276.png",
+      "featured": false
+    },
+    {
+      "name": "Drift Hunters",
+      "folder": "Drift-Hunters",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/173.png",
+      "featured": false
     }
   ]
 }
