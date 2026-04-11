@@ -594,6 +594,12 @@
       "folder": "Slither.io",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/461.png",
       "featured": false
+    },
+    {
+      "name": "Suika Game",
+      "folder": "Suika-Game",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/766.png",
+      "featured": false
     }
   ]
 }
