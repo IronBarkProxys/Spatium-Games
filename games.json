@@ -474,6 +474,12 @@
       "folder": "Soundboard",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/179.png",
       "featured": true
+    },
+    {
+      "name": "Aviamasters",
+      "folder": "Aviamasters",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/552.png",
+      "featured": false
     }
   ]
 }
