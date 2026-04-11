@@ -516,6 +516,24 @@
       "folder": "Drift-Hunters",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/173.png",
       "featured": false
+    },
+    {
+      "name": "OvO",
+      "folder": "OvO",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/1.png",
+      "featured": false
+    },
+    {
+      "name": "OvO 2",
+      "folder": "OvO 2",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/2.png",
+      "featured": false
+    },
+    {
+      "name": "OVO 3 Dimensions",
+      "folder": "OvO-3-Dimensions",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/3.png",
+      "featured": false
     }
   ]
 }
