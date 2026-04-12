@@ -708,6 +708,12 @@
       "folder": "Basket-Bros",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/285.png",
       "featured": false
+    },
+    {
+      "name": "Getting Over It",
+      "folder": "Getting-Over-It",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/557.png",
+      "featured": false
     }
   ]}
   
