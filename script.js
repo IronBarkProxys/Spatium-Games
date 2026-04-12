@@ -1,9 +1,3 @@
-// ========================================================
-// SPATIUM - Full Enhanced UI JavaScript (Long Version)
-// Particle Styles: Classic • Stars (slow stars + shooting stars) • Fog
-// No hearts/favorites | Improved colors and themes
-// ========================================================
-
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 
@@ -13,15 +7,11 @@ let recentlyPlayed = JSON.parse(localStorage.getItem('spatium_recentlyPlayed') |
 let currentSortMode = 'name';
 let currentParticleStyle = localStorage.getItem('spatium_particleStyle') || 'classic';
 
-// ====================== CANVAS SETUP ======================
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 
-// ====================== PARTICLE STYLES ======================
-
-// 1. Classic - Soft floating dots
 class ClassicParticle {
     constructor() { this.reset(); }
     reset() {
@@ -49,7 +39,6 @@ class ClassicParticle {
     }
 }
 
-// 2. Stars - Super slow moving stars with rare shooting stars
 class StarParticle {
     constructor() { this.reset(); }
     reset() {
@@ -59,7 +48,7 @@ class StarParticle {
         this.speedX = (Math.random() - 0.5) * 0.25;
         this.speedY = (Math.random() - 0.5) * 0.25;
         this.opacity = Math.random() * 0.7 + 0.4;
-        this.isShootingStar = Math.random() < 0.018; // rare shooting stars
+        this.isShootingStar = Math.random() < 0.018;
         if (this.isShootingStar) {
             this.speedX = (Math.random() - 0.3) * 12;
             this.speedY = (Math.random() - 0.7) * 9;
@@ -95,7 +84,6 @@ class StarParticle {
     }
 }
 
-// 3. Fog - Slow, thick atmospheric fog
 class FogParticle {
     constructor() { this.reset(); }
     reset() {
@@ -126,7 +114,6 @@ class FogParticle {
     }
 }
 
-// ====================== PARTICLE MANAGER ======================
 let currentParticles = [];
 
 function createParticles(style) {
@@ -151,7 +138,6 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-// ====================== THEMES ======================
 const themes = {
     space: { '--bg': '#000000', '--surface': '#12151c', '--accent': '#8b9eff', '--text': '#e8ebf5', '--border': '#252a38' },
     aquatic: { '--bg': '#0b1a24', '--surface': '#132a3a', '--accent': '#4fc3e0', '--text': '#e0f0f8', '--border': '#1f3a4f' },
@@ -178,7 +164,6 @@ function setTheme(themeName) {
     saveSettings();
 }
 
-// ====================== LOCALSTORAGE & SETTINGS ======================
 function saveSettings() {
     const activeThemeEl = document.querySelector('.theme-option.active');
     const themeName = activeThemeEl ? activeThemeEl.getAttribute('data-theme') : 'space';
@@ -221,7 +206,6 @@ function changeParticleStyle(style) {
     saveSettings();
 }
 
-// ====================== GAME LOADING ======================
 async function loadGames() {
     const loadingText = document.getElementById('loadingText');
     const loadingScreen = document.getElementById('loadingScreen');
@@ -252,7 +236,6 @@ async function loadGames() {
     }
 }
 
-// ====================== DISPLAY FUNCTIONS ======================
 function displayGames(games, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -300,7 +283,6 @@ function displayTrending() {
     });
 }
 
-// ====================== SEARCH WITH DEBOUNCE ======================
 let searchTimeout;
 function filterGames() {
     clearTimeout(searchTimeout);
@@ -317,7 +299,6 @@ function filterGames() {
     }, 280);
 }
 
-// ====================== GAME VIEWER ======================
 function openGame(game) {
     const viewer = document.getElementById('zoneViewer');
     const frame = document.getElementById('zoneFrame');
@@ -348,7 +329,6 @@ function fullscreenZone() {
     else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
 }
 
-// ====================== SETTINGS & MODALS ======================
 function openSettings() {
     document.getElementById('settingsModal').style.display = 'flex';
     document.getElementById('siteTitleInput').value = document.title;
@@ -395,7 +375,6 @@ function uploadFavicon() {
     reader.readAsDataURL(file);
 }
 
-// ====================== KEYBOARD SHORTCUTS & UTILITIES ======================
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -439,7 +418,6 @@ function addRandomButton() {
     headerActions.appendChild(randomBtn);
 }
 
-// ====================== SORT ======================
 function sortZones() {
     const select = document.getElementById('sortOptions');
     if (!select) return;
@@ -449,7 +427,6 @@ function sortZones() {
     displayGames(sorted, 'allGamesGrid');
 }
 
-// ====================== FINAL INIT ======================
 window.onload = () => {
     resizeCanvas();
     createParticles(currentParticleStyle);
