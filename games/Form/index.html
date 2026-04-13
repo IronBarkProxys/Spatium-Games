@@ -1,43 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Form Player</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #231f20;
-    }
-
-    #gameContainer {
-      width: 100vw;
-      height: 100vh;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
+  <title>Play Form</title>
 </head>
-
 <body>
 
-<div id="gameContainer"></div>
+<button onclick="openForm()">PLAY</button>
 
 <script>
-  const formURL = "https://forms.gle/1RPY7ynhMK7qXZsh9";
-
-  function loadForm() {
-    const iframe = document.createElement("iframe");
-    iframe.src = formURL;
-    document.getElementById("gameContainer").appendChild(iframe);
+  function openForm() {
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSfl4IwqXxj8PzUS_l7Ss1eXoqKiEGMYnysuKj4dGhBUpyGf9A/viewform?usp=header",
+      "_blank"
+    );
   }
-
-  // auto start like a game
-  window.onload = loadForm;
 </script>
 
 </body>
