@@ -726,6 +726,18 @@
       "folder": "Tag",
       "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/627.png",
       "featured": false
+    },
+    {
+      "name": "Tag",
+      "folder": "Tag",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/627.png",
+      "featured": false
+    },
+    {
+      "name": "Hide-n-Seek",
+      "folder": "Hide-n-Seek",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/16.png",
+      "featured": false
     }
   ]}
   
